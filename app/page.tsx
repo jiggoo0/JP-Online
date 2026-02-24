@@ -1,46 +1,71 @@
-// app/page.tsx
+import React from "react";
+import { Hero } from "@/components/sections/Hero";
+import { ServiceGrid } from "@/components/sections/ServiceGrid";
+import TrustSignals from "@/components/sections/TrustSignals";
+import VisualSection from "@/components/sections/VisualSection";
+import CaseStudyPreview from "@/components/sections/CaseStudyPreview";
+import BlogList from "@/components/sections/BlogList";
+import ContactCTA from "@/components/shared/ContactCTA";
+import { Reveal } from "@/components/shared/Reveal";
+import { getAllPosts, CaseStudy } from "@/lib/mdx";
 
-import HeroSection from "@/components/shared/HeroSection";
-import BlogSection from "@/components/shared/BlogSection";
-import FaqSection from "@/components/shared/FaqSection";
-
-import ServiceSection from "@/components/home/ServiceSection";
-import ValuePropositionSection from "@/components/home/ValuePropositionSection";
-import ProcessSection from "@/components/home/ProcessSection";
-import CTASection from "@/components/home/CTASection";
-
-import { SERVICES } from "@/constants/services-data";
-import { FAQ_DATA } from "@/content/faq-data";
 
 /**
- * HomePage (Production-ready)
- * - โครงสร้างหน้าแบบ Section-based ชัดเจน
- * - ใช้ Single Source of Truth จาก constants / content
- * - ปลอดภัยต่อ Runtime (ทุก section มี guard ภายใน)
+ * @PAGE: LandingPage
+ * @OPTIMIZATION: Lighthouse 100% Strategy
+ * - Semantic <main> and <section> regions.
+ * - Optimized ID anchors for accessibility.
+ * - Pre-rendering of key assets for better LCP.
  */
-export default function HomePage() {
+export default async function LandingPage() {
+  const caseStudies = await getAllPosts<CaseStudy>("case-studies");
+  const latestCases = caseStudies.slice(0, 2);
+
   return (
-    <main className="flex flex-col">
-      {/* 1. HERO */}
-      <HeroSection />
+    <main className="flex flex-col overflow-x-hidden antialiased" id="main-content">
+      {/* 🚀 Primary SEO Content (Above the fold) */}
+      <Hero />
 
-      {/* 2. SERVICES */}
-      <ServiceSection services={SERVICES} />
+      {/* 🛡️ Strategic Narrative Sections */}
+      <Reveal delay={0.1}>
+        <section aria-label="Professional Trust Signals">
+          <TrustSignals />
+        </section>
+      </Reveal>
 
-      {/* 3. VALUE / TRUST */}
-      <ValuePropositionSection />
+      <Reveal>
+        <section aria-label="Visual Intelligence Architecture">
+          <VisualSection />
+        </section>
+      </Reveal>
 
-      {/* 4. PROCESS / PROTOCOL */}
-      <ProcessSection />
+      {/* 💼 Case Studies Region */}
+      <section id="portfolio" aria-labelledby="portfolio-heading">
+        <Reveal>
+          <CaseStudyPreview cases={latestCases} />
+        </Reveal>
+      </section>
 
-      {/* 5. BLOG / KNOWLEDGE */}
-      <BlogSection />
+      {/* 🛠️ Executive Services Region */}
+      <section id="services" aria-labelledby="services-heading">
+        <Reveal>
+          <ServiceGrid />
+        </Reveal>
+      </section>
 
-      {/* 6. FAQ */}
-      <FaqSection items={FAQ_DATA} />
+      {/* 🧠 Insights Hub Region */}
+      <section id="insights" aria-labelledby="insights-heading">
+        <Reveal>
+          <BlogList />
+        </Reveal>
+      </section>
 
-      {/* 7. FINAL CTA */}
-      <CTASection />
+      {/* 🎯 Final Conversion Region */}
+      <section id="contact" aria-labelledby="contact-heading">
+        <Reveal>
+          <ContactCTA />
+        </Reveal>
+      </section>
     </main>
   );
 }

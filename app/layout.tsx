@@ -1,120 +1,108 @@
-// app/layout.tsx
+/**
+ * @AI_INSTRUCTION: [STRICT_CODE_ONLY]
+ * - High-Efficiency Code (Industrial Master Grade)
+ * - Tailwind v4 CSS-First Strategy
+ * - No Business Interpretation
+ * - Full Component Assembly
+ */
+
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans_Thai, Inter } from "next/font/google";
+import { Inter, Noto_Serif_JP } from "next/font/google";
+import { Navbar } from "@/components/shared/Navbar";
+import { Footer } from "@/components/shared/Footer";
+import CustomCursor from "@/components/shared/CustomCursor";
+import Preloader from "@/components/shared/Preloader";
+import { siteConfig } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
-import { AppProvider } from "@/providers/AppProvider";
-import { Toaster } from "@/components/ui/sonner";
-import { cn } from "@/lib/utils";
-
-/**
- * Font configuration
- * - Headings: IBM Plex Sans Thai
- * - Body: Inter
- */
-const ibmPlexThai = IBM_Plex_Sans_Thai({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["thai", "latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const inter = Inter({
+/* Font Architecture: Industrial Sans & Academic Serif */
+const fontSans = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
 });
 
-/**
- * Global metadata
- */
+const fontSerif = Noto_Serif_JP({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: "#080c18", // Industrial Obsidian
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jpvisouldocs.online"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "JP-VISOUL | เพื่อนคู่คิดด้านเอกสารและการวางแผนที่ปรึกษาคุณ",
-    template: "%s | JP-VISOUL",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "ช่วยจัดการเอกสารที่ยุ่งยากให้เป็นเรื่องง่าย พร้อมดูแลทุกขั้นตอนอย่างใส่ใจ",
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author }],
+  creator: siteConfig.author,
   openGraph: {
     type: "website",
     locale: "th_TH",
-    url: "https://jpvisouldocs.online",
-    siteName: "JP-VISOUL Intelligence",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "JP-VISOUL – Document & Advisory Services",
-      },
-    ],
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
 /**
- * Viewport configuration
+ * @PATH: app/layout.tsx
+ * @DESCRIPTION: Global Root Shell - JP-VISUAL & DOCS Foundation
  */
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#0A192F",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "flex min-h-screen flex-col bg-[#FAFAFA] text-[#1A1A1A] antialiased",
-          ibmPlexThai.variable,
-          inter.variable,
-          "font-body selection:bg-blue-600/20 selection:text-[#0A192F]",
+          "bg-background selection:bg-primary-accent/10 selection:text-primary-accent min-h-screen font-sans antialiased",
+          fontSans.variable,
+          fontSerif.variable,
         )}
       >
-        <AppProvider>
-          {/* Noise texture overlay */}
-          <div
-            aria-hidden
-            className="pointer-events-none fixed inset-0 z-[9999] bg-[url('/images/noise.png')] opacity-[0.015]"
-          />
-
+        <Preloader />
+        <CustomCursor />
+        <div className="relative flex min-h-screen flex-col">
+          {/* Navigation Layer */}
           <Navbar />
 
-          {/* Main content */}
-          <main className="relative flex-grow pt-[80px] lg:pt-[90px]">
-            {/* Decorative gradient */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-0 top-0 h-[500px] w-full bg-gradient-to-b from-blue-50/50 to-transparent"
-            />
-            <div className="relative z-10">{children}</div>
-          </main>
+          {/* Core Content Layer */}
+          <main className="flex-1">{children}</main>
 
+          {/* System Footer Layer */}
           <Footer />
+        </div>
 
-          {/* Global toaster */}
-          <Toaster
-            position="bottom-right"
-            richColors
-            expand
-            closeButton
-            toastOptions={{
-              className:
-                "rounded-2xl border-none bg-white/95 font-heading text-[#0A192F] shadow-2xl backdrop-blur-md",
-              style: {
-                borderRadius: "16px",
-                boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.1)",
-              },
-            }}
-          />
-        </AppProvider>
+        {/* Global Design Elements */}
+        <div className="pointer-events-none fixed inset-0 -z-10 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
       </body>
     </html>
   );

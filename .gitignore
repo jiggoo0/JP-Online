@@ -1,5 +1,31 @@
-node_modules
-.next
+# 📦 Dependencies
+node_modules/
+.pnpm-store/
+
+# 🚀 Next.js Build Output
+.next/
+out/
+build/
+dist/
+
+# 🔑 Secrets & Local Environment
+.env
 .env*.local
+service-account.json
+*.pem
+
+# 🛠 Debugging & Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+.eslintcache
+.stylelintcache
+
+# 🍎 OS Specific
 .DS_Store
-dist
+Thumbs.db
+*.tsbuildinfo
+
+# 🧪 Testing & Coverage
+coverage/
+.nyc_output/

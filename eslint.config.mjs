@@ -1,52 +1,55 @@
-/** @format */
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import nextPlugin from "@next/eslint-plugin-next";
+import tsParser from "@typescript-eslint/parser";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import reactPlugin from "eslint-plugin-react";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
-
+/**
+ * 🎯 ESLint 9 Pure Flat Config
+ * Optimized for Next.js 16 & React 19
+ * Corrected Namespace Mapping
+ */
 export default [
-  // 1. ตั้งค่าไฟล์ที่จะไม่ตรวจสอบ (Ignores)
+  {
+    files: ["**/*.{js,mjs,cjs,ts,tsx}"],
+    plugins: {
+      "@next/next": nextPlugin,
+      "@typescript-eslint": tsPlugin,
+      react: reactPlugin,
+    },
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    rules: {
+      // ✅ Explicitly Map Rules from Next.js Recommended Config
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@next/next/no-img-element": "warn",
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
   {
     ignores: [
       ".next/*",
       "node_modules/*",
-      "out/*",
       "public/*",
-      "**/*.d.ts",
-      "eslint.config.mjs",
+      "dist/*",
+      ".next-env.d.ts",
+      "tsconfig.tsbuildinfo",
     ],
-  },
-
-  // 2. ใช้ compat.extends เพื่อดึงค่ามาตรฐานของ Next.js
-  // สิ่งนี้จะทำให้ Warning "Next.js plugin not detected" หายไป
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-
-  // 3. กำหนดกฎเพิ่มเติม (Custom Rules)
-  {
-    rules: {
-      // ✅ แก้ไขปัญหา 'React' is not defined (สำหรับ React 19 / JSX Transform)
-      "no-undef": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-
-      // ✅ กฎความเข้มงวดของ TypeScript
-      "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-
-      // ✅ ประสิทธิภาพ (Performance)
-      "@next/next/no-img-element": "error", // บังคับใช้ <Image /> เท่านั้น
-      "react/no-unescaped-entities": "off",
-    },
   },
 ];

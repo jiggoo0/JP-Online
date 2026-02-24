@@ -1,102 +1,93 @@
 @import "tailwindcss";
 
-/* 1. Plugins Registration */
-@plugin "tailwindcss-animate";
-@plugin "@tailwindcss/typography";
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* 2. Tailwind v4 Theme Configuration */
 @theme {
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui;
-  --font-body: var(--font-body), ui-sans-serif, system-ui;
+  /* Elite Luxury Palette */
+  --color-background: #020617; /* Obsidian Dark */
+  --color-foreground: #f8fafc; /* Slate 50 */
+  --color-primary: #0f172a; /* Slate 900 */
+  --color-primary-accent: #f59e0b; /* Amber 500 (Metallic Gold) */
+  --color-accent-emerald: #10b981; /* Emerald 500 */
 
-  /* ปรับโทนสีให้เป็น Professional Navy ตามแบรนด์ JP-VISOUL */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary); /* Navy #0A192F */
-  --color-secondary: var(--secondary); /* Blue #2563EB */
-  --color-accent: var(--accent); /* Emerald/Line #06C755 */
+  /* Elite Typography Logic */
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui;
+  --font-serif: var(--font-serif), ui-serif, Georgia;
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  /* ควบคุมความโค้งให้คมขึ้น (ลดความเป็นมังงะ/การ์ตูน) */
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-3xl: 24px; /* สูงสุดที่แนะนำสำหรับกล่องเนื้อหาหลัก */
+  /* Spacing & Transitions */
+  --animate-subtle-fade: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 3. Global CSS Variables (:root) */
-:root {
-  /* ใช้ Pure White พื้นหลังเพื่อความสะอาดสไตล์เว็บไซต์ชั้นนำ */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.044 265.75);
-
-  --primary: oklch(0.21 0.044 265.75);
-  --secondary: oklch(0.55 0.18 250);
-  --accent: oklch(0.7 0.19 145);
-
-  --border: oklch(0.92 0.01 265);
-  --input: oklch(0.92 0.01 265);
-  --ring: oklch(0.55 0.18 250 / 0.15);
-
-  --thai-line-height: 1.6;
+html {
+  scroll-behavior: smooth;
 }
 
-/* 4. Utilities */
-@utility thai-snug {
-  line-height: var(--thai-line-height);
-  letter-spacing: -0.015em;
-  text-underline-offset: 6px;
-}
-
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/* 5. Base Layers */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  html {
-    @apply scroll-smooth antialiased;
+  *,
+  ::after,
+  ::before {
+    @apply border-slate-900;
   }
 
   body {
-    @apply bg-background text-foreground font-body;
-    line-height: var(--thai-line-height);
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
-    text-rendering: optimizeLegibility;
+    @apply bg-background text-foreground overflow-x-hidden antialiased selection:bg-amber-500/30 selection:text-amber-500;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(180, 140, 40, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(180, 140, 40, 0.03) 0%, transparent 40%);
   }
 
-  /* หัวข้อสไตล์ Corporate: ตัวหนา กระชับ ไม่ห่างเกินไป */
+  /* Premium Noise Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading font-semibold tracking-tight;
-    line-height: 1.15;
-    color: var(--primary);
+  h4 {
+    @apply font-sans tracking-tight text-white uppercase;
   }
 }
 
-/* 6. Advanced Animations (Smooth & Minimal) */
-@keyframes fade-in-up {
+/* Luxury Prose Refinement */
+.prose {
+  --tw-prose-body: oklch(70.4% 0.04 256.788); /* Slate 400 */
+  --tw-prose-headings: #fff;
+  --tw-prose-links: #f59e0b; /* Amber 500 */
+  --tw-prose-bold: #fff;
+  --tw-prose-quotes: oklch(92.4% 0.12 95.746); /* Amber 200 */
+  --tw-prose-hr: oklch(20.8% 0.042 265.755); /* Slate 900 */
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  @apply font-black tracking-tighter uppercase;
+}
+
+.prose h1 {
+  @apply font-serif font-light text-amber-500 lowercase italic;
+}
+
+@utility container-center {
+  @apply mx-auto w-full max-w-7xl px-6;
+}
+
+@utility glass-morphism {
+  @apply border-b border-white/5 bg-[#020617]/80 backdrop-blur-2xl;
+}
+
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(10px); /* ลดระยะเคลื่อนไหวให้ดูนิ่งขึ้น */
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -104,24 +95,20 @@
   }
 }
 
-@utility animate-entry {
-  animation: fade-in-up 0.6s cubic-bezier(0.2, 0, 0, 1) forwards;
-}
-
-/* 7. Scrollbar Styling (Minimalist) */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  background: #020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+  background: #0f172a;
+  border-radius: 10px;
 }
 
-/* 8. Card Styling Override (ป้องกันความโค้งเกินไปใน Component) */
-.service-card {
-  @apply rounded-2xl border border-slate-100 shadow-sm transition-all duration-300;
+::-webkit-scrollbar-thumb:hover {
+  background: #1e293b;
 }

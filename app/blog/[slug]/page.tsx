@@ -1,124 +1,125 @@
-import { Metadata } from "next";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXComponents } from "@/components/blog/MDXComponents";
+import TableOfContents from "@/components/blog/TableOfContents";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { Calendar, User, Tag } from "lucide-react";
+import Section from "@/components/shared/Section";
+import { Calendar, User, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Metadata } from "next";
 
-import { getPostBySlug } from "@/lib/mdx";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { formatDateThai } from "@/lib/utils";
+import { generateArticleJsonLd, siteConfig } from "@/lib/seo";
 
-/* -------------------------------------------------------------------------- */
-/*                                   Types                                    */
-/* -------------------------------------------------------------------------- */
-
-interface PageProps {
+interface PostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                               Metadata (SEO)                               */
-/* -------------------------------------------------------------------------- */
+export async function generateStaticParams() {
+  const posts = await getAllPosts("blog");
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params; // ✅ FIX
-  const post = await getPostBySlug(slug);
-
-  if (!post) {
-    return {
-      title: "Post Not Found | JP-VISOUL.DOCS",
-    };
-  }
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug("blog", slug);
+  if (!post) return {};
 
   return {
-    title: `${post.title} | JP-VISOUL.DOCS`,
-    description: post.excerpt,
+    title: `${post.data.title} | Insights | ${siteConfig.name}`,
+    description: post.data.description,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image || "/og-image.jpg"],
+      title: post.data.title,
+      description: post.data.description,
       type: "article",
-      publishedTime: post.date,
-      authors: [post.author || "JP-VISOUL Team"],
+      publishedTime: post.data.date,
+      images: [{ url: post.data.image || siteConfig.ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.data.title,
+      description: post.data.description,
+      images: [post.data.image || siteConfig.ogImage],
     },
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   Page                                     */
-/* -------------------------------------------------------------------------- */
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+  const post = await getPostBySlug("blog", slug);
 
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params; // ✅ FIX
-  const post = await getPostBySlug(slug);
+  if (!post) notFound();
 
-  if (!post) {
-    notFound();
-  }
-
-  /* ------------------------------ JSON-LD Data ----------------------------- */
-  const jsonLdData = {
-    headline: post.title,
-    image: post.image,
-    datePublished: post.date,
-    author: post.author || "JP-VISOUL Team",
-    description: post.excerpt,
-    slug,
-  };
+  const jsonLd = generateArticleJsonLd({
+    title: post.data.title,
+    description: post.data.description,
+    date: post.data.date,
+    image: post.data.image || siteConfig.ogImage,
+    slug: post.slug,
+    type: "BlogPosting",
+  });
 
   return (
-    <main className="container max-w-4xl py-12">
-      {/* ✅ Structured Data */}
-      <JsonLd type="BlogPosting" data={jsonLdData} />
+    <main className="min-h-screen bg-[#020617]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* Cinematic Header */}
+      <div className="relative overflow-hidden border-b border-slate-900 pt-40 pb-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.08)_0%,transparent_70%)]" />
+        <div className="relative z-10 container mx-auto max-w-4xl px-6">
+          <Link
+            href="/#insights"
+            className="group mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all hover:text-amber-500"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Archive Access
+          </Link>
 
-      <article>
-        {/* Header */}
-        <header className="mb-10 space-y-5">
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5 font-medium text-primary">
-              <Tag size={16} />
-              {post.category || "สาระน่ารู้"}
-            </span>
-
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar size={16} />
-              {formatDateThai(post.date)}
-            </span>
-
-            <span className="inline-flex items-center gap-1.5">
-              <User size={16} />
-              {post.author || "JP-VISOUL Team"}
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-px w-8 bg-amber-500/50" />
+            <span className="text-[10px] font-black tracking-[0.5em] text-amber-500 uppercase">
+              {post.data.category}
             </span>
           </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-            {post.title}
+          <h1 className="animate-subtle-fade mb-12 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-7xl">
+            {post.data.title}
           </h1>
 
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            {post.excerpt}
-          </p>
-        </header>
-
-        {/* Cover Image */}
-        {post.image && (
-          <div className="relative mb-12 aspect-video overflow-hidden rounded-xl border bg-muted">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              priority
-              className="object-cover"
-            />
+          <div className="flex flex-wrap items-center gap-10 opacity-50">
+            <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-white uppercase">
+              <Calendar className="h-4 w-4 text-amber-500" />
+              {post.data.date}
+            </div>
+            <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-white uppercase">
+              <User className="h-4 w-4 text-amber-500" />
+              {post.data.author}
+            </div>
           </div>
-        )}
-
-        {/* Content */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
-      </article>
+      </div>
+
+      <Section className="relative mx-auto max-w-7xl px-6 py-20">
+        <div className="flex justify-center">
+          <TableOfContents />
+          <div className="w-full max-w-3xl">
+            {/* MDX Content */}
+            <div className="prose prose-invert prose-amber max-w-none">
+              <MDXRemote source={post.content} components={MDXComponents} />
+            </div>
+          </div>
+        </div>
+
+        {/* Brand Bottom Signature */}
+        <div className="mt-32 border-t border-slate-900 pt-16 text-center opacity-30">
+          <span className="text-[10px] font-black tracking-[0.8em] text-slate-600 uppercase">
+            End of Official Protocol Transcript
+          </span>
+        </div>
+      </Section>
     </main>
   );
 }

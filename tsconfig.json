@@ -1,4 +1,9 @@
-{
+/**
+ * @AI_INSTRUCTION: [STRICT_CODE_ONLY]
+ * - High-Efficiency Configuration (Industrial Master Grade)
+ * - Next.js v16+ Optimized
+ * - No Business Interpretation
+ */ {
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -6,13 +11,13 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "incremental": true,
-    "module": "esnext",
     "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "incremental": true,
     "plugins": [
       {
         "name": "next"
@@ -21,25 +26,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    },
-    /* ✅ ปรับปรุงการตรวจสอบให้เข้มงวดแต่ยืดหยุ่นสำหรับ Next.js 15 */
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-
-    /* ✅ แนะนำให้เพิ่ม (Optional) */
-    "noFallthroughCasesInSwitch": true, // ป้องกันลืมใส่ break ใน switch case
-    "strictPropertyInitialization": false // กรณีใช้กับพวก Class ที่ถูก init ภายหลัง
+    }
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.md",
-    "**/*.mdx"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".next"] // ✅ เพิ่ม .next ใน exclude เพื่อไม่ให้ตรวจสอบไฟล์ที่ถูก build แล้ว
+  "exclude": ["node_modules"]
 }

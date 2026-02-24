@@ -1,146 +1,122 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronRight, ArrowUpRight } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import React from "react";
 import Logo from "@/components/shared/Logo";
-import { Button } from "@/components/ui/button";
-import { MAIN_NAV } from "@/constants/navigation";
-import { SITE_CONFIG } from "@/constants/site-config";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import Link from "next/link";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { navigationConfig } from "@/config/navigation";
 
 /**
- * Navbar (Production Safe)
- * - ไม่มี unused imports
- * - Guard ทุก dynamic route จาก SITE_CONFIG
- * - รองรับ App Router + Client Component
- * - ปลอดภัยต่อ runtime
+ * @COMPONENT: Navbar
+ * @OPTIMIZATION: Lighthouse 100% Strategy
+ * - Semantic <nav> with proper aria-label.
+ * - Focus-visible states for all interactive elements.
+ * - Optimized scroll progress rendering.
  */
-export default function Navbar() {
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  /* =====================
-   * Safe Routes
-   * ===================== */
-  const servicesHref = SITE_CONFIG.routes?.services ?? "/services";
-
-  /* =====================
-   * Scroll Detection
-   * ===================== */
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 15);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  /* =====================
-   * Close mobile menu on route change
-   * ===================== */
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
-    <nav
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
-          ? "border-b border-slate-200/50 bg-white/90 py-3 backdrop-blur-xl shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)]"
-          : "bg-white py-6",
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between px-4">
-        {/* Logo */}
-        <Logo />
+    <header className="fixed top-0 left-0 z-[100] h-20 w-full">
+      <nav
+        aria-label="Main Directory"
+        className="h-full w-full border-b border-white/5 bg-[#020617]/90 backdrop-blur-2xl"
+      >
+        {/* Scroll Progress: Use aria-hidden for purely decorative progress bar */}
+        <motion.div
+          className="absolute right-0 bottom-0 left-0 z-50 h-[2px] origin-left bg-gradient-to-r from-amber-500/0 via-amber-500 to-amber-500/0"
+          style={{ scaleX }}
+          aria-hidden="true"
+        />
 
-        {/* =====================
-         * Desktop Navigation
-         * ===================== */}
-        <div className="hidden items-center gap-2 lg:flex">
-          {MAIN_NAV.map((item) => {
-            const isActive = pathname === item.href;
+        <div className="container mx-auto flex h-full items-center justify-between px-6">
+          <Link
+            href="/"
+            aria-label="JP-Visual Home"
+            className="rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+          >
+            <Logo />
+          </Link>
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "relative rounded-full px-5 py-2 text-sm font-bold transition-all",
-                  isActive
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-slate-600 hover:text-[#0A192F]",
-                )}
+          {/* Desktop Links: Semantic list for navigation */}
+          <ul className="hidden list-none items-center gap-12 lg:flex">
+            {navigationConfig.mainNav.map((item) => (
+              <li key={item.title}>
+                <Link
+                  href={item.href}
+                  className="p-1 text-[11px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all outline-none hover:text-amber-500 focus-visible:text-amber-500 focus-visible:ring-1 focus-visible:ring-amber-500"
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <button
+                aria-label="Request Protocol Access"
+                className="flex items-center gap-2 rounded-sm border border-white/10 bg-white/5 px-8 py-3 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all outline-none hover:border-amber-500/50 hover:bg-amber-500 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-amber-500"
               >
-                {item.title}
-              </Link>
-            );
-          })}
+                Protocol Access
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            </li>
+          </ul>
 
-          <div className="ml-4 border-l border-slate-200 pl-4">
-            <Button asChild className="h-12 rounded-2xl px-8 font-black">
-              <Link href={servicesHref} className="flex items-center gap-2">
-                เริ่มใช้บริการ
-                <ArrowUpRight size={18} />
-              </Link>
-            </Button>
-          </div>
+          {/* Mobile Toggle: Accessible button */}
+          <button
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            className="relative z-50 p-2 text-white transition-transform outline-none focus-visible:ring-2 focus-visible:ring-amber-500 active:scale-90 lg:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <X className="h-7 w-7 text-amber-500" aria-hidden="true" />
+            ) : (
+              <Menu className="h-7 w-7 text-white" aria-hidden="true" />
+            )}
+          </button>
         </div>
 
-        {/* =====================
-         * Mobile Toggle
-         * ===================== */}
-        <button
-          type="button"
-          aria-label="Toggle navigation"
-          onClick={() => setIsOpen((v) => !v)}
-          className="rounded-2xl border border-slate-200 bg-slate-50 p-3 lg:hidden"
-        >
-          {isOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {/* =====================
-       * Mobile Menu
-       * ===================== */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="border-t border-slate-100 bg-white shadow-xl lg:hidden"
-          >
-            <div className="space-y-3 p-4">
-              {MAIN_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-center justify-between rounded-2xl bg-slate-50 p-5 font-bold text-slate-700"
-                >
-                  <span>{item.title}</span>
-                  <ChevronRight size={18} />
-                </Link>
-              ))}
-
-              <Button
-                asChild
-                className="h-16 w-full rounded-2xl text-lg font-black"
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center gap-10 bg-[#020617] px-10 lg:hidden"
+            >
+              <ul className="flex list-none flex-col items-center gap-10">
+                {navigationConfig.mainNav.map((item) => (
+                  <li key={item.title}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-4xl font-black tracking-tighter text-white uppercase outline-none hover:text-amber-500 focus-visible:text-amber-500"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <button
+                className="mt-10 w-full rounded-sm bg-amber-500 py-6 text-xl font-black tracking-[0.2em] text-slate-950 uppercase outline-none focus-visible:ring-4 focus-visible:ring-white"
+                onClick={() => setIsOpen(false)}
               >
-                <Link href={servicesHref} className="flex items-center gap-2">
-                  ขอรับบริการทันที
-                  <ArrowUpRight />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+                Protocol Access
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
   );
-}
+};

@@ -1,0 +1,136 @@
+.
+├── .agents
+│   └── skills
+│       └── next-best-practices
+│           ├── SKILL.md
+│           ├── async-patterns.md
+│           ├── bundling.md
+│           ├── data-patterns.md
+│           ├── debug-tricks.md
+│           ├── directives.md
+│           ├── error-handling.md
+│           ├── file-conventions.md
+│           ├── font.md
+│           ├── functions.md
+│           ├── hydration-error.md
+│           ├── image.md
+│           ├── metadata.md
+│           ├── parallel-routes.md
+│           ├── route-handlers.md
+│           ├── rsc-boundaries.md
+│           ├── runtime-selection.md
+│           ├── scripts.md
+│           ├── self-hosting.md
+│           └── suspense-boundaries.md
+├── .claude
+│   └── skills
+│       └── next-best-practices -> ../../.agents/skills/next-best-practices
+├── .windsurf
+│   └── skills
+│       └── next-best-practices -> ../../.agents/skills/next-best-practices
+├── app
+│   ├── (marketing)
+│   │   ├── case-studies
+│   │   │   └── [slug]
+│   │   ├── contact
+│   │   └── services
+│   │       └── [slug]
+│   │           └── page.tsx
+│   ├── api
+│   │   ├── ai
+│   │   └── contact
+│   │       └── route.ts
+│   ├── blog
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── case-studies
+│   │   └── [slug]
+│   │       └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components
+│   ├── blog
+│   │   ├── MDXComponents.tsx
+│   │   └── TableOfContents.tsx
+│   ├── sections
+│   │   ├── BlogCard.tsx
+│   │   ├── BlogList.tsx
+│   │   ├── CaseStudyPreview.tsx
+│   │   ├── CategoryFilter.tsx
+│   │   ├── Hero.tsx
+│   │   ├── ServiceCard.tsx
+│   │   ├── ServiceGrid.tsx
+│   │   ├── TrustSignals.tsx
+│   │   └── VisualSection.tsx
+│   ├── shared
+│   │   ├── Button.tsx
+│   │   ├── ContactCTA.tsx
+│   │   ├── ContactForm.tsx
+│   │   ├── CustomCursor.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Logo.tsx
+│   │   ├── Magnetic.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Preloader.tsx
+│   │   ├── Reveal.tsx
+│   │   └── Section.tsx
+│   └── visuals
+│       ├── IdentityMap.tsx
+│       └── InteractiveGrid.tsx
+├── config
+│   ├── navigation.ts
+│   ├── services.ts
+│   └── site.ts
+├── content
+│   ├── blog
+│   │   ├── executive-documentation-strategy.mdx
+│   │   ├── financial-documentation-protocols.mdx
+│   │   ├── gds-systems-mobility.mdx
+│   │   ├── modern-archiving-security.mdx
+│   │   └── visual-narrative-executive-structure.mdx
+│   ├── case-studies
+│   │   ├── cross-border-financial-infrastructure-alignment.mdx
+│   │   ├── multinational-alignment.mdx
+│   │   └── tech-merger-strategy.mdx
+│   └── services
+│       ├── documentation
+│       │   └── customized-income-documentation.mdx
+│       ├── financial
+│       │   └── financial-account-structuring.mdx
+│       ├── immigration
+│       │   └── flight-hotel-confirmed-status.mdx
+│       └── systems
+│           └── complete-profile-infrastructure.mdx
+├── hooks
+│   └── use-service-filter.ts
+├── lib
+│   ├── mdx.ts
+│   ├── seo.ts
+│   └── utils.ts
+├── public
+│   ├── assets
+│   └── og
+├── types
+├── .geminirules
+├── .gitignore
+├── .npmrc
+├── .prettierrc
+├── CONTEXT.md
+├── README.md
+├── eslint.config.mjs
+├── knip.json
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.js
+├── service-account.json
+├── structure.txt
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
+
+44 directories, 90 files
