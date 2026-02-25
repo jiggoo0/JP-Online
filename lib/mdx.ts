@@ -5,7 +5,7 @@ import matter from "gray-matter";
 const contentDir = path.join(process.cwd(), "content");
 
 export interface BasePost {
-  date: string;
+  date?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
@@ -15,6 +15,7 @@ export interface Insight extends BasePost {
   category: string;
   description: string;
   slug: string;
+  date: string; // Required for Insights
 }
 
 export interface CaseStudy extends BasePost {
@@ -24,6 +25,7 @@ export interface CaseStudy extends BasePost {
   client: string;
   outcome: string;
   slug: string;
+  date: string; // Required for CaseStudies
 }
 
 export interface ServiceFrontmatter extends BasePost {
@@ -70,7 +72,11 @@ export async function getPostBySlug<T extends BasePost>(
   if (!fullPath || !fs.existsSync(fullPath)) return null;
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
-  return { data: data as T, content, slug };
+
+  // Ensure slug is always included in data for type consistency
+  const postData = { ...data, slug } as unknown as T;
+
+  return { data: postData, content, slug };
 }
 
 export async function getAllPosts<T extends BasePost>(
@@ -81,46 +87,46 @@ export async function getAllPosts<T extends BasePost>(
 
   const posts: T[] = [];
 
-  if (category === "services") {
-    const entries = fs.readdirSync(categoryPath);
+  function scanDir(dir: string) {
+    const entries = fs.readdirSync(dir);
     for (const entry of entries) {
-      const entryPath = path.join(categoryPath, entry);
-      if (fs.statSync(entryPath).isDirectory()) {
-        const files = fs.readdirSync(entryPath);
-        for (const file of files) {
-          if (file.endsWith(".mdx")) {
-            const slug = file.replace(".mdx", "");
-            const fullPath = path.join(entryPath, file);
-            const fileContents = fs.readFileSync(fullPath, "utf8");
-            const { data } = matter(fileContents);
-            posts.push({ ...data, slug } as unknown as T);
-          }
-        }
+      const fullPath = path.join(dir, entry);
+      const stat = fs.statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        scanDir(fullPath);
       } else if (entry.endsWith(".mdx")) {
-        const slug = entry.replace(".mdx", "");
-        const fileContents = fs.readFileSync(entryPath, "utf8");
+        const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
+        const slug = entry.replace(".mdx", "");
         posts.push({ ...data, slug } as unknown as T);
       }
     }
+  }
+
+  if (category === "services") {
+    scanDir(categoryPath);
   } else {
     const files = fs.readdirSync(categoryPath);
-    posts.push(
-      ...files
-        .filter((file) => file.endsWith(".mdx"))
-        .map((file) => {
-          const slug = file.replace(".mdx", "");
-          const fullPath = path.join(categoryPath, file);
-          const fileContents = fs.readFileSync(fullPath, "utf8");
-          const { data } = matter(fileContents);
-          return { ...data, slug } as unknown as T;
-        }),
-    );
+    for (const file of files) {
+      if (file.endsWith(".mdx")) {
+        const fullPath = path.join(categoryPath, file);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+        const { data } = matter(fileContents);
+        const slug = file.replace(".mdx", "");
+        posts.push({ ...data, slug } as unknown as T);
+      }
+    }
   }
 
   return posts.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA;
+    // If date exists, sort by date descending
+    if (a.date && b.date) {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    }
+    // Fallback for posts without dates (like services) - alphabetical by slug or title
+    const valA = a.title || a.slug || "";
+    const valB = b.title || b.slug || "";
+    return valA.localeCompare(valB);
   });
 }

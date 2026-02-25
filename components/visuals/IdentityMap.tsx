@@ -3,36 +3,39 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { UserCheck, Fingerprint, Globe, ShieldAlert, Cpu, Link2 } from "lucide-react";
+import { UserCheck, Globe, ShieldAlert, Cpu } from "lucide-react";
 
 const IDENTITY_NODES = [
   {
-    id: "legal",
-    icon: UserCheck,
-    label: "Legal Identity",
-    status: "Verified",
-    details: "KYC/AML Compliance - รหัสรับรองสถาบัน",
-  },
-  {
     id: "financial",
     icon: Cpu,
-    label: "Asset Hash",
-    status: "Correlated",
-    details: "DSR Analysis - โครงสร้างภาระหนี้",
+    label: "จัดโครงสร้างเดินบัญชี",
+    status: "AUDIT-READY",
+    details: "ออกแบบแผนการเงินและยอดหมุนเวียนให้สอดคล้องกับตรรกะการตรวจของ AI ธนาคารและสถานทูต",
   },
   {
-    id: "digital",
+    id: "immigration",
     icon: Globe,
-    label: "Digital Footprint",
-    status: "Cleaned",
-    details: "Risk Mitigation - ล้างประวัติลบ",
+    label: "ลงระบบเดินทางจริง",
+    status: "VERIFIED",
+    details:
+      "Injection ข้อมูลการเดินทางเข้าสู่ระบบ GDS สากล เพื่อให้ได้รหัสจริงที่ตรวจสอบได้ 100% ทั่วโลก",
   },
   {
-    id: "biometric",
-    icon: Fingerprint,
-    label: "Trust Score",
-    status: "High-Tier",
-    details: "Verification Chain - ระดับความน่าเชื่อถือ",
+    id: "legal",
+    icon: UserCheck,
+    label: "จัดเตรียมโปรไฟล์เชิงกลยุทธ์",
+    status: "ALIGNED",
+    details:
+      "สร้างตรรกะอาชีพและที่มารายได้ในเอกสารให้เนียนและมีน้ำหนักเหนือคู่แข่ง เพื่ออุดรอยโหว่การตรวจสอบ",
+  },
+  {
+    id: "recovery",
+    icon: ShieldAlert,
+    label: "กู้คืนเคสถูกปฏิเสธ",
+    status: "RE-SYNCED",
+    details:
+      "วิเคราะห์สาเหตุการโดนแบนหรือถูกปฏิเสธ (Gap Analysis) และวางแผนแก้ไขประวัติเพื่อความสำเร็จครั้งใหม่",
   },
 ];
 
@@ -43,128 +46,96 @@ export const IdentityMap: React.FC<{ className?: string }> = ({ className }) => 
     <div
       className={cn("relative flex h-full w-full flex-col overflow-hidden p-8 lg:p-12", className)}
     >
-      {/* Background Grid Pattern */}
-      <div className="pointer-events-none absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat opacity-[0.03]" />
+      {/* Background Grid Pattern: Structural Audit Lines */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(30,41,59,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,41,59,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      {/* Header */}
-      <div className="relative z-10 mb-16 flex items-end justify-between">
+      {/* Header: Authoritative Protocol Status */}
+      <div className="relative z-10 mb-16 flex items-end justify-between border-b border-slate-900 pb-12">
         <div>
-          <div className="mb-2 flex items-center gap-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-            <span className="text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase">
-              Identity Protocol Active
-            </span>
+          <div className="mb-3 flex items-center gap-3">
+            <div className="bg-accent h-1.5 w-1.5 animate-pulse" />
+            <span className="label-mono text-accent">Strategic Solution Mapping v4.0</span>
           </div>
-          <h3 className="text-2xl leading-none font-black tracking-tighter text-white uppercase">
-            Unified Identity <br />
-            <span className="text-primary font-light lowercase italic">Architecture</span>
+          <h3 className="text-3xl leading-none font-black tracking-tighter text-white uppercase">
+            Internal Audit <br />
+            <span className="text-accent font-light lowercase italic">Simulation Logic</span>
           </h3>
         </div>
         <div className="hidden md:block">
-          <div className="text-right font-mono text-[9px] leading-relaxed text-slate-500 uppercase">
-            Protocol: SEC_V3.9 <br />
-            Correlation: 99.8% <br />
-            Integrity: Optimal
+          <div className="label-mono text-right text-slate-500">
+            System ID: JP-VISUAL-ARCH <br />
+            Security: Tier-1 Encryption <br />
+            Status: Optimal
           </div>
         </div>
       </div>
 
-      {/* Connection Logic Visualization */}
-      <div className="relative flex flex-1 flex-col items-center justify-center">
-        {/* Central Core */}
-        <div className="relative z-20 mb-12">
-          <motion.div
-            animate={{
-              rotate: [0, 90, 180, 270, 360],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="border-primary/30 relative flex h-32 w-32 items-center justify-center rounded-full border"
-          >
-            <div className="border-primary/20 animate-spin-slow absolute inset-0 rounded-full border border-dashed" />
-            <div className="bg-primary/5 border-primary/20 flex h-24 w-24 items-center justify-center rounded-full border backdrop-blur-sm">
-              <Link2 className="text-primary h-8 w-8" strokeWidth={1.5} />
-            </div>
-          </motion.div>
-        </div>
+      {/* Nodes Grid: Business Integrity Blocks */}
+      <div className="relative z-20 grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {IDENTITY_NODES.map((node, index) => {
+          const Icon = node.icon;
+          const isActive = activeNode === index;
 
-        {/* Nodes Grid */}
-        <div className="relative z-20 grid w-full grid-cols-2 gap-6 lg:grid-cols-4">
-          {IDENTITY_NODES.map((node, index) => {
-            const Icon = node.icon;
-            const isActive = activeNode === index;
+          return (
+            <button
+              key={node.id}
+              onClick={() => setActiveNode(index)}
+              className={cn(
+                "audit-border group relative overflow-hidden p-8 transition-all duration-500",
+                isActive
+                  ? "border-accent/40 bg-slate-900 shadow-[0_0_50px_rgba(180,140,40,0.1)]"
+                  : "bg-slate-950/40 hover:bg-slate-900/60",
+              )}
+            >
+              <div className="relative z-10">
+                <div
+                  className={cn(
+                    "mb-8 flex h-14 w-14 items-center justify-center border transition-all duration-500",
+                    isActive
+                      ? "border-accent text-accent bg-accent/5"
+                      : "border-slate-800 text-slate-700 group-hover:border-slate-600 group-hover:text-slate-500",
+                  )}
+                >
+                  <Icon size={28} strokeWidth={1.5} />
+                </div>
 
-            return (
-              <button
-                key={node.id}
-                onClick={() => setActiveNode(index)}
-                className={cn(
-                  "group relative overflow-hidden border p-6 transition-all duration-500",
-                  isActive
-                    ? "border-primary/50 bg-slate-900/90 shadow-[0_0_40px_rgba(var(--primary-rgb),0.05)]"
-                    : "border-slate-900 bg-slate-950/20 hover:border-slate-800",
-                )}
-              >
-                {/* Active Scanline Effect */}
-                {isActive && (
-                  <motion.div
-                    initial={{ top: "-100%" }}
-                    animate={{ top: "100%" }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="via-primary/30 absolute inset-x-0 z-0 h-1 bg-gradient-to-r from-transparent to-transparent"
-                  />
-                )}
-
-                <div className="relative z-10">
-                  <div
+                <div className="space-y-2">
+                  <span
                     className={cn(
-                      "mb-6 flex h-12 w-12 items-center justify-center rounded-lg border transition-all duration-500",
-                      isActive
-                        ? "border-primary text-primary bg-primary/5 rotate-12"
-                        : "border-slate-800 text-slate-600",
+                      "label-mono text-[9px] transition-colors",
+                      isActive ? "text-accent" : "text-slate-600",
                     )}
                   >
-                    <Icon size={24} strokeWidth={1.5} />
-                  </div>
-
-                  <div className="space-y-1">
-                    <span
-                      className={cn(
-                        "block text-[10px] font-black tracking-widest uppercase",
-                        isActive ? "text-primary" : "text-slate-500",
-                      )}
-                    >
-                      {node.status}
-                    </span>
-                    <span className={cn("block text-sm font-bold text-white")}>{node.label}</span>
-                  </div>
+                    {node.status}
+                  </span>
+                  <span className="block text-base font-bold tracking-tight text-white uppercase">
+                    {node.label}
+                  </span>
                 </div>
-              </button>
-            );
-          })}
-        </div>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Narrative Reveal */}
-      <div className="relative z-10 mt-12 min-h-[60px] border-t border-slate-900 pt-8">
+      {/* Narrative Reveal: The Unfair Advantage */}
+      <div className="audit-border border-l-accent relative z-10 mt-12 min-h-[100px] border-l-4 bg-slate-900/50 p-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeNode}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
-            className="flex items-start gap-4"
+            className="flex items-start gap-6"
           >
-            <ShieldAlert className="text-primary mt-1 h-5 w-5 shrink-0" />
-            <div>
-              <p className="mb-1 text-sm font-bold tracking-tight text-white uppercase">
-                Analytical Detail: {IDENTITY_NODES[activeNode].label}
-              </p>
-              <p className="text-[11px] leading-relaxed tracking-[0.1em] text-slate-500 uppercase">
+            <div className="bg-accent/10 shrink-0 p-2">
+              <ShieldAlert className="text-accent h-6 w-6" />
+            </div>
+            <div className="flex-1">
+              <h4 className="mb-3 text-sm font-bold tracking-widest text-white uppercase">
+                Intelligence Protocol: {IDENTITY_NODES[activeNode].label}
+              </h4>
+              <p className="max-w-3xl text-sm leading-relaxed text-slate-400">
                 {IDENTITY_NODES[activeNode].details}
               </p>
             </div>

@@ -1,5 +1,5 @@
 {
-  "name": "jp-visual-docs",
+  "name": "www.jpvisouldocs.online",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -25,7 +25,8 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.1.6",
-    "@tailwindcss/postcss": "^4.2.0",
+    "@tailwindcss/cli": "4.2.1",
+    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

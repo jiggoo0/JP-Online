@@ -20,6 +20,7 @@ export default function ContactForm() {
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [category, setCategory] = React.useState("FINANCIAL");
   const [message, setMessage] = React.useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,7 +32,7 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, category, message }),
       });
 
       if (response.ok) {
@@ -50,15 +51,19 @@ export default function ContactForm() {
         role="alert"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-sm border border-amber-500/30 bg-amber-500/5 p-12 text-center backdrop-blur-sm"
+        className="border border-slate-800 bg-slate-900/50 p-16 text-center backdrop-blur-xl"
       >
-        <Lock className="mx-auto mb-6 h-12 w-12 text-amber-500" aria-hidden="true" />
-        <h3 className="mb-4 text-2xl font-black tracking-tighter text-white uppercase">
-          Protocol Initiated
+        <div className="mb-8 flex justify-center">
+          <div className="border-accent/30 bg-accent/10 h-20 w-20 rounded-full border p-6">
+            <Lock className="text-accent h-full w-full" aria-hidden="true" />
+          </div>
+        </div>
+        <h3 className="mb-4 text-3xl font-bold tracking-tight text-white uppercase">
+          Protocol Transmission: <span className="text-accent">Success</span>
         </h3>
-        <p className="text-sm leading-relaxed tracking-widest text-slate-300 uppercase">
-          Your request has been encrypted and sent to our executive board. <br />
-          Expect a secure response within 24 hours.
+        <p className="mx-auto max-w-md text-sm leading-relaxed tracking-wide text-slate-400 uppercase">
+          Your strategic data has been encrypted and queued for board review. A secure response will
+          be initiated within 24 standard business hours.
         </p>
       </motion.div>
     );
@@ -67,78 +72,82 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid grid-cols-1 gap-6 text-left md:grid-cols-2"
+      className="grid grid-cols-1 gap-8 text-left md:grid-cols-2"
       aria-label="Secure Consultation Request"
     >
       {status === "error" && (
         <div
           role="alert"
-          className="flex items-center gap-3 border border-red-500/20 bg-red-500/10 p-4 text-xs font-bold tracking-widest text-red-400 uppercase md:col-span-2"
+          className="flex items-center gap-3 border border-red-500/20 bg-red-500/10 p-5 text-[10px] font-bold tracking-widest text-red-400 uppercase md:col-span-2"
         >
           <AlertCircle className="h-4 w-4" />
-          An error occurred. Please verify your connection and try again.
+          System Error: Request failed. Please re-verify protocol data and retry.
         </div>
       )}
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="executive-name"
-          className="ml-1 text-[10px] font-black tracking-widest text-slate-400 uppercase"
-        >
-          Full Name
+      <div className="flex flex-col gap-3">
+        <label htmlFor="executive-name" className="label-mono">
+          Executive / Organization Name
         </label>
         <input
           id="executive-name"
           name="name"
           required
           type="text"
-          autoComplete="name"
-          aria-required="true"
-          placeholder="EXECUTIVE NAME"
+          placeholder="ENTER FULL NAME"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="rounded-sm border border-slate-800 bg-[#0c1122] p-4 text-sm tracking-widest text-white transition-all outline-none placeholder:text-slate-700 focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50"
+          className="border border-slate-800 bg-slate-950 p-5 text-sm tracking-widest text-white outline-none placeholder:text-slate-800 focus:border-cyan-500"
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="secure-email"
-          className="ml-1 text-[10px] font-black tracking-widest text-slate-400 uppercase"
-        >
-          Secure Email
+      <div className="flex flex-col gap-3">
+        <label htmlFor="secure-email" className="label-mono">
+          Secure Official Email
         </label>
         <input
           id="secure-email"
           name="email"
           required
           type="email"
-          autoComplete="email"
-          aria-required="true"
-          placeholder="OFFICIAL@COMPANY.COM"
+          placeholder="EXECUTIVE@DOMAIN.COM"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="rounded-sm border border-slate-800 bg-[#0c1122] p-4 text-sm tracking-widest text-white transition-all outline-none placeholder:text-slate-700 focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50"
+          className="border border-slate-800 bg-slate-950 p-5 text-sm tracking-widest text-white outline-none placeholder:text-slate-800 focus:border-cyan-500"
         />
       </div>
 
-      <div className="flex flex-col gap-2 md:col-span-2">
-        <label
-          htmlFor="protocol-brief"
-          className="ml-1 text-[10px] font-black tracking-widest text-slate-400 uppercase"
+      <div className="flex flex-col gap-3 md:col-span-2">
+        <label htmlFor="problem-category" className="label-mono">
+          Target Protocol Category
+        </label>
+        <select
+          id="problem-category"
+          name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="border border-slate-800 bg-slate-950 p-5 text-sm font-bold tracking-widest text-white outline-none focus:border-cyan-500"
         >
-          Protocol Brief
+          <option value="FINANCIAL">FINANCIAL ARCHITECTURE (CASHFLOW ENGINEERING)</option>
+          <option value="IMMIGRATION">GDS IMMIGRATION INJECTION (HARD CASE VISA)</option>
+          <option value="DOCUMENTATION">EXECUTIVE LOGIC-BASED PROFILING</option>
+          <option value="SYSTEMS">INFRASTRUCTURE ALIGNMENT</option>
+        </select>
+      </div>
+
+      <div className="flex flex-col gap-3 md:col-span-2">
+        <label htmlFor="protocol-brief" className="label-mono">
+          Brief Context of Constraints (Gap Analysis)
         </label>
         <textarea
           id="protocol-brief"
           name="message"
           required
-          rows={4}
-          aria-required="true"
-          placeholder="DESCRIBE YOUR DOCUMENTATION OR VISUAL STRATEGY REQUIREMENTS..."
+          rows={5}
+          placeholder="DESCRIBE YOUR CURRENT PROFILE CONSTRAINTS OR REJECTION HISTORY..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-none rounded-sm border border-slate-800 bg-[#0c1122] p-4 text-sm tracking-widest text-white transition-all outline-none placeholder:text-slate-700 focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50"
+          className="resize-none border border-slate-800 bg-slate-950 p-5 text-sm tracking-widest text-white outline-none placeholder:text-slate-800 focus:border-cyan-500"
         />
       </div>
 
@@ -146,11 +155,10 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          aria-busy={status === "submitting"}
-          className="flex w-full items-center justify-center gap-3 bg-amber-500 py-5 font-black tracking-[0.3em] text-slate-950 uppercase shadow-[0_10px_40px_rgba(180,140,40,0.2)] transition-all outline-none hover:bg-amber-600 focus-visible:ring-4 focus-visible:ring-white disabled:bg-slate-800"
+          className="btn-primary flex w-full items-center justify-center gap-4 py-6"
         >
-          {status === "submitting" ? "ENCRYPTING..." : "INITIATE SECURE CONSULTATION"}
-          <Send className="h-4 w-4" aria-hidden="true" />
+          {status === "submitting" ? "ENCRYPTING DATA..." : "INITIATE SOLUTION PROTOCOL"}
+          <Send className="h-4 w-4 text-slate-950" aria-hidden="true" />
         </button>
       </div>
     </form>

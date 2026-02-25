@@ -2,7 +2,7 @@
 
 import React from "react";
 import Logo from "@/components/shared/Logo";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { navigationConfig } from "@/config/navigation";
@@ -16,91 +16,84 @@ import { navigationConfig } from "@/config/navigation";
  */
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
 
   return (
-    <header className="fixed top-0 left-0 z-[100] h-20 w-full">
+    <header className="bg-background/80 fixed top-0 left-0 z-[100] h-20 w-full border-b border-slate-900 backdrop-blur-xl">
       <nav
-        aria-label="Main Directory"
-        className="h-full w-full border-b border-white/5 bg-[#020617]/90 backdrop-blur-2xl"
+        aria-label="Executive Command Center"
+        className="container mx-auto flex h-full items-center justify-between px-6"
       >
-        {/* Scroll Progress: Use aria-hidden for purely decorative progress bar */}
-        <motion.div
-          className="absolute right-0 bottom-0 left-0 z-50 h-[2px] origin-left bg-gradient-to-r from-amber-500/0 via-amber-500 to-amber-500/0"
-          style={{ scaleX }}
-          aria-hidden="true"
-        />
+        <Link
+          href="/"
+          aria-label="JP-Visual Home"
+          className="group flex items-center gap-3 outline-none"
+        >
+          <Logo />
+          <div className="group-hover:bg-accent h-4 w-px bg-slate-800 transition-colors" />
+          <span className="label-mono hidden text-[9px] text-slate-500 md:block">
+            System Status: <span className="text-accent">Operational</span>
+          </span>
+        </Link>
 
-        <div className="container mx-auto flex h-full items-center justify-between px-6">
-          <Link
-            href="/"
-            aria-label="JP-Visual Home"
-            className="rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
-          >
-            <Logo />
-          </Link>
-
-          {/* Desktop Links: Semantic list for navigation */}
-          <ul className="hidden list-none items-center gap-12 lg:flex">
-            {navigationConfig.mainNav.map((item) => (
-              <li key={item.title}>
-                <Link
-                  href={item.href}
-                  className="p-1 text-[11px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all outline-none hover:text-amber-500 focus-visible:text-amber-500 focus-visible:ring-1 focus-visible:ring-amber-500"
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <button
-                aria-label="Request Protocol Access"
-                className="flex items-center gap-2 rounded-sm border border-white/10 bg-white/5 px-8 py-3 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all outline-none hover:border-amber-500/50 hover:bg-amber-500 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-amber-500"
+        {/* Desktop Links: High-Contrast Minimalism */}
+        <ul className="hidden list-none items-center gap-10 lg:flex">
+          {navigationConfig.mainNav.map((item) => (
+            <li key={item.title}>
+              <Link
+                href={item.href}
+                className="label-mono focus-visible:text-accent text-[10px] text-slate-400 transition-all hover:text-white"
               >
-                Protocol Access
-                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </button>
+                {item.title}
+              </Link>
             </li>
-          </ul>
+          ))}
+          <li>
+            <Link href="/#contact">
+              <button
+                aria-label="Initiate Protocol Access"
+                className="btn-primary flex items-center gap-3 px-6 py-3"
+              >
+                PROTOCOL ACCESS
+                <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              </button>
+            </Link>
+          </li>
+        </ul>
 
-          {/* Mobile Toggle: Accessible button */}
-          <button
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="relative z-50 p-2 text-white transition-transform outline-none focus-visible:ring-2 focus-visible:ring-amber-500 active:scale-90 lg:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? (
-              <X className="h-7 w-7 text-amber-500" aria-hidden="true" />
-            ) : (
-              <Menu className="h-7 w-7 text-white" aria-hidden="true" />
-            )}
-          </button>
-        </div>
+        {/* Mobile Toggle */}
+        <button
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          className="relative z-50 p-2 text-white outline-none lg:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <X className="text-accent h-6 w-6" aria-hidden="true" />
+          ) : (
+            <Menu className="h-6 w-6 text-white" aria-hidden="true" />
+          )}
+        </button>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu: Strategic Grid Overlay */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               id="mobile-menu"
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center gap-10 bg-[#020617] px-10 lg:hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-background fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center gap-12 px-10 lg:hidden"
             >
-              <ul className="flex list-none flex-col items-center gap-10">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(30,41,59,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,41,59,0.3)_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
+
+              <ul className="relative flex list-none flex-col items-center gap-8">
                 {navigationConfig.mainNav.map((item) => (
                   <li key={item.title}>
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-4xl font-black tracking-tighter text-white uppercase outline-none hover:text-amber-500 focus-visible:text-amber-500"
+                      className="hover:text-accent text-4xl font-bold tracking-tighter text-white uppercase transition-colors"
                     >
                       {item.title}
                     </Link>
@@ -108,10 +101,10 @@ export const Navbar = () => {
                 ))}
               </ul>
               <button
-                className="mt-10 w-full rounded-sm bg-amber-500 py-6 text-xl font-black tracking-[0.2em] text-slate-950 uppercase outline-none focus-visible:ring-4 focus-visible:ring-white"
+                className="btn-primary relative w-full py-6 text-lg"
                 onClick={() => setIsOpen(false)}
               >
-                Protocol Access
+                INITIATE PROTOCOL
               </button>
             </motion.div>
           )}

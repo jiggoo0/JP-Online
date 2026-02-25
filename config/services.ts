@@ -1,27 +1,16 @@
-import { Shield, LucideIcon } from "lucide-react";
+import { Shield, LucideIcon, Globe, FileText, Briefcase } from "lucide-react";
 
 /**
  * =========================================
  * ✅ Service & Protocol Data Model (Production Ready)
- * File: constants/services.ts
  * =========================================
  */
 
-/**
- * ✅ Interface สำหรับโครงสร้างขั้นตอน (Protocol Step)
- * ใช้ร่วมกันทั้ง Service / ProtocolStepper / UI
- */
 export interface ProtocolStep {
   title: string;
   description: string;
 }
 
-/**
- * =========================================
- * ✅ Interface สำหรับโครงสร้างบริการ (Service)
- * ใช้เป็น Single Source of Truth ทั้ง UI / SEO / JsonLd
- * =========================================
- */
 export const CATEGORIES = [
   "FINANCIAL",
   "IMMIGRATION",
@@ -36,7 +25,7 @@ export interface Service {
   id: string;
   slug: string;
   name: string;
-  title: string; // สำหรับ SEO / JsonLd
+  title: string;
   category: ServiceCategory;
   description: string;
   protocol: ProtocolStep[];
@@ -50,17 +39,12 @@ export interface Service {
   features?: string[];
 }
 
-/**
- * =========================================
- * ✅ Default Image (Fallback)
- * =========================================
- */
 const DEFAULT_SERVICE_IMAGE =
   "https://ksiobbrextlywypdzaze.supabase.co/storage/v1/object/public/user-uploads/Service/Service.webp";
 
 /**
  * =========================================
- * ✅ Services Dataset
+ * ✅ Services Dataset - Simplified for Mass Market
  * =========================================
  */
 export const SERVICES: Service[] = [
@@ -68,124 +52,226 @@ export const SERVICES: Service[] = [
     id: "SRV-FIN-01",
     slug: "financial-account-structuring",
     category: "FINANCIAL",
-    name: "วิเคราะห์และวางโครงสร้างเดินบัญชี (Account Structuring)",
-    title: "Account Structuring - บริการวางโครงสร้างเดินบัญชี",
-    tagline: "ปรับปรุงโปรไฟล์สเตทเม้นให้เข้าเกณฑ์พิจารณาสูงสุด [Case Recovery]",
+    name: "Cashflow Architecture Optimization",
+    title: "Financial Profile Engineering - วางโครงสร้างสเตทเม้นระดับสูง",
+    tagline: "ออกแบบกระแสเงินสดเชิงตรรกะ เพื่ออุดรอยโหว่ในการตรวจสอบ (Audit-Ready Profile)",
     description:
-      "บริการสำหรับเคสที่ตัวเลขไม่ถึงหรือที่มาเงินไม่ชัดเจน เราออกแบบโครงสร้างเดินบัญชีใหม่ให้มีความน่าเชื่อถือตามเกณฑ์สถาบันการเงินและสถานทูต",
-    timeline: "3 - 7 วันทำการ",
-    feeEstimate: "ประเมินตามความยากของเคส",
+      "เปลี่ยนข้อมูลการเดินบัญชีที่สับสนให้กลายเป็นโครงสร้างที่มีตรรกะรองรับ เราใช้หลักการ Internal Audit Simulation เพื่อจำลองเกณฑ์การตรวจของธนาคารและสถานทูต ทำให้โปรไฟล์ของคุณผ่านเกณฑ์ AML และ DSR ได้อย่างไร้ที่ติ",
+    timeline: "3 - 7 วัน",
+    feeEstimate: "ประเมินตามความซับซ้อนของเคส",
     imageUrl: DEFAULT_SERVICE_IMAGE,
     contactMethod: "LINE",
     icon: Shield,
     protocol: [
       {
         title: "Gap Analysis",
-        description: "วิเคราะห์จุดบอดของบัญชีเดิมและประเมินยอดที่จำเป็นต่อการอนุมัติ",
+        description: "วิเคราะห์จุดอ่อนของประวัติทางการเงินและระบุรอยโหว่ที่ทำให้ถูกปฏิเสธในอดีต",
       },
       {
-        title: "Cashflow Design",
-        description: "ออกแบบจังหวะการหมุนเวียนเงินให้เป็นธรรมชาติและตรวจสอบได้",
+        title: "Liquidity Structuring",
+        description: "ออกแบบจังหวะการไหลเวียนของกระแสเงินสดให้สมเหตุสมผลตามแหล่งที่มารายได้",
       },
       {
-        title: "Internal Audit",
-        description: "จำลองการตรวจสอบผ่านระบบ Banking เพื่อยืนยันความพร้อมก่อนใช้งานจริง",
+        title: "Compliance Verification",
+        description:
+          "ตรวจสอบความสมบูรณ์ขั้นสุดท้ายเพื่อให้มั่นใจว่าเอกสารพร้อมรับการตรวจสอบเชิงลึก",
       },
     ],
-    tags: ["High Success", "Financial Design", "Case Adjustment"],
-    features: ["วิเคราะห์จุดบอด", "ออกแบบ Cashflow", "Audit ความพร้อม"],
+    features: ["Risk Mitigation Strategy", "Logical Cashflow Alignment", "Audit-Ready Support"],
+  },
+  {
+    id: "SRV-FIN-02",
+    slug: "credit-leverage-infrastructure",
+    category: "FINANCIAL",
+    name: "Credit Leverage Infrastructure",
+    title: "Credit Positioning Strategy - วางระบบฐานข้อมูลเพื่อการกู้ยืม",
+    tagline: "สร้างความน่าเชื่อถือผ่านการวางโครงสร้างรายได้ สำหรับเคสซับซ้อนและวงเงินสูง",
+    description:
+      "เหมาะสำหรับผู้มีอุปสรรคด้านหลักฐานรายได้ไม่ชัดเจน เราช่วยวางโครงสร้าง Credit Positioning ใหม่ทั้งหมด เพื่อเพิ่ม Leverage ให้กับโปรไฟล์ของคุณในการเข้าถึงสินเชื่อระดับสถาบันการเงิน",
+    timeline: "2 - 4 สัปดาห์",
+    feeEstimate: "ขึ้นอยู่กับวงเงินเป้าหมาย",
+    imageUrl: DEFAULT_SERVICE_IMAGE,
+    contactMethod: "LINE",
+    icon: Briefcase,
+    protocol: [
+      {
+        title: "Capacity Assessment",
+        description: "ประเมินขีดความสามารถในการกู้และวางตำแหน่งทางการเงินเป้าหมาย",
+      },
+      {
+        title: "Source of Wealth Protocol",
+        description: "สร้างตรรกะที่มาของรายได้และเอกสารประกอบที่สถาบันการเงินให้การยอมรับ",
+      },
+      {
+        title: "System Finalization",
+        description: "ดำเนินการส่งมอบงานและดูแลการอนุมัติในระดับโครงสร้าง",
+      },
+    ],
+    features: [
+      "Business Credit Positioning",
+      "Income Logic Enhancement",
+      "Institutional Trust Building",
+    ],
   },
   {
     id: "SRV-DOC-01",
     slug: "customized-income-documentation",
     category: "DOCUMENTATION",
-    name: "จัดเตรียมชุดเอกสารรับรองรายได้ (Customized Documentation)",
-    title: "Income Documentation - จัดเตรียมชุดเอกสารรับรองรายได้",
-    tagline: "จัดทำเอกสารสำหรับเคสไม่มีบริษัทหรือไม่มีหน้าร้าน",
+    name: "Logic-based Income Documentation",
+    title: "Income Protocol Drafting - จัดทำเอกสารรับรองรายได้เชิงตรรกะ",
+    tagline: "การร่างเอกสารรับรองที่เน้น 'ที่มาของเงิน' มากกว่าแค่ข้อมูลเบื้องต้น",
     description:
-      "จัดทำและปรับจูนเอกสารรับรองรายได้ให้สอดคล้องกับเป้าหมายการยื่นกู้หรือยื่นวีซ่า พร้อมตรวจสอบความสมจริงทุกมิติ",
-    timeline: "1 - 2 วันทำการ",
-    feeEstimate: "เริ่มต้น ฿1,XXX",
+      "สำหรับการทำงานอิสระหรือฟรีแลนซ์รายได้สูงที่ต้องการเอกสารยืนยันสถานะที่ได้รับความเชื่อถือในระดับสากล เราเน้นการสร้าง 'Paper Trail' ที่แข็งแกร่งและสมเหตุสมผล",
+    timeline: "1 - 2 วัน",
+    feeEstimate: "ราคาตามประเภทเอกสาร",
     imageUrl: DEFAULT_SERVICE_IMAGE,
     contactMethod: "LINE",
-    icon: Shield,
+    icon: FileText,
     protocol: [
       {
-        title: "Logic Setup",
-        description: "กำหนดโปรไฟล์อาชีพที่สมเหตุสมผลเพื่อรองรับแหล่งที่มารายได้",
+        title: "Profiling Selection",
+        description: "เลือกรูปแบบอาชีพและการทำงานที่สอดคล้องกับพฤติกรรมการใช้จ่ายจริง",
       },
       {
-        title: "Data Customization",
-        description: "จัดทำเอกสารด้วยข้อมูลที่ถูกต้องตามรูปแบบหน่วยงาน",
+        title: "Technical Drafting",
+        description: "จัดทำเอกสารด้วยรูปแบบมาตรฐานสากล พร้อมระบบตรวจสอบย้อนกลับ",
       },
       {
-        title: "Verified Appearance",
-        description: "ตรวจสอบ Font / Stamp / Alignment ให้ใกล้เคียงต้นฉบับมากที่สุด",
+        title: "Quality Audit",
+        description: "ตรวจสอบรายละเอียดปลีกย่อยเพื่อให้มั่นใจว่าเอกสารไร้ที่ติในสายตาเจ้าหน้าที่",
       },
     ],
-    tags: ["Technical Edit", "Profile Building", "Express Work"],
-    features: ["กำหนดโปรไฟล์อาชีพ", "เอกสารความละเอียดสูง", "ตรวจสอบความสมจริง"],
+    features: [
+      "High-End Professional Drafting",
+      "Verified Source of Wealth Logic",
+      "International Standards",
+    ],
+  },
+  {
+    id: "SRV-DOC-02",
+    slug: "physical-credential-logistics",
+    category: "DOCUMENTATION",
+    name: "รับทำบัตร PVC และบัตรสมาชิกทุกชนิด (ตามแบบลูกค้า)",
+    title: "รับทำบัตรตามสั่ง - พิมพ์บัตร PVC/Smart Card ทุกรูปแบบ",
+    tagline: "งานพิมพ์บัตรคุณภาพสูง จะมีชิปหรือแถบแม่เหล็กเราก็ทำได้หมด",
+    description:
+      "รับพิมพ์บัตรทุกรูปแบบตามที่ลูกค้ากำหนด งานละเอียด สีชัด ไม่ลอก รองรับการลงข้อมูลในชิปหรือแถบแม่เหล็กตามไฟล์งานของคุณ ส่งงานไวทั่วประเทศ",
+    timeline: "1 - 3 วัน",
+    feeEstimate: "ตามจำนวนและเทคนิค",
+    imageUrl: DEFAULT_SERVICE_IMAGE,
+    contactMethod: "LINE",
+    icon: FileText,
+    protocol: [
+      { title: "รับแบบงาน", description: "รับไฟล์งานและข้อมูลที่คุณต้องการลงในบัตร" },
+      { title: "ผลิตงานไว", description: "พิมพ์ด้วยเครื่องคุณภาพสูง สีเป๊ะ ทันใจ" },
+      { title: "ทดสอบการใช้งาน", description: "เช็คชิปและแถบแม่เหล็กว่าใช้งานได้จริงก่อนส่ง" },
+    ],
+    features: ["พิมพ์ชัด ไม่แตก", "บัตรชิป/แถบแม่เหล็ก", "ส่งด่วนทั่วไทย"],
+  },
+  {
+    id: "SRV-DOC-03",
+    slug: "universal-document-drafting-protocol",
+    category: "DOCUMENTATION",
+    name: "รับทำร่างเอกสารทุกชนิด (มีแบบมา เราจัดให้เป๊ะ)",
+    title: "จัดทำเอกสารตามสั่ง - รับทำร่างเอกสารทุกรูปแบบตามต้นฉบับ",
+    tagline: "งานละเอียดระดับพรีเมียม... จะแบบไหน ชนิดไหน เราจัดให้ได้หมด",
+    description:
+      "รับจัดทำร่างเอกสารและงานจัดวางเลย์เอาต์ทุกประเภทตามมาตรฐานของเอกสารนั้นๆ เน้นความเป๊ะของตัวอักษรและรูปแบบงานพิมพ์ สำหรับคนที่มีต้นฉบับแล้วต้องการงานที่เนียนที่สุด",
+    timeline: "1 - 2 วัน [งานด่วนจัดให้]",
+    feeEstimate: "ราคาตามความละเอียดของงาน",
+    imageUrl: DEFAULT_SERVICE_IMAGE,
+    contactMethod: "LINE",
+    icon: FileText,
+    protocol: [
+      { title: "ส่งแบบงาน", description: "แจ้งประเภทเอกสารและส่งแบบงานที่คุณต้องการให้เราดู" },
+      { title: "จัดทำร่าง", description: "ดำเนินการจัดร่างเอกสารโดยอิงตามรูปแบบมาตรฐาน 100%" },
+      {
+        title: "ตรวจความเนียน",
+        description: "เช็คความถูกต้องของ Font, ระยะห่าง และตราประทับต่างๆ",
+      },
+    ],
+    features: ["ทำได้ทุกชนิดที่มีแบบมา", "งานพิมพ์ความละเอียดสูง", "รักษาความลับลูกค้าสูงสุด"],
   },
   {
     id: "SRV-IMM-01",
     slug: "flight-hotel-confirmed-status",
     category: "IMMIGRATION",
-    name: "สำรองตั๋วและโรงแรมสถานะจริง (Confirmed GDS Status)",
-    title: "GDS Reservation - สำรองตั๋วและโรงแรมสถานะจริง",
-    tagline: "ออกใบจองรหัสจริง ตรวจสอบสถานะได้บนเว็บทางการ",
+    name: "GDS System Status Injection",
+    title: "GDS Reservation Protocol - ใบจองตั๋ว/โรงแรมสถานะจริงในระบบ",
+    tagline: "Injection สถานะการจองที่ตรวจสอบได้จริงผ่านรหัส PNR ในระบบสากล",
     description:
-      "บริการสำรองผ่านระบบ GDS สำหรับยื่นวีซ่า ได้รหัส PNR ที่ตรวจสอบได้จริงโดยไม่ต้องชำระค่าตั๋วเต็มจำนวน",
-    timeline: "2 - 6 ชั่วโมง",
-    feeEstimate: "฿450 - ฿XXX",
+      "เราไม่ได้แค่พิมพ์กระดาษ แต่เราทำ 'System Injection' เพื่อให้ชื่อของคุณปรากฏในฐานข้อมูลสากล (Global Distribution System) สถานทูตสามารถตรวจสอบสถานะยืนยันได้จริง 100% ตลอดช่วงการพิจารณา",
+    timeline: "ไม่เกิน 6 ชม.",
+    feeEstimate: "ราคามาตรฐานระบบ",
     imageUrl: DEFAULT_SERVICE_IMAGE,
     contactMethod: "LINE",
-    icon: Shield,
+    icon: Globe,
     protocol: [
+      { title: "GDS Access", description: "เข้าถึงระบบสำรองที่นั่งสากลเพื่อลงทะเบียนสถานะยืนยัน" },
       {
-        title: "System Injection",
-        description: "บันทึกข้อมูลเข้าสู่ระบบ GDS สากลในสถานะ Hold หรือ Confirmed",
+        title: "Verification Check",
+        description: "ตรวจสอบความถูกต้องของรหัส PNR บนหน้าเว็บไซต์ผู้ให้บริการโดยตรง",
       },
       {
-        title: "PNR Validation",
-        description: "ตรวจสอบรหัสกับเว็บไซต์ทางการของสายการบินหรือโรงแรม",
-      },
-      {
-        title: "Visa Documentation",
-        description: "จัดส่งไฟล์ E-Booking มาตรฐานสำหรับการยื่นวีซ่า",
+        title: "Document Issuance",
+        description: "ออกเอกสารยืนยันการจองที่มีความน่าเชื่อถือสูงสุดเพื่อการยื่นวีซ่า",
       },
     ],
-    tags: ["Visa Support", "Real System", "No-Risk"],
-    features: ["PNR จริง", "รองรับทุกสายการบิน", "ใช้ยื่นวีซ่าได้ทันที"],
+    features: ["Verified PNR Code", "Real-time Traceability", "Official GDS Status"],
+  },
+  {
+    id: "SRV-IMM-02",
+    slug: "lifestyle-mobility-independent-visa",
+    category: "IMMIGRATION",
+    name: "Lifestyle Mobility Strategy",
+    title: "Immigration Profile Profiling - แก้เคสยากสำหรับอาชีพอิสระ",
+    tagline: "ออกแบบแผนการเดินทางและโปรไฟล์เพื่อความคล่องตัวในระดับสากล",
+    description:
+      "เชี่ยวชาญการดูแลเคสสุภาพสตรีและฟรีแลนซ์ที่ต้องการเดินทางไปต่างประเทศแต่มีข้อจำกัดด้านอาชีพ เราใช้ Logic-based Profiling เพื่ออุดทุกรอยโหว่ที่สถานทูตมักจะสงสัย เปลี่ยนความเสี่ยงให้เป็นความแน่นอน",
+    timeline: "ตามเงื่อนไขแต่ละเคส",
+    feeEstimate: "คุยส่วนตัวเพื่อประเมินแผน",
+    imageUrl: DEFAULT_SERVICE_IMAGE,
+    contactMethod: "LINE",
+    icon: Globe,
+    protocol: [
+      {
+        title: "Profile Logic Design",
+        description: "วางแผนการทำงานและการเงินให้ดูสมเหตุสมผลตามสไตล์การใช้ชีวิต",
+      },
+      {
+        title: "Itinerary Structuring",
+        description: "ออกแบบแผนการเดินทางที่มีจุดประสงค์ชัดเจนและน่าเชื่อถือ",
+      },
+      {
+        title: "Communication Audit",
+        description: "เตรียมความพร้อมด้านข้อมูลเพื่อตอบข้อซักถามอย่างมั่นใจและสอดคล้องกัน",
+      },
+    ],
+    features: [
+      "Independent Lifestyle Support",
+      "Hard Case Resolution",
+      "Comprehensive Gap Closure",
+    ],
   },
   {
     id: "SRV-SYS-01",
     slug: "complete-profile-infrastructure",
     category: "SYSTEMS",
-    name: "วางโครงสร้างโปรไฟล์แบบครบวงจร (Complete Infra-Setup)",
-    title: "Infra-Setup - วางโครงสร้างโปรไฟล์ครบวงจร",
-    tagline: "สร้างโปรไฟล์ใหม่ตั้งแต่ศูนย์เพื่อเป้าหมายระดับสูง",
+    name: "ดูแลโปรไฟล์การเงินและเอกสารระยะยาว (รายเดือน)",
+    title: "ดูแลโปรไฟล์ - บริการวางระบบความน่าเชื่อถือให้คุณถาวร",
+    tagline: "สร้างรากฐานให้ตัวคุณดูดีในระบบสากล เพื่อโอกาสการกู้และเดินทางในอนาคต",
     description:
-      "ดูแลตั้งแต่การเงิน เอกสาร และโครงสร้างธุรกิจ สำหรับลูกค้าที่ต้องการผลลัพธ์ระยะยาวและความน่าเชื่อถือระดับสูง",
-    timeline: "1 - 3 เดือน",
-    feeEstimate: "ประเมินตามเป้าหมาย",
+      "เหมาะสำหรับคนที่ต้องการความมั่นคงระยะยาว เราช่วยดูแลทั้งเรื่องเงินในบัญชี เอกสาร และประวัติต่างๆ ให้พร้อมสำหรับการทำธุรกรรมใหญ่ๆ ตลอดเวลา",
+    timeline: "ดูแลต่อเนื่องรายเดือน",
+    feeEstimate: "ค่าบริการรายเดือน",
     imageUrl: DEFAULT_SERVICE_IMAGE,
     contactMethod: "LINE",
     icon: Shield,
     protocol: [
-      {
-        title: "Infrastructure Design",
-        description: "วางโครงสร้างตัวตนทางธุรกิจและการเงินในระยะยาว",
-      },
-      {
-        title: "Monthly Monitoring",
-        description: "ติดตามและปรับปรุงข้อมูลรายเดือนอย่างต่อเนื่อง",
-      },
-      {
-        title: "Final Compliance Check",
-        description: "ตรวจสอบความพร้อมขั้นสุดท้ายก่อนใช้งานจริง",
-      },
+      { title: "ตรวจประวัติ", description: "เช็คจุดอ่อนในอดีตและวางทางแก้แบบยั่งยืน" },
+      { title: "คุมยอดเงิน", description: "ดูแลการเดินบัญชีให้สวยงามสม่ำเสมอทุกเดือน" },
+      { title: "ตรวจความพร้อม", description: "เช็คความสมบูรณ์ของโปรไฟล์ทุกครั้งก่อนเริ่มงานใหญ่" },
     ],
-    tags: ["Elite Service", "Long-term Planning"],
-    features: ["ดูแลระยะยาว", "ปรับโปรไฟล์รายเดือน", "Compliance Check"],
+    features: ["ที่ปรึกษาส่วนตัว", "คุมสเตทเม้นรายเดือน", "วางแผนอนาคตทางการเงิน"],
   },
 ];

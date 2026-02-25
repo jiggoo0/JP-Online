@@ -20,7 +20,7 @@ export default function Section({ children, className, id }: SectionProps) {
   return (
     <section
       id={id}
-      className={cn("relative overflow-hidden bg-[#020617] py-24 md:py-40", className)}
+      className={cn("relative overflow-hidden bg-[#020617] py-20 md:py-32", className)}
     >
       {/* Structural Decor (Subtle Horizontal Lines) */}
       <div className="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-slate-900 to-transparent" />

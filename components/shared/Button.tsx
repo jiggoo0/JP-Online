@@ -5,14 +5,16 @@ import { cn } from "@/lib/utils";
 import Magnetic from "./Magnetic";
 
 const buttonVariants = cva(
-  "group flex w-full items-center justify-center gap-3 rounded-sm px-12 py-5 font-black transition-all duration-300 sm:w-auto",
+  "group relative flex w-full items-center justify-center gap-4 border transition-all duration-300 sm:w-auto",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-b from-amber-400 to-amber-600 text-slate-950 shadow-[0_10px_40px_rgba(180,140,40,0.2)] hover:shadow-[0_15px_50px_rgba(180,140,40,0.4)]",
+          "bg-accent border-accent px-10 py-5 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase hover:border-white hover:bg-white hover:shadow-[0_0_40px_rgba(180,140,40,0.4)]",
         secondary:
-          "relative overflow-hidden border border-slate-800 bg-white/5 text-white hover:border-amber-500/50",
+          "hover:border-accent hover:text-accent border-slate-800 bg-slate-900/50 bg-transparent px-10 py-5 text-[11px] font-black tracking-[0.3em] text-white uppercase backdrop-blur-md",
+        outline:
+          "hover:border-accent/40 border-slate-700/50 bg-transparent px-8 py-4 text-[10px] font-bold tracking-[0.4em] text-slate-400 uppercase hover:text-white",
       },
     },
     defaultVariants: {
@@ -22,19 +24,14 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, ...props }, ref) => {
     const Comp = "button";
     return (
       <Magnetic>
-        <Comp
-          className={cn(buttonVariants({ variant, className }))}
-          ref={ref}
-          {...props}
-        />
+        <Comp className={cn(buttonVariants({ variant, className }))} ref={ref} {...props} />
       </Magnetic>
     );
   },

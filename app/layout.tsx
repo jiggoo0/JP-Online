@@ -1,37 +1,25 @@
 /**
- * @AI_INSTRUCTION: [STRICT_CODE_ONLY]
- * - High-Efficiency Code (Industrial Master Grade)
- * - Tailwind v4 CSS-First Strategy
- * - No Business Interpretation
- * - Full Component Assembly
+ * @PATH: app/layout.tsx
+ * @DESCRIPTION: Global Root Shell - Industrial Master Grade
  */
-
 import type { Metadata, Viewport } from "next";
-import { Inter, Noto_Serif_JP } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
 import CustomCursor from "@/components/shared/CustomCursor";
 import Preloader from "@/components/shared/Preloader";
 import { siteConfig } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import "./globals.css";
 
-/* Font Architecture: Industrial Sans & Academic Serif */
+/* Font Architecture */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const fontSerif = Noto_Serif_JP({
-  weight: ["300", "400", "700"],
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
 export const viewport: Viewport = {
-  themeColor: "#080c18", // Industrial Obsidian
+  themeColor: "#020617",
   width: "device-width",
   initialScale: 1,
 };
@@ -53,7 +41,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage }],
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
@@ -74,35 +62,52 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * @PATH: app/layout.tsx
- * @DESCRIPTION: Global Root Shell - JP-VISUAL & DOCS Foundation
- */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Schema.org Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteConfig.url}/#organization`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}/logo.png`,
+        description: siteConfig.description,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: siteConfig.name,
+        publisher: { "@id": `${siteConfig.url}/#organization` },
+      },
+    ],
+  };
+
   return (
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" href="/styles/global.css" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={cn(
-          "bg-background selection:bg-primary-accent/10 selection:text-primary-accent min-h-screen font-sans antialiased",
-          fontSans.variable,
-          fontSerif.variable,
+          "bg-slate-950 text-slate-300 min-h-screen font-sans antialiased selection:bg-accent/20 selection:text-accent",
+          fontSans.variable
         )}
       >
         <Preloader />
         <CustomCursor />
+        
         <div className="relative flex min-h-screen flex-col">
-          {/* Navigation Layer */}
           <Navbar />
-
-          {/* Core Content Layer */}
           <main className="flex-1">{children}</main>
-
-          {/* System Footer Layer */}
           <Footer />
         </div>
-
-        {/* Global Design Elements */}
-        <div className="pointer-events-none fixed inset-0 -z-10 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
       </body>
     </html>
   );

@@ -44,9 +44,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
  */
 export async function generateStaticParams() {
   const posts = await getAllPosts<ServiceFrontmatter>("services");
-  const mdxSlugs = posts
-    .filter((post) => post.slug)
-    .map((post) => ({ slug: post.slug }));
+  const mdxSlugs = posts.filter((post) => post.slug).map((post) => ({ slug: post.slug }));
   const configSlugs = SERVICES.map((service) => ({ slug: service.slug }));
 
   // Combine and de-duplicate slugs
@@ -146,32 +144,59 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <Section className="py-32" aria-labelledby="protocols-heading">
             <div className="grid grid-cols-1 gap-20 lg:grid-cols-12">
               <div className="lg:col-span-4">
-                <h2
-                  id="protocols-heading"
-                  className="mb-6 flex items-center gap-4 text-2xl font-bold tracking-wider text-white uppercase"
-                >
-                  <Shield className="h-8 w-8 text-amber-500" aria-hidden="true" />
-                  Intelligence <br /> Protocols
-                </h2>
-                <div className="mb-8 h-1 w-20 bg-amber-500" aria-hidden="true" />
-                <p className="mb-8 leading-relaxed text-slate-400">
-                  เราใช้มาตรฐานการวิเคราะห์ระดับสากล
-                  เพื่อตรวจสอบความสมบูรณ์ของเอกสารและระบบข้อมูลก่อนดำเนินการจริง (Pre-audit Logic)
-                </p>
+                <div className="sticky top-32 space-y-12">
+                  <div>
+                    <h2
+                      id="protocols-heading"
+                      className="mb-6 flex items-center gap-4 text-2xl font-bold tracking-wider text-white uppercase"
+                    >
+                      <Shield className="h-8 w-8 text-amber-500" aria-hidden="true" />
+                      Intelligence <br /> Protocols
+                    </h2>
+                    <div className="mb-8 h-1 w-20 bg-amber-500" aria-hidden="true" />
+                    <p className="mb-8 leading-relaxed text-slate-400">
+                      เราใช้มาตรฐานการวิเคราะห์ระดับสากล
+                      เพื่อตรวจสอบความสมบูรณ์ของเอกสารและระบบข้อมูลก่อนดำเนินการจริง (Pre-audit
+                      Logic)
+                    </p>
+                  </div>
 
-                {/* Semantic Data List for Key-Value Pairs */}
-                <dl className="flex flex-col gap-4">
-                  <div className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/50 p-6">
-                    <dt className="mb-1 text-xs font-bold text-amber-500 uppercase">Timeline</dt>
-                    <dd className="text-base text-white">{service.timeline}</dd>
+                  {/* Technical Metadata Badge */}
+                  <div className="space-y-6 border-l border-slate-800 pl-8">
+                    <div className="flex flex-col gap-1">
+                      <span className="label-mono text-[10px] text-slate-500">System ID</span>
+                      <span className="text-xs font-bold text-white">{service.id}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="label-mono text-[10px] text-slate-500">
+                        Authority Oversight
+                      </span>
+                      <span className="text-xs font-bold text-amber-500/80">
+                        เจ้าป่า / Secure-Tier 1
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="label-mono text-[10px] text-slate-500">Security Level</span>
+                      <span className="text-xs font-bold text-emerald-500">VERIFIED ARCHIVE</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/50 p-6">
-                    <dt className="mb-1 text-xs font-bold text-amber-500 uppercase">
-                      Fee Estimate
-                    </dt>
-                    <dd className="text-base text-white">{service.feeEstimate}</dd>
-                  </div>
-                </dl>
+
+                  {/* Semantic Data List for Key-Value Pairs */}
+                  <dl className="flex flex-col gap-4">
+                    <div className="flex flex-col border border-slate-800 bg-slate-900/30 p-6 backdrop-blur-sm">
+                      <dt className="mb-1 text-[9px] font-black tracking-widest text-amber-500 uppercase">
+                        Execution Timeline
+                      </dt>
+                      <dd className="text-base font-bold text-white">{service.timeline}</dd>
+                    </div>
+                    <div className="flex flex-col border border-slate-800 bg-slate-900/30 p-6 backdrop-blur-sm">
+                      <dt className="mb-1 text-[9px] font-black tracking-widest text-amber-500 uppercase">
+                        Protocol Fee
+                      </dt>
+                      <dd className="text-base font-bold text-white">{service.feeEstimate}</dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
 
               {/* Semantic Ordered List for Process Steps */}
@@ -179,7 +204,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 {service.protocol?.map((step, index) => (
                   <li
                     key={index}
-                    className="group relative rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-8 transition-colors duration-500 outline-none focus-within:border-transparent focus-within:ring-2 focus-within:ring-amber-500 hover:border-amber-500/50"
+                    className="group relative border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-8 transition-colors duration-500 outline-none focus-within:border-transparent focus-within:ring-2 focus-within:ring-amber-500 hover:border-amber-500/50"
                     tabIndex={0}
                   >
                     <article className="flex flex-col items-start gap-6 sm:flex-row sm:gap-8">

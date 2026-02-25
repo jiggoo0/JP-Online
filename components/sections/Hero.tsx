@@ -16,112 +16,105 @@ export const Hero = () => {
   return (
     <section
       aria-label="Executive Introduction"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#020617] pt-24 pb-16"
+      className="bg-background relative flex min-h-screen items-center justify-center overflow-hidden pt-48 pb-40"
     >
-      {/* 🚀 LCP Optimization: High-performance Gradient Background */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-40" aria-hidden="true">
-        <div className="absolute top-0 left-1/2 h-full w-full -translate-x-1/2 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.1)_0%,transparent_70%)]" />
-        <div className="absolute top-1/2 left-1/4 aspect-square w-[min(600px,80vw)] animate-pulse rounded-full bg-blue-500/5 blur-[120px]" />
+      {/* 🚀 LCP Optimization: Structural Grid Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden="true">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.1)_0%,transparent_70%)]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+          className="flex flex-col items-center text-center"
         >
-          {/* Badge: Use small but accessible text */}
-          <div className="mb-8 inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/5 px-4 py-1.5 backdrop-blur-xl">
-            <span className="text-[10px] font-bold tracking-[0.5em] text-amber-500 uppercase md:text-xs">
-              Precision Documentation & Visual Strategy
+          {/* Badge: Tactical Label */}
+          <div className="mb-14 inline-flex items-center gap-4 border border-slate-800 bg-slate-900/50 px-6 py-2.5 backdrop-blur-md">
+            <div className="bg-accent h-1.5 w-1.5 animate-pulse" />
+            <span className="label-mono text-[10px] tracking-[0.3em] text-slate-300 uppercase">
+              Strategic Solutions Provider // Immigration & Financial
             </span>
           </div>
 
-          {/* H1: The most important SEO signal */}
-          <h1 className="mb-8 text-[clamp(2.5rem,10vw,7.5rem)] leading-[0.85] font-black tracking-tighter text-white uppercase">
-            <span className="font-serif font-light lowercase italic">JP</span>
-            -VISUAL
+          {/* H1: Authoritative Branding */}
+          <h1 className="mb-14 max-w-6xl text-[clamp(3rem,10vw,7.5rem)] leading-[0.85] font-black tracking-tighter text-white uppercase">
+            JP-VISUAL
             <br />
-            <span className="bg-gradient-to-b from-amber-200 via-amber-500 to-amber-700 bg-clip-text text-transparent italic drop-shadow-2xl">
-              &DOCS
-            </span>
+            <span className="text-accent">&DOCS</span>
           </h1>
 
-          <p className="mx-auto mb-12 max-w-3xl px-4 text-lg leading-relaxed font-light tracking-wide text-slate-400 md:text-xl">
-            เราสร้างระบบระเบียบที่{" "}
-            <span className="font-bold text-white italic">มองเห็นได้ (Visual)</span>{" "}
-            ควบคู่กับงานเอกสารที่{" "}
-            <span className="font-bold text-amber-500 italic underline decoration-amber-500/30 underline-offset-4">
-              เชื่อถือได้ (Docs)
-            </span>{" "}
-            เพื่อความปลอดภัยสูงสุดในการดำเนินงานของคุณ
+          <p className="mx-auto mb-20 max-w-3xl text-base leading-[1.8] tracking-wide text-slate-400 md:text-xl">
+            เรามอบ <span className="font-bold text-white">"Deep Insights"</span>{" "}
+            และระบบระเบียบเอกสารขั้นสูง ผ่านกระบวนการ{" "}
+            <span className="text-accent font-bold italic">Internal Audit Simulation</span>
+            เพื่ออุดทุกรอยโหว่และยกระดับโปรไฟล์ของคุณให้เป็นไปตามมาตรฐานสากลสูงสุด
           </p>
 
           <nav
             aria-label="Hero Actions"
-            className="flex flex-col items-center justify-center gap-6 sm:flex-row"
+            className="flex flex-col items-center justify-center gap-10 sm:flex-row"
           >
-            <Button aria-label="Consult our documentation protocol">
-              CONSULT DOCUMENTATION
+            <Button
+              variant="primary"
+              aria-label="Initiate documentation protocol"
+              className="px-10 py-4"
+            >
+              INITIATE PROTOCOL
               <ChevronRight
-                className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </Button>
-            <Button variant="secondary" aria-label="View our professional portfolio">
-              <span className="opacity-70 transition-opacity group-hover:opacity-100">
-                PORTFOLIO
-              </span>
-              <div
-                className="absolute top-0 right-0 h-2 w-2 rounded-bl-sm bg-amber-500 opacity-0 transition-opacity group-hover:opacity-100"
-                aria-hidden="true"
-              />
+            <Button
+              variant="secondary"
+              aria-label="Review executive archive"
+              className="px-10 py-4"
+            >
+              EXECUTIVE ARCHIVE
             </Button>
           </nav>
 
-          {/* Stats: Semantic DL for Key Data */}
-          <dl className="mx-auto mt-24 grid max-w-4xl grid-cols-3 gap-4 border-t border-slate-900 pt-12 md:gap-16">
+          {/* Stats: Semantic DL for Audit Proof */}
+          <dl className="mx-auto mt-40 grid w-full max-w-6xl grid-cols-1 gap-16 border-t border-slate-800/50 pt-24 md:grid-cols-3">
             {[
               {
-                label: "Documentation",
-                val: "Verified",
-                color: "text-amber-500",
+                label: "Financial Architecture",
+                val: "CASHFLOW-01",
+                status: "SECURED",
               },
               {
-                label: "Visual Clarity",
-                val: "Precision",
-                color: "text-blue-400",
+                label: "Immigration Systems",
+                val: "GDS-INJECTION",
+                status: "VERIFIED",
               },
               {
-                label: "Infrastructure",
-                val: "Secure",
-                color: "text-emerald-500",
+                label: "Audit Compatibility",
+                val: "COMPLIANCE-X",
+                status: "OPTIMIZED",
               },
             ].map((stat, i) => (
-              <div key={i} className="group text-center">
-                <dd
-                  className={`mb-1 text-xl font-black tracking-tighter transition-all group-hover:scale-110 md:text-3xl ${stat.color}`}
-                >
-                  {stat.val}
+              <div
+                key={i}
+                className="flex flex-col items-center gap-4 border-r border-slate-800 last:border-0 md:items-start"
+              >
+                <dt className="label-mono text-slate-500">{stat.label}</dt>
+                <dd className="flex items-end gap-3">
+                  <span className="text-2xl font-bold tracking-tighter text-white">{stat.val}</span>
+                  <span className="text-accent mb-1 text-[9px] font-black tracking-widest">
+                    [{stat.status}]
+                  </span>
                 </dd>
-                <dt className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">
-                  {stat.label}
-                </dt>
               </div>
             ))}
           </dl>
         </motion.div>
       </div>
 
-      {/* Decorative Structural Glow */}
-      <div
-        className="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-amber-500/10 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-0 left-1/2 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-500/20 to-transparent"
-        aria-hidden="true"
-      />
+      {/* Decorative Accents */}
+      <div className="from-accent/0 via-accent/20 to-accent/0 absolute top-0 left-0 h-1 w-full bg-gradient-to-r" />
+      <div className="from-accent/0 via-accent/10 to-accent/0 absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r" />
     </section>
   );
 };

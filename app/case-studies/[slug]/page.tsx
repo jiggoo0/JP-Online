@@ -52,8 +52,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const jsonLd = generateArticleJsonLd({
     title: post.data.title,
-    description: post.data.description,
-    date: post.data.date,
+    description: post.data.description || "",
+    date: post.data.date || new Date().toISOString(),
     image: post.data.image || siteConfig.ogImage,
     slug: post.slug,
     type: "CaseStudy",

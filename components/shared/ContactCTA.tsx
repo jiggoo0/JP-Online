@@ -22,62 +22,51 @@ interface ContactCTAProps {
  * @REFACTOR: Added support for dynamic title, description, and serviceId context.
  */
 export default function ContactCTA({
-  title = "Initiate Protocol",
-  description = "โปรดกรอกรายละเอียดด้านล่างเพื่อให้ฝ่ายบริหารของเราวิเคราะห์ข้อมูลเบื้องต้น และจัดส่งแผนงาน (Proposal) กลับไปให้คุณภายในระยะเวลาที่กำหนด",
+  title = "Initiate Protocol Access",
+  description = "โปรดระบุรายละเอียดของข้อจำกัดหรือปัญหาที่พบ ฝ่ายวิเคราะห์ของเราจะดำเนินการตรวจสอบเบื้องต้น (Gap Analysis) และติดต่อกลับผ่านช่องทางที่ปลอดภัยที่สุด",
   serviceId,
 }: ContactCTAProps) {
   return (
-    <Section id="contact" className="border-t border-slate-900">
-      {/* Dynamic Background Glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.05)_0%,transparent_100%)]" />
-
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+    <Section id="contact" className="border-t border-slate-900 bg-slate-950/20">
+      <div className="relative z-10 mx-auto max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
           viewport={{ once: true }}
         >
-          <div className="mb-10 inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/5 px-4 py-1.5 backdrop-blur-sm">
-            <Shield className="mr-2 h-4 w-4 text-amber-500" />
-            <span className="text-[10px] font-black tracking-[0.5em] text-amber-500 uppercase">
-              {serviceId ? `Protocol: ${serviceId}` : "Strategic Contact Protocol"}
+          <div className="mb-10 inline-flex items-center gap-3 border border-slate-800 bg-slate-900/50 px-5 py-2">
+            <Shield className="text-accent h-4 w-4" />
+            <span className="label-mono text-slate-400">
+              {serviceId ? `TARGET PROTOCOL: ${serviceId}` : "SECURE STRATEGIC CONTACT"}
             </span>
           </div>
 
-          <h2 className="mb-10 text-4xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-7xl">
-            {title.split(" ")[0]} <br />
-            <span className="bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text font-light text-transparent lowercase italic">
-              {title.split(" ").slice(1).join(" ")}
-            </span>
+          <h2 className="mb-10 text-4xl font-bold tracking-tight text-white uppercase md:text-7xl">
+            {title}
           </h2>
 
-          <p className="mx-auto mb-20 max-w-2xl text-sm leading-loose font-light tracking-wide text-slate-400 uppercase md:text-base">
+          <p className="mx-auto mb-16 max-w-2xl text-base leading-loose tracking-wide text-slate-400">
             {description}
           </p>
 
-          <div className="mx-auto max-w-3xl">
-            {/* 💡 Note: ContactForm could be enhanced to pre-fill serviceId if needed */}
+          <div className="mx-auto max-w-4xl">
             <ContactForm />
           </div>
 
-          <div className="mt-24 flex flex-col items-center justify-center gap-12 border-t border-slate-900 pt-12 opacity-50 md:flex-row">
-            <div className="flex flex-col items-center gap-2 sm:items-start">
-              <span className="text-[9px] font-black tracking-[0.3em] text-slate-600 uppercase">
-                Private Line
-              </span>
-              <span className="text-sm font-bold tracking-widest text-white">
-                +66 (0) 2 123 45 67
-              </span>
+          {/* Verification Badges / Social Proof */}
+          <div className="mt-24 grid grid-cols-1 gap-12 border-t border-slate-900 pt-16 md:grid-cols-3">
+            <div className="flex flex-col items-center gap-2">
+              <span className="label-mono opacity-50">Private Encryption</span>
+              <span className="text-xs font-bold text-slate-300">AES-256 SECURED</span>
             </div>
-            <div className="hidden h-8 w-px bg-slate-800 md:block" />
-            <div className="flex flex-col items-center gap-2 sm:items-start">
-              <span className="text-[9px] font-black tracking-[0.3em] text-slate-600 uppercase">
-                Secure Email
-              </span>
-              <span className="text-sm font-bold tracking-widest text-white">
-                ops@jpvisdocs.com
-              </span>
+            <div className="flex flex-col items-center gap-2">
+              <span className="label-mono opacity-50">Direct Response</span>
+              <span className="text-xs font-bold text-slate-300">BOARD-LEVEL ACCESS</span>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <span className="label-mono opacity-50">Operational Line</span>
+              <span className="text-xs font-bold text-slate-300">MON-FRI [EXEC ONLY]</span>
             </div>
           </div>
         </motion.div>

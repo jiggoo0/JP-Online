@@ -1,27 +1,39 @@
 .
 ├── .agents
 │   └── skills
-│       └── next-best-practices
-│           ├── SKILL.md
-│           ├── async-patterns.md
-│           ├── bundling.md
-│           ├── data-patterns.md
-│           ├── debug-tricks.md
-│           ├── directives.md
-│           ├── error-handling.md
-│           ├── file-conventions.md
-│           ├── font.md
-│           ├── functions.md
-│           ├── hydration-error.md
-│           ├── image.md
-│           ├── metadata.md
-│           ├── parallel-routes.md
-│           ├── route-handlers.md
-│           ├── rsc-boundaries.md
-│           ├── runtime-selection.md
-│           ├── scripts.md
-│           ├── self-hosting.md
-│           └── suspense-boundaries.md
+│       ├── internal-audit-logic
+│       │   └── SKILL.md
+│       ├── next-best-practices
+│       │   ├── SKILL.md
+│       │   ├── async-patterns.md
+│       │   ├── bundling.md
+│       │   ├── data-patterns.md
+│       │   ├── debug-tricks.md
+│       │   ├── directives.md
+│       │   ├── error-handling.md
+│       │   ├── file-conventions.md
+│       │   ├── font.md
+│       │   ├── functions.md
+│       │   ├── hydration-error.md
+│       │   ├── image.md
+│       │   ├── metadata.md
+│       │   ├── parallel-routes.md
+│       │   ├── route-handlers.md
+│       │   ├── rsc-boundaries.md
+│       │   ├── runtime-selection.md
+│       │   ├── scripts.md
+│       │   ├── self-hosting.md
+│       │   └── suspense-boundaries.md
+│       └── tactical-ui-excellence
+│           ├── tactical-ui-excellence
+│           │   ├── assets
+│           │   │   └── example_asset.txt
+│           │   ├── references
+│           │   │   └── example_reference.md
+│           │   ├── scripts
+│           │   │   └── example_script.cjs
+│           │   └── SKILL.md
+│           └── SKILL.md
 ├── .claude
 │   └── skills
 │       └── next-best-practices -> ../../.agents/skills/next-best-practices
@@ -47,6 +59,7 @@
 │   ├── case-studies
 │   │   └── [slug]
 │   │       └── page.tsx
+│   ├── dist.css
 │   ├── globals.css
 │   ├── layout.tsx
 │   ├── page.tsx
@@ -61,6 +74,7 @@
 │   │   ├── BlogList.tsx
 │   │   ├── CaseStudyPreview.tsx
 │   │   ├── CategoryFilter.tsx
+│   │   ├── FAQSection.tsx
 │   │   ├── Hero.tsx
 │   │   ├── ServiceCard.tsx
 │   │   ├── ServiceGrid.tsx
@@ -79,8 +93,7 @@
 │   │   ├── Reveal.tsx
 │   │   └── Section.tsx
 │   └── visuals
-│       ├── IdentityMap.tsx
-│       └── InteractiveGrid.tsx
+│       └── IdentityMap.tsx
 ├── config
 │   ├── navigation.ts
 │   ├── services.ts
@@ -98,11 +111,15 @@
 │   │   └── tech-merger-strategy.mdx
 │   └── services
 │       ├── documentation
-│       │   └── customized-income-documentation.mdx
+│       │   ├── customized-income-documentation.mdx
+│       │   ├── physical-credential-logistics.mdx
+│       │   └── universal-document-drafting-protocol.mdx
 │       ├── financial
+│       │   ├── credit-leverage-infrastructure.mdx
 │       │   └── financial-account-structuring.mdx
 │       ├── immigration
-│       │   └── flight-hotel-confirmed-status.mdx
+│       │   ├── flight-hotel-confirmed-status.mdx
+│       │   └── lifestyle-mobility-independent-visa.mdx
 │       └── systems
 │           └── complete-profile-infrastructure.mdx
 ├── hooks
@@ -113,15 +130,18 @@
 │   └── utils.ts
 ├── public
 │   ├── assets
+│   │   └── logo-strategic.svg
 │   └── og
 ├── types
-├── .geminirules
+├── .geminiignore
 ├── .gitignore
 ├── .npmrc
 ├── .prettierrc
-├── CONTEXT.md
+├── GEMINI.md
+├── PROJECT_SUMMARY_AND_ROADMAP.md
 ├── README.md
 ├── eslint.config.mjs
+├── internal-audit-logic.skill
 ├── knip.json
 ├── next-env.d.ts
 ├── next.config.js
@@ -133,4 +153,4 @@
 ├── tsconfig.json
 └── tsconfig.tsbuildinfo
 
-44 directories, 90 files
+50 directories, 104 files

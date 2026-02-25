@@ -6,22 +6,32 @@ import { Service } from "@/config/services";
  * ใช้สำหรับค่าพื้นฐานที่ต้องเหมือนกันทั้งเว็บไซต์
  */
 export const siteConfig = {
-  name: "JP-Visual&Docs Protocol",
+  name: "JP-Visual&Docs | Strategic Solutions Provider",
   shortName: "JP-Visual",
   description:
-    "High-End Digital Documentation & Identity Architecture สำหรับกลุ่มบริหารและเคสซับซ้อนระดับสากล",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://jpvisualdocs.com",
-  ogImage:
-    "https://ksiobbrextlywypdzaze.supabase.co/storage/v1/object/public/user-uploads/OG/Master.webp",
-  author: "JP-Visual&Docs Team",
+    "ผู้เชี่ยวชาญการวางระบบเอกสารเชิงลึก (Deep Insights) และการแก้ปัญหาโปรไฟล์ขั้นสูง สำหรับการเงินและการย้ายถิ่นฐาน (Immigration & Financial Strategy)",
+  url: "https://www.jpvisouldocs.online",
+  ogImage: "https://www.jpvisouldocs.online/og.jpg",
+  author: "เจ้าป่า",
   keywords: [
-    "วางโครงสร้างเดินบัญชี",
-    "จัดเตรียมเอกสารวีซ่า",
-    "GDS Reservation",
+    "เจ้าป่า",
+    // 🏛️ Middle-Class / Professional Tier
+    "วางแผนการเงินย้ายประเทศ",
+    "Internal Audit Simulation",
+    "หนังสือรับรองรายได้สากล",
+    "วางระบบโปรไฟล์นักธุรกิจ",
+    "Immigration Strategy Thailand",
+    "Financial Architecture for Visa",
+
+    // 🛠️ Broad-Base / Hard Case Tier
+    "ทำสเตทเม้นวีซ่า",
+    "แก้ปัญหาวีซ่าไม่ผ่าน",
+    "เอกสารรายได้พ่อค้าแม่ค้า",
+    "ช่วยเดินบัญชีขอวีซ่า",
+    "ปรึกษาวีซ่าเคสยาก",
+    "ยืนยันที่มาของเงิน",
+    "จองตั๋วเครื่องบินระบบ GDS",
     "Identity Architecture",
-    "Digital Footprint Cleaning",
-    "แก้ปัญหาโปรไฟล์สเตทเม้น",
-    "High-End Documentation Service",
   ],
 };
 
