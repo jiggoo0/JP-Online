@@ -4,44 +4,52 @@ import matter from "gray-matter";
 
 const contentDir = path.join(process.cwd(), "content");
 
-export interface BasePost {
-  date?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
+/**
+ * @TYPE_SYSTEM: Discriminated Unions for Industrial Grade Content
+ */
+export type ContentCategory = "blog" | "case-studies" | "services";
 
-export interface Insight extends BasePost {
-  title: string;
-  category: string;
-  description: string;
+export interface BaseFrontmatter {
   slug: string;
-  date: string; // Required for Insights
-}
-
-export interface CaseStudy extends BasePost {
   title: string;
   description: string;
+  date: string;
+  author: string;
+  image?: string;
+}
+
+export interface BlogFrontmatter extends BaseFrontmatter {
+  category: string;
+}
+
+export interface CaseStudyFrontmatter extends BaseFrontmatter {
   category: string;
   client: string;
   outcome: string;
-  slug: string;
-  date: string; // Required for CaseStudies
 }
 
-export interface ServiceFrontmatter extends BasePost {
-  title: string;
-  description: string;
+export interface ServiceFrontmatter extends BaseFrontmatter {
+  id: string;
+  category: "FINANCIAL" | "IMMIGRATION" | "DOCUMENTATION" | "SYSTEMS" | "INFRASTRUCTURE";
+  tagline: string;
   imageUrl?: string;
-  category?: string;
-  tagline?: string;
-  id?: string;
+  feeEstimate?: string;
+  timeline?: string;
+  protocol?: Array<{ title: string; description: string }>;
+}
+
+export type PostFrontmatter = BlogFrontmatter | CaseStudyFrontmatter | ServiceFrontmatter;
+
+export interface PostResult<T extends PostFrontmatter> {
+  data: T;
+  content: string;
   slug: string;
 }
 
-export async function getPostBySlug<T extends BasePost>(
-  category: "blog" | "case-studies" | "services",
+export async function getPostBySlug<T extends PostFrontmatter>(
+  category: ContentCategory,
   slug: string,
-) {
+): Promise<PostResult<T> | null> {
   let fullPath = "";
   if (category === "services") {
     const servicesPath = path.join(contentDir, "services");
@@ -73,14 +81,23 @@ export async function getPostBySlug<T extends BasePost>(
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  // Ensure slug is always included in data for type consistency
-  const postData = { ...data, slug } as unknown as T;
+  // Strict Validation & Mapping
+  const postData = {
+    ...data,
+    slug,
+    // Ensure critical fields exist
+    title: data.title || "Untitled",
+    description: data.description || "",
+    date: data.date || new Date().toISOString(),
+    author: data.author || "เจ้าป่า",
+    image: data.image || data.imageUrl || "/assets/blog/blog-exec-docs.webp",
+  } as T;
 
   return { data: postData, content, slug };
 }
 
-export async function getAllPosts<T extends BasePost>(
-  category: "blog" | "case-studies" | "services",
+export async function getAllPosts<T extends PostFrontmatter>(
+  category: ContentCategory,
 ): Promise<T[]> {
   const categoryPath = path.join(contentDir, category);
   if (!fs.existsSync(categoryPath) || !fs.statSync(categoryPath).isDirectory()) return [];
@@ -99,7 +116,15 @@ export async function getAllPosts<T extends BasePost>(
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
         const slug = entry.replace(".mdx", "");
-        posts.push({ ...data, slug } as unknown as T);
+        posts.push({
+          ...data,
+          slug,
+          title: data.title || "Untitled",
+          description: data.description || "",
+          date: data.date || new Date().toISOString(),
+          author: data.author || "เจ้าป่า",
+          image: data.image || data.imageUrl || "/assets/blog/blog-exec-docs.webp",
+        } as T);
       }
     }
   }
@@ -114,19 +139,20 @@ export async function getAllPosts<T extends BasePost>(
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
         const slug = file.replace(".mdx", "");
-        posts.push({ ...data, slug } as unknown as T);
+        posts.push({
+          ...data,
+          slug,
+          title: data.title || "Untitled",
+          description: data.description || "",
+          date: data.date || new Date().toISOString(),
+          author: data.author || "เจ้าป่า",
+          image: data.image || data.imageUrl || "/assets/blog/blog-exec-docs.webp",
+        } as T);
       }
     }
   }
 
   return posts.sort((a, b) => {
-    // If date exists, sort by date descending
-    if (a.date && b.date) {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    }
-    // Fallback for posts without dates (like services) - alphabetical by slug or title
-    const valA = a.title || a.slug || "";
-    const valB = b.title || b.slug || "";
-    return valA.localeCompare(valB);
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 }

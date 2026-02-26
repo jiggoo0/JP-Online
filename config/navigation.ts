@@ -1,18 +1,20 @@
-export const navigationConfig = {
+import { NavigationConfig } from "@/types/navigation";
+
+export const navigationConfig: NavigationConfig = {
   mainNav: [
     {
-      title: "Portfolio",
-      href: "/#portfolio",
-      description: "Case studies of visual strategy and documentation excellence.",
-    },
-    {
       title: "Services",
-      href: "/#services",
+      href: "/services",
       description: "Our core executive protocols and business solutions.",
     },
     {
-      title: "Insights",
-      href: "/#insights",
+      title: "Case Studies",
+      href: "/case-studies",
+      description: "Case studies of visual strategy and documentation excellence.",
+    },
+    {
+      title: "Blog",
+      href: "/blog",
       description: "Strategic knowledge and industry intelligence.",
     },
     {
@@ -44,12 +46,19 @@ export const navigationConfig = {
       ],
     },
     {
+      title: "Resources",
+      items: [
+        { title: "All Services", href: "/services" },
+        { title: "Case Studies", href: "/case-studies" },
+        { title: "Strategic Blog", href: "/blog" },
+        { title: "Privacy Policy", href: "/privacy" },
+      ],
+    },
+    {
       title: "Company",
       items: [
         { title: "About JP-Visual&Docs", href: "/#about" },
-        { title: "Success Stories", href: "/#portfolio" },
-        { title: "Intelligence Hub", href: "/#insights" },
-        { title: "Privacy Policy", href: "/privacy" },
+        { title: "Contact Us", href: "/#contact" },
       ],
     },
   ],

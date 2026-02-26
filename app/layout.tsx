@@ -6,10 +6,12 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+import FloatingContact from "@/components/shared/FloatingContact";
 import CustomCursor from "@/components/shared/CustomCursor";
 import Preloader from "@/components/shared/Preloader";
-import { siteConfig } from "@/lib/seo";
+import { siteConfig, generateOrganizationJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+// import "./globals.css"; // ❌ Bypassing Webpack CSS Parser as per Strategic Skill
 
 /* Font Architecture */
 const fontSans = Inter({
@@ -32,8 +34,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
-  authors: [{ name: siteConfig.author }],
-  creator: siteConfig.author,
+  authors: [{ name: "เจ้าป่า", url: siteConfig.url }],
+  creator: "เจ้าป่า",
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -63,46 +65,41 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Schema.org Structured Data
-  const jsonLd = {
+  // Schema.org Structured Data (Synced from SEO Protocol)
+  const organizationJsonLd = generateOrganizationJsonLd();
+  const websiteJsonLd = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${siteConfig.url}/#organization`,
-        name: siteConfig.name,
-        url: siteConfig.url,
-        logo: `${siteConfig.url}/logo.png`,
-        description: siteConfig.description,
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteConfig.url}/#website`,
-        url: siteConfig.url,
-        name: siteConfig.name,
-        publisher: { "@id": `${siteConfig.url}/#organization` },
-      },
-    ],
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: siteConfig.name,
+    publisher: { "@type": "Organization", "@id": `${siteConfig.url}/#organization` },
   };
 
   return (
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel="stylesheet" href="/styles/global.css" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body
         className={cn(
-          "bg-slate-950 text-slate-300 min-h-screen font-sans antialiased selection:bg-accent/20 selection:text-accent",
-          fontSans.variable
+          "selection:bg-accent/20 bg-background min-h-screen font-sans text-slate-900 antialiased selection:text-slate-950",
+          fontSans.variable,
         )}
       >
         <Preloader />
         <CustomCursor />
-        
+        <FloatingContact />
+
         <div className="relative flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>

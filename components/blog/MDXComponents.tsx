@@ -33,7 +33,7 @@ export const MDXComponents = {
   h3: ({ className, ...props }: React.ComponentPropsWithoutRef<"h3">) => (
     <h3
       className={cn(
-        "mt-10 mb-4 text-xl font-bold tracking-widest text-amber-500 uppercase",
+        "text-accent mt-10 mb-4 text-xl font-bold tracking-widest uppercase",
         className,
       )}
       {...props}
@@ -54,7 +54,7 @@ export const MDXComponents = {
   li: ({ className, ...props }: React.ComponentPropsWithoutRef<"li">) => (
     <li
       className={cn(
-        "relative pl-8 font-light tracking-wide text-slate-300 before:absolute before:top-3 before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:bg-amber-500 before:shadow-[0_0_8px_rgba(245,158,11,0.5)]",
+        "before:bg-accent relative pl-8 font-light tracking-wide text-slate-300 before:absolute before:top-3 before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:shadow-[0_0_8px_rgba(180,140,40,0.5)]",
         className,
       )}
       {...props}
@@ -63,7 +63,7 @@ export const MDXComponents = {
   blockquote: ({ className, ...props }: React.ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
       className={cn(
-        "my-12 rounded-sm border-l-2 border-amber-500 bg-amber-500/5 p-10 text-xl font-light text-slate-200 italic backdrop-blur-sm",
+        "border-accent bg-accent/5 my-12 rounded-sm border-l-2 p-10 text-xl font-light text-slate-200 italic backdrop-blur-sm",
         className,
       )}
       {...props}
@@ -72,7 +72,7 @@ export const MDXComponents = {
   code: ({ className, ...props }: React.ComponentPropsWithoutRef<"code">) => (
     <code
       className={cn(
-        "rounded-sm border border-slate-800 bg-slate-900 px-2 py-1 font-mono text-sm text-amber-400",
+        "text-accent-light rounded-sm border border-slate-800 bg-slate-900 px-2 py-1 font-mono text-sm",
         className,
       )}
       {...props}
@@ -92,9 +92,9 @@ export const MDXComponents = {
   }) => {
     const icons = {
       info: <Info className="h-5 w-5 text-blue-400" />,
-      warning: <AlertTriangle className="h-5 w-5 text-amber-500" />,
+      warning: <AlertTriangle className="text-accent h-5 w-5" />,
       success: <CheckCircle2 className="h-5 w-5 text-emerald-400" />,
-      secure: <Lock className="h-5 w-5 text-amber-500" />,
+      secure: <Lock className="text-accent h-5 w-5" />,
     };
 
     return (
@@ -102,10 +102,10 @@ export const MDXComponents = {
         className={cn(
           "my-10 flex gap-6 rounded-sm border border-white/5 p-8 backdrop-blur-xl",
           type === "info" && "border-blue-500/20 bg-blue-500/5",
-          type === "warning" && "border-amber-500/20 bg-amber-500/5",
+          type === "warning" && "border-accent/20 bg-accent/5",
           type === "success" && "border-emerald-500/20 bg-emerald-500/5",
           type === "secure" &&
-            "border-amber-500/30 bg-amber-500/10 shadow-[inner_0_0_20px_rgba(245,158,11,0.05)]",
+            "border-accent/30 bg-accent/10 shadow-[inner_0_0_20px_rgba(180,140,40,0.05)]",
         )}
       >
         <div className="mt-1 shrink-0">{icons[type]}</div>
@@ -137,17 +137,22 @@ export const MDXComponents = {
 
   /* Brand Signature CTA */
   ProtocolCTA: () => (
-    <div className="my-20 rounded-sm border border-amber-500/20 bg-gradient-to-br from-slate-900 to-[#020617] p-12 text-center">
-      <Shield className="mx-auto mb-6 h-10 w-10 text-amber-500" />
+    <div className="border-accent/20 my-20 rounded-sm border bg-gradient-to-br from-slate-900 to-slate-950 p-12 text-center">
+      <Shield className="text-accent mx-auto mb-6 h-10 w-10" />
       <h4 className="mb-4 text-xl font-black tracking-widest text-white uppercase">
-        Ready to initiate protocol?
+        ต้องการเริ่มต้นวางระบบทันที?
       </h4>
       <p className="mb-8 text-sm font-light tracking-widest text-slate-400 uppercase">
-        Connect with our executive board for a secure consultation.
+        ติดต่อฝ่ายวิเคราะห์เชิงกลยุทธ์เพื่อขอรับการประเมินเบื้องต้นได้ทันที
       </p>
-      <button className="rounded-sm bg-amber-500 px-10 py-4 text-[10px] font-black tracking-[0.3em] text-slate-950 uppercase transition-all hover:bg-amber-400">
-        Initiate Proposal
-      </button>
+      <a
+        href="https://lin.ee/1d0Juko"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-accent hover:bg-accent-light inline-block rounded-sm px-10 py-4 text-[10px] font-black tracking-[0.3em] text-slate-950 uppercase transition-all hover:scale-105"
+      >
+        CONTACT VIA LINE OFFICIAL
+      </a>
     </div>
   ),
 };

@@ -5,13 +5,13 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Section from "../shared/Section";
 import React from "react";
-import { CaseStudy } from "@/lib/mdx";
+import { CaseStudyFrontmatter } from "@/lib/mdx";
 
 /**
  * @COMPONENT: CaseStudyPreview
  * @STYLE: Dynamic Portfolio Archives / Obsidian Luxury
  */
-export default function CaseStudyPreview({ cases }: { cases: CaseStudy[] }) {
+export default function CaseStudyPreview({ cases }: { cases: CaseStudyFrontmatter[] }) {
   return (
     <Section id="portfolio" className="border-b border-slate-900 bg-slate-950/20">
       <div className="mb-24 flex flex-col items-end justify-between gap-12 md:flex-row">
@@ -46,14 +46,21 @@ export default function CaseStudyPreview({ cases }: { cases: CaseStudy[] }) {
           >
             <Link href={`/case-studies/${item.slug}`} className="absolute inset-0 z-20" />
 
-            <div className="relative mb-10 aspect-[16/9] overflow-hidden border border-slate-800 bg-slate-950/60 transition-all duration-700 group-hover:bg-slate-900 hover:border-cyan-500/50">
+            <div className="hover:border-accent/50 relative mb-10 aspect-[16/9] overflow-hidden border border-slate-800 bg-slate-950/60 transition-all duration-700 group-hover:bg-slate-900">
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                style={{
+                  backgroundImage: `url("${item.image || "/assets/case-studies/case-preview-vault.webp"}")`,
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(30,41,59,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,41,59,0.3)_1px,transparent_1px)] bg-[size:30px_30px] opacity-10" />
 
               <div className="absolute top-8 left-8 z-10 flex flex-col gap-2">
-                <span className="label-mono text-[9px] text-slate-600 transition-colors group-hover:text-cyan-500">
+                <span className="label-mono group-hover:text-accent bg-slate-950/60 px-2 py-1 text-[9px] text-slate-300 backdrop-blur-sm transition-colors">
                   System ID: {item.slug.slice(0, 8).toUpperCase()}
                 </span>
-                <span className="label-mono text-accent text-[9px] font-bold">
+                <span className="label-mono text-accent bg-slate-950/60 px-2 py-1 text-[9px] font-bold backdrop-blur-sm">
                   STATUS: {item.outcome || "VERIFIED"}
                 </span>
               </div>

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev:css": "tailwindcss -i ./app/globals.css -o ./public/styles/global.css --watch",
+    "build:css": "tailwindcss -i ./app/globals.css -o ./public/styles/global.css --minify",
+    "dev": "pnpm build:css && next dev --webpack",
+    "build": "pnpm build:css && next build --webpack",
     "start": "next start",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
@@ -26,7 +28,6 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.1.6",
     "@tailwindcss/cli": "4.2.1",
-    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

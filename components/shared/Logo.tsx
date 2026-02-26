@@ -1,8 +1,8 @@
 /**
- * @IDENTITY: JP-VISUAL & DOCS (Strategic Monogram v2)
- * - Industrial Precision
- * - System Traceability Motif
- * - Executive Stealth Aesthetic
+ * @IDENTITY: JP-VISUAL & DOCS (Elite Advisory Monogram)
+ * - Sophisticated Minimalism
+ * - Balanced Authority
+ * - High-End Ivory Integration
  */
 
 import React from "react";
@@ -11,72 +11,78 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   iconOnly?: boolean;
+  light?: boolean; // New prop to handle dark/light contexts
 }
 
 /**
  * @COMPONENT: Logo
- * @STYLE: Modernized Strategic Iconography
- * - Pure SVG for Lighthouse 100% Performance
- * - No External Icon Libraries for Brand Core
+ * @STYLE: Elite Advisory Iconography
+ * - Optimized SVG Pathing
+ * - Fluid Responsiveness
  */
-export default function Logo({ className, iconOnly = false }: LogoProps) {
+export default function Logo({ className, iconOnly = false, light = false }: LogoProps) {
+  // Define colors based on theme context
+  const primaryColor = light ? "#FFFFFF" : "#0F172A"; // Midnight Navy or White
+  const accentColor = "#B48C28"; // Antique Gold
+
   return (
-    <div className={cn("group flex items-center gap-3 select-none", className)}>
-      {/* 🛡️ Strategic Symbol: The "JP" Monogram Grid */}
-      <div className="relative h-10 w-10 flex-shrink-0 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110">
+    <div className={cn("group flex items-center gap-4 select-none", className)}>
+      {/* 🏛️ Elite Symbol: The Balanced "JP" Monogram */}
+      <div className="relative h-10 w-10 flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105">
         <svg
           viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="h-full w-full"
         >
-          {/* Background Structural Grid */}
-          <rect width="100" height="100" rx="4" fill="#020617" />
-          <path
-            d="M20 20H80V80H20V20Z"
-            stroke="#1e293b"
-            strokeWidth="0.5"
-            strokeDasharray="2 2"
-          />
-          
-          {/* The "J" Architecture (Structural Base) */}
-          <path
-            d="M45 35V65C45 70.5228 40.5228 75 35 75"
-            stroke="#b48c28"
-            strokeWidth="8"
-            strokeLinecap="square"
-            className="transition-all duration-500 group-hover:stroke-cyan-500"
-          />
-          
-          {/* The "P" Injection (Visionary Loop) */}
-          <path
-            d="M55 75V25H70C78.2843 25 85 31.7157 85 40V40C85 48.2843 78.2843 55 70 55H55"
-            stroke="white"
-            strokeWidth="8"
-            strokeLinecap="square"
-            className="transition-all duration-500 group-hover:stroke-amber-500"
+          {/* Circular Frame - Subtle authority boundary */}
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            stroke={primaryColor}
+            strokeWidth="1"
+            strokeOpacity="0.1"
           />
 
-          {/* Scanning Status Indicator */}
-          <circle
-            cx="55"
-            cy="25"
-            r="4"
-            fill="#06b6d4"
-            className="animate-pulse"
+          {/* The "J" Component (Foundation) */}
+          <path
+            d="M35 30V60C35 71.0457 43.9543 80 55 80H60"
+            stroke={accentColor}
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-all duration-500"
+          />
+
+          {/* The "P" Component (Vision) */}
+          <path
+            d="M45 20V70M45 20H65C73.2843 20 80 26.7157 80 35C80 43.2843 73.2843 50 65 50H45"
+            stroke={primaryColor}
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-all duration-500"
           />
         </svg>
-        
-        {/* Glow Effect Layer */}
-        <div className="absolute inset-0 -z-10 bg-amber-500/20 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
       {!iconOnly && (
-        <div className="flex flex-col leading-none">
-          <span className="text-lg font-black tracking-[0.2em] text-white uppercase">
-            JP<span className="text-amber-500">-</span>VISUAL
+        <div className="flex flex-col leading-[1.1]">
+          <span
+            className={cn(
+              "text-base font-black tracking-[0.3em] uppercase transition-colors",
+              light ? "text-white" : "text-slate-950",
+            )}
+          >
+            JP<span className="text-accent">.</span>VISUAL
           </span>
-          <span className="mt-1 font-mono text-[10px] font-bold tracking-[0.4em] text-slate-500 uppercase">
+          <span
+            className={cn(
+              "text-[9px] font-bold tracking-[0.5em] uppercase opacity-60",
+              light ? "text-slate-300" : "text-slate-500",
+            )}
+          >
             & Strategic Docs
           </span>
         </div>

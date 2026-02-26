@@ -3,8 +3,15 @@
 import React from "react";
 import { Service } from "@/config/services";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, FileText, Briefcase, Globe, LucideIcon } from "lucide-react";
 import Link from "next/link";
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Shield,
+  FileText,
+  Briefcase,
+  Globe,
+};
 
 interface ServiceCardProps {
   service: Service;
@@ -19,6 +26,8 @@ interface ServiceCardProps {
  * - Optimized image/icon contrast.
  */
 export const ServiceCard = ({ service, index }: ServiceCardProps) => {
+  const IconComponent = ICON_MAP[service.icon] || Shield;
+
   return (
     <motion.article
       layout
@@ -30,63 +39,59 @@ export const ServiceCard = ({ service, index }: ServiceCardProps) => {
         delay: index * 0.05,
         ease: [0.19, 1, 0.22, 1],
       }}
-      className="group relative flex h-full flex-col border border-slate-800 transition-all duration-500 hover:border-cyan-500/50 hover:bg-slate-900/80"
+      className="group glass-panel hover:border-accent/30 relative flex h-full min-h-[400px] flex-col overflow-hidden border border-white/5 p-8 transition-all duration-500 hover:bg-slate-900/50"
     >
       {/* ⚓ Absolute Link Overlay for Full Card Clickability */}
       <Link
         href={`/services/${service.slug}`}
-        className="absolute inset-0 z-10"
-        aria-label={`Access ${service.title} Protocol`}
+        className="absolute inset-0 z-20"
+        aria-label={`ดูรายละเอียดบริการ ${service.name}`}
       />
 
-      {/* Header Info: Protocol ID & Status */}
-      <header className="mb-10 flex items-start justify-between">
-        <div className="relative">
-          <div className="border border-slate-800 bg-slate-950 p-4 transition-all duration-500 group-hover:border-cyan-500/40 group-hover:bg-slate-900">
-            <service.icon
-              className="text-accent h-6 w-6 stroke-[1.5] transition-transform duration-500 group-hover:scale-110"
-              aria-hidden="true"
-            />
+      {/* 🖼️ High-Visibility Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+          style={{ backgroundImage: `url("${service.imageUrl}")` }}
+        />
+        <div className="absolute inset-0 bg-slate-950/80 transition-colors duration-500 group-hover:bg-slate-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+      </div>
+
+      {/* Header Info: Friendly Icon & Category */}
+      <header className="relative z-10 mb-8 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="border-accent/20 bg-accent/10 text-accent group-hover:bg-accent border p-3 backdrop-blur-sm transition-all duration-500 group-hover:text-slate-950">
+            <IconComponent className="h-5 w-5 stroke-[1.5]" aria-hidden="true" />
           </div>
+          <span className="text-accent/60 group-hover:text-accent-light text-[9px] font-black tracking-[0.2em] uppercase">
+            {service.category}
+          </span>
         </div>
-        <div className="flex flex-col items-end gap-1">
-          <span className="label-mono group-hover:text-accent transition-colors">{service.id}</span>
-          <div className="flex items-center gap-2 opacity-40 transition-opacity duration-500 group-hover:opacity-100">
-            <div className="bg-accent h-1 w-1 rounded-full" />
-            <span className="text-accent text-[8px] font-bold tracking-[0.2em] uppercase">
-              Verified Protocol
-            </span>
-          </div>
+        <div className="flex items-center gap-2 opacity-40 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="h-1 w-1 animate-pulse rounded-full bg-emerald-500" />
+          <span className="text-[8px] font-bold tracking-[0.1em] text-emerald-500 uppercase">
+            Active Service
+          </span>
         </div>
       </header>
 
       {/* Title & Description */}
-      <h3 className="group-hover:text-accent mb-4 text-xl font-bold tracking-tight text-white uppercase transition-colors">
-        {service.title}
-      </h3>
+      <div className="relative z-10 mt-auto">
+        <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors group-hover:text-white">
+          {service.name}
+        </h3>
 
-      <p className="mb-10 text-[11px] leading-relaxed tracking-wide text-slate-400 uppercase opacity-70 transition-opacity group-hover:opacity-100">
-        {service.description}
-      </p>
-
-      {/* Features: Tactical List */}
-      <ul className="mt-auto mb-12 flex list-none flex-col gap-3 border-y border-slate-800/50 py-6">
-        {service.features?.slice(0, 3).map((feature, i) => (
-          <li
-            key={i}
-            className="flex items-center gap-3 text-[9px] font-bold tracking-[0.1em] text-slate-500 uppercase transition-colors group-hover:text-slate-300"
-          >
-            <div className="group-hover:bg-accent h-1 w-1 bg-slate-700 transition-colors" />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
+        <p className="mb-8 text-xs leading-relaxed text-slate-300/80 transition-opacity group-hover:opacity-100">
+          {service.tagline}
+        </p>
+      </div>
 
       {/* Action Link (Visual) */}
-      <div className="flex items-center justify-between text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all group-hover:text-white">
-        <span>Access Solution Protocol</span>
+      <div className="group-hover:text-accent relative z-10 flex items-center justify-between border-t border-white/5 pt-6 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase transition-all">
+        <span>ดูวิธีที่เราช่วยคุณได้</span>
         <ArrowRight
-          className="text-accent h-4 w-4 transition-transform duration-500 group-hover:translate-x-2"
+          className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-2"
           aria-hidden="true"
         />
       </div>

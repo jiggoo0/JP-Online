@@ -1,39 +1,45 @@
 import { Metadata } from "next";
 import { Service } from "@/config/services";
+import { siteConfig as globalConfig } from "@/config/site";
 
 /**
- * ✅ Global Site Configuration
- * ใช้สำหรับค่าพื้นฐานที่ต้องเหมือนกันทั้งเว็บไซต์
+ * ✅ Global Site Configuration (Synced from config/site.ts)
  */
 export const siteConfig = {
-  name: "JP-Visual&Docs | Strategic Solutions Provider",
+  ...globalConfig,
   shortName: "JP-Visual",
-  description:
-    "ผู้เชี่ยวชาญการวางระบบเอกสารเชิงลึก (Deep Insights) และการแก้ปัญหาโปรไฟล์ขั้นสูง สำหรับการเงินและการย้ายถิ่นฐาน (Immigration & Financial Strategy)",
-  url: "https://www.jpvisouldocs.online",
-  ogImage: "https://www.jpvisouldocs.online/og.jpg",
-  author: "เจ้าป่า",
-  keywords: [
-    "เจ้าป่า",
-    // 🏛️ Middle-Class / Professional Tier
-    "วางแผนการเงินย้ายประเทศ",
-    "Internal Audit Simulation",
-    "หนังสือรับรองรายได้สากล",
-    "วางระบบโปรไฟล์นักธุรกิจ",
-    "Immigration Strategy Thailand",
-    "Financial Architecture for Visa",
-
-    // 🛠️ Broad-Base / Hard Case Tier
-    "ทำสเตทเม้นวีซ่า",
-    "แก้ปัญหาวีซ่าไม่ผ่าน",
-    "เอกสารรายได้พ่อค้าแม่ค้า",
-    "ช่วยเดินบัญชีขอวีซ่า",
-    "ปรึกษาวีซ่าเคสยาก",
-    "ยืนยันที่มาของเงิน",
-    "จองตั๋วเครื่องบินระบบ GDS",
-    "Identity Architecture",
-  ],
 };
+
+/**
+ * generateOrganizationJsonLd - สร้างฐานข้อมูล Entity ขององค์กรและ CEO สำหรับ Google AI
+ */
+export function generateOrganizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/logo.png`,
+    description: siteConfig.description,
+    founder: {
+      "@type": "Person",
+      name: "เจ้าป่า",
+      jobTitle: "Senior Strategic Architect",
+      description: "ผู้เชี่ยวชาญด้านการวางโครงสร้างโปรไฟล์และระบบเอกสารเชิงลึกระดับสากล",
+      image: `${siteConfig.url}/assets/ceo-avatar.webp`,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      availableLanguage: ["Thai", "English"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "TH",
+    },
+    keywords: siteConfig.keywords.join(", "),
+  };
+}
 
 /**
  * generateServiceMetadata - สร้าง Metadata สำหรับหน้าบริการแต่ละหน้า
@@ -148,10 +154,18 @@ export function generateArticleJsonLd(article: {
     description: article.description,
     image: article.image,
     datePublished: article.date,
-    author: {
-      "@type": "Organization",
-      name: siteConfig.name,
-    },
+    author: [
+      {
+        "@type": "Person",
+        name: "เจ้าป่า",
+        jobTitle: "Senior Strategic Architect",
+        url: siteConfig.url,
+      },
+      {
+        "@type": "Organization",
+        name: siteConfig.name,
+      },
+    ],
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,

@@ -9,18 +9,15 @@ import { navigationConfig } from "@/config/navigation";
 
 /**
  * @COMPONENT: Navbar
- * @OPTIMIZATION: Lighthouse 100% Strategy
- * - Semantic <nav> with proper aria-label.
- * - Focus-visible states for all interactive elements.
- * - Optimized scroll progress rendering.
+ * @STYLE: High-End Ivory & Elite Glass
  */
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className="bg-background/80 fixed top-0 left-0 z-[100] h-20 w-full border-b border-slate-900 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 z-[100] h-20 w-full border-b border-slate-100 bg-white/80 backdrop-blur-xl transition-all duration-300">
       <nav
-        aria-label="Executive Command Center"
+        aria-label="Executive Navigation Center"
         className="container mx-auto flex h-full items-center justify-between px-6"
       >
         <Link
@@ -29,19 +26,19 @@ export const Navbar = () => {
           className="group flex items-center gap-3 outline-none"
         >
           <Logo />
-          <div className="group-hover:bg-accent h-4 w-px bg-slate-800 transition-colors" />
-          <span className="label-mono hidden text-[9px] text-slate-500 md:block">
-            System Status: <span className="text-accent">Operational</span>
+          <div className="group-hover:bg-accent h-4 w-px bg-slate-200 transition-colors" />
+          <span className="hidden text-[9px] font-bold tracking-[0.4em] text-slate-500 uppercase md:block">
+            Professional <span className="text-accent">Advisor</span>
           </span>
         </Link>
 
-        {/* Desktop Links: High-Contrast Minimalism */}
-        <ul className="hidden list-none items-center gap-10 lg:flex">
+        {/* Desktop Links: High-End Professionalism */}
+        <ul className="hidden list-none items-center gap-12 lg:flex">
           {navigationConfig.mainNav.map((item) => (
             <li key={item.title}>
               <Link
                 href={item.href}
-                className="label-mono focus-visible:text-accent text-[10px] text-slate-400 transition-all hover:text-white"
+                className="hover:text-accent text-[10px] font-black tracking-[0.2em] text-slate-600 uppercase transition-all"
               >
                 {item.title}
               </Link>
@@ -50,10 +47,10 @@ export const Navbar = () => {
           <li>
             <Link href="/#contact">
               <button
-                aria-label="Initiate Protocol Access"
-                className="btn-primary flex items-center gap-3 px-6 py-3"
+                aria-label="ปรึกษาเราทาง LINE"
+                className="shadow-premium hover:bg-accent flex items-center gap-3 bg-slate-950 px-8 py-3 text-[10px] font-black tracking-[0.2em] text-white transition-all"
               >
-                PROTOCOL ACCESS
+                ปรึกษาทาง LINE
                 <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
               </button>
             </Link>
@@ -65,17 +62,17 @@ export const Navbar = () => {
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
           aria-label={isOpen ? "Close menu" : "Open menu"}
-          className="relative z-50 p-2 text-white outline-none lg:hidden"
+          className="relative z-50 p-2 text-slate-950 outline-none lg:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
             <X className="text-accent h-6 w-6" aria-hidden="true" />
           ) : (
-            <Menu className="h-6 w-6 text-white" aria-hidden="true" />
+            <Menu className="h-6 w-6" aria-hidden="true" />
           )}
         </button>
 
-        {/* Mobile Menu: Strategic Grid Overlay */}
+        {/* Mobile Menu: Ivory Overlay */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -83,17 +80,15 @@ export const Navbar = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-background fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center gap-12 px-10 lg:hidden"
+              className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center gap-12 bg-[#FAF9F6] px-10 lg:hidden"
             >
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(30,41,59,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,41,59,0.3)_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
-
-              <ul className="relative flex list-none flex-col items-center gap-8">
+              <ul className="relative flex list-none flex-col items-center gap-10">
                 {navigationConfig.mainNav.map((item) => (
                   <li key={item.title}>
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="hover:text-accent text-4xl font-bold tracking-tighter text-white uppercase transition-colors"
+                      className="hover:text-accent text-4xl font-black tracking-tighter text-slate-950 uppercase transition-colors"
                     >
                       {item.title}
                     </Link>
@@ -101,10 +96,10 @@ export const Navbar = () => {
                 ))}
               </ul>
               <button
-                className="btn-primary relative w-full py-6 text-lg"
+                className="shadow-premium w-full bg-slate-950 py-6 text-sm font-black tracking-widest text-white uppercase"
                 onClick={() => setIsOpen(false)}
               >
-                INITIATE PROTOCOL
+                CONTACT US
               </button>
             </motion.div>
           )}

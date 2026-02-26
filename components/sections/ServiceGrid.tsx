@@ -31,14 +31,14 @@ export const ServiceGrid = ({ limit }: ServiceGridProps) => {
           className="max-w-3xl"
         >
           <div className="mb-10 flex items-center gap-4">
-            <div className="h-px w-16 bg-amber-500/50" />
-            <span className="text-[10px] font-black tracking-[0.6em] text-amber-500 uppercase">
+            <div className="bg-accent/50 h-px w-16" />
+            <span className="text-accent text-[10px] font-black tracking-[0.6em] uppercase">
               Visual & Documentation expertise
             </span>
           </div>
           <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-white uppercase md:text-7xl">
             CORE{" "}
-            <span className="bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text font-light text-transparent italic">
+            <span className="from-accent-light to-accent bg-gradient-to-r bg-clip-text font-light text-transparent italic">
               &
             </span>
             SOLUTIONS

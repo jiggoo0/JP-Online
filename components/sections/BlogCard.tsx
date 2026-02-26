@@ -2,56 +2,73 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, BookOpen } from "lucide-react";
-import { Insight } from "@/lib/mdx";
+import { Calendar, ArrowUpRight } from "lucide-react";
+import { BlogFrontmatter } from "@/lib/mdx";
 import Link from "next/link";
 
 interface BlogCardProps {
-  post: Insight;
+  post: BlogFrontmatter;
   index: number;
 }
 
 /**
  * @COMPONENT: BlogCard
- * @STYLE: Strategic Insight Card / Obsidian Intelligence Tier
+ * @STYLE: High-End Ivory Card - Focused on elite advisory aesthetics.
  */
 export default function BlogCard({ post, index }: BlogCardProps) {
+  const imageUrl = post.image || "/assets/blog/blog-exec-docs.webp";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05, ease: [0.19, 1, 0.22, 1] }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.19, 1, 0.22, 1] }}
       viewport={{ once: true }}
-      className="h-full"
+      className="group h-full"
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="audit-border group relative flex h-full flex-col bg-slate-950/40 p-10 transition-all duration-500 hover:bg-slate-900"
+        className="hover:border-accent/40 hover:shadow-premium flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-500"
       >
-        <div className="mb-8 flex items-center justify-between">
-          <span className="label-mono text-accent">Insight // {post.category}</span>
-          <div className="label-mono flex items-center gap-3 text-slate-600 group-hover:text-slate-400">
-            <Calendar className="h-3 w-3" />
-            {post.date}
+        {/* 🖼️ Image Section - Clear and Large */}
+        <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100">
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 group-hover:scale-110"
+            style={{ backgroundImage: `url("${imageUrl}")` }}
+          />
+          {/* Very subtle overlay for high-end look */}
+          <div className="absolute inset-0 bg-slate-950/5 opacity-40 transition-opacity group-hover:opacity-0" />
+
+          {/* Badge: Category */}
+          <div className="absolute top-4 left-4 z-10">
+            <span className="badge-premium backdrop-blur-md">{post.category}</span>
           </div>
         </div>
 
-        <h3 className="group-hover:text-accent mb-6 text-xl font-bold tracking-tight text-white uppercase transition-colors md:text-2xl">
-          {post.title}
-        </h3>
+        {/* 📝 Content Section */}
+        <div className="flex flex-1 flex-col p-6 pt-8">
+          {/* Date Label */}
+          <div className="mb-4 flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-500 uppercase">
+            <Calendar className="text-accent h-3.5 w-3.5" />
+            {post.date}
+          </div>
 
-        <p className="mb-12 line-clamp-3 text-sm leading-relaxed tracking-wide text-slate-500">
-          {post.description}
-        </p>
+          <h3 className="group-hover:text-accent mb-4 text-xl leading-snug font-bold text-slate-950 transition-colors md:text-2xl">
+            {post.title}
+          </h3>
 
-        <div className="mt-auto flex items-center justify-between border-t border-slate-900 pt-8">
-          <span className="label-mono text-[9px] text-slate-600 group-hover:text-white">
-            Read Strategic Analysis
-          </span>
-          <BookOpen
-            className="group-hover:text-accent h-4 w-4 text-slate-700 transition-colors"
-            aria-hidden="true"
-          />
+          <p className="mb-8 line-clamp-3 text-sm leading-relaxed text-slate-600 group-hover:text-slate-700">
+            {post.description}
+          </p>
+
+          <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
+            <span className="text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase group-hover:text-slate-950">
+              รายละเอียดเพิ่มเติม
+            </span>
+            <div className="group-hover:border-accent group-hover:bg-accent flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 transition-all duration-500 group-hover:text-white">
+              <ArrowUpRight className="h-4 w-4" />
+            </div>
+          </div>
         </div>
       </Link>
     </motion.div>

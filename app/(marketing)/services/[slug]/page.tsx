@@ -3,12 +3,20 @@ import { Metadata } from "next";
 import { SERVICES, Service } from "@/config/services";
 import { generateServiceMetadata, generateServiceJsonLd } from "@/lib/seo";
 import Section from "@/components/shared/Section";
-import { Shield, ArrowLeft } from "lucide-react";
+import { Shield, ArrowLeft, FileText, Briefcase, Globe, LucideIcon } from "lucide-react";
 import ContactCTA from "@/components/shared/ContactCTA";
+import { ServiceProtocolSidebar } from "@/components/sections/ServiceProtocolSidebar";
 import { getPostBySlug, getAllPosts, ServiceFrontmatter } from "@/lib/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { MDXComponents } from "@/components/blog/MDXComponents";
 import Link from "next/link";
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Shield,
+  FileText,
+  Briefcase,
+  Globe,
+};
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -25,12 +33,12 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   if (mdxData) {
     const { data } = mdxData;
     return {
-      title: data.title,
+      title: `${data.title} | Protocol Archive`,
       description: data.description,
       openGraph: {
         title: data.title,
         description: data.description,
-        images: [{ url: data.imageUrl || "/og-image.jpg" }],
+        images: [{ url: data.imageUrl || "/assets/og-image.jpg" }],
       },
     };
   }
@@ -61,23 +69,30 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   if (!mdxData && !serviceFromConfig) notFound();
 
-  // If we have MDX data, we can use its frontmatter to supplement or create a service object
-  const service: Service = serviceFromConfig || {
-    id: mdxData?.data.id || "SRV-GEN-01",
+  /**
+   * 🏗️ Merged Data Intelligence Strategy
+   * Priority: MDX Frontmatter > Config Dataset
+   */
+  const service: Service = {
+    id: mdxData?.data.id || serviceFromConfig?.id || "SRV-GEN-01",
     slug,
-    name: mdxData?.data.title || "",
-    title: mdxData?.data.title || "",
-    category: (mdxData?.data.category as Service["category"]) || "SERVICES",
-    description: mdxData?.data.description || "",
-    protocol: [],
-    feeEstimate: "Contact for Quote",
-    timeline: "Variable",
-    tagline: mdxData?.data.tagline || "",
-    imageUrl: mdxData?.data.imageUrl || "/og-image.jpg",
+    name: mdxData?.data.title || serviceFromConfig?.name || "",
+    title: mdxData?.data.title || serviceFromConfig?.title || "",
+    category: (mdxData?.data.category ||
+      serviceFromConfig?.category ||
+      "SYSTEMS") as Service["category"],
+    description: mdxData?.data.description || serviceFromConfig?.description || "",
+    protocol: mdxData?.data.protocol || serviceFromConfig?.protocol || [],
+    feeEstimate: mdxData?.data.feeEstimate || serviceFromConfig?.feeEstimate || "Contact for Quote",
+    timeline: mdxData?.data.timeline || serviceFromConfig?.timeline || "Variable",
+    tagline: mdxData?.data.tagline || serviceFromConfig?.tagline || "",
+    imageUrl: mdxData?.data.imageUrl || serviceFromConfig?.imageUrl || "/assets/og-image.jpg",
     contactMethod: "LINE",
-    icon: Shield,
+    icon: (serviceFromConfig?.icon as string) || "Shield",
   };
+
   const jsonLd = generateServiceJsonLd(service);
+  const IconComponent = ICON_MAP[service.icon] || Shield;
 
   const components = {
     ...MDXComponents,
@@ -85,14 +100,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#020617] selection:bg-amber-500/30 selection:text-amber-200">
+    <main className="selection:bg-accent/30 selection:text-accent-light min-h-screen bg-slate-950">
       {/* 🚀 Schema.org JSON-LD Integration */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 🏆 HERO SECTION (H1 for SEO - Solving Search Intent) */}
+      {/* 🏆 HERO SECTION (Executive Title & Strategic Visual) */}
       <section
         aria-label="Service Introduction"
         className="relative flex min-h-[60vh] flex-col justify-center overflow-hidden border-b border-slate-900 pt-44 pb-24"
@@ -105,141 +120,100 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="max-w-4xl">
             <Link
               href="/#services"
-              className="group mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all hover:text-amber-500"
+              className="group hover:text-accent mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all"
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               Service Protocol Archive
             </Link>
             <br />
-            <span className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-[10px] font-bold tracking-widest text-amber-500 uppercase">
+            <span className="border-accent/20 bg-accent/10 text-accent mb-8 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
               Protocol: {service.category}
             </span>
-            <h1 className="mb-8 text-4xl leading-tight font-black text-white md:text-6xl">
-              {/* Intent: แก้ปัญหา... หรือ เทคนิคการ... */}
-              {service.name ? `แก้ปัญหา ${service.name.split("(")[0].trim()}` : service.title}{" "}
-              <br />
-              <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent italic">
+            <h1 className="mb-8 text-4xl leading-tight font-black text-white uppercase md:text-6xl">
+              {service.name.split("(")[0].trim()} <br />
+              <span className="from-accent-light via-accent to-accent-dim bg-gradient-to-r bg-clip-text text-transparent italic">
                 {service.tagline}
               </span>
             </h1>
-            <p className="mb-12 max-w-2xl text-xl leading-relaxed text-slate-400">
+            <p className="mb-12 max-w-2xl text-xl leading-relaxed font-light text-slate-400">
               {service.description}
             </p>
+
+            {/* Strategic Service Asset */}
+            {service.imageUrl && (
+              <div className="group relative mt-12 aspect-[21/9] overflow-hidden border border-slate-900">
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 transition-all duration-1000 group-hover:scale-105 group-hover:opacity-40"
+                  style={{ backgroundImage: `url("${service.imageUrl}")` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Content Section: MDX or Default Layout */}
-      {mdxData ? (
-        <Section className="py-24">
-          <div className="mx-auto max-w-4xl px-6">
-            <div className="prose prose-invert prose-amber max-w-none">
-              <MDXRemote source={mdxData.content} components={components} />
+      {/* 🛠️ INDUSTRIAL LAYOUT (12-Column Grid) */}
+      <Section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 gap-20 lg:grid-cols-12">
+            {/* 🛡️ LEFT SIDEBAR: Technical Protocol Sidebar (Always Visible) */}
+            <aside className="order-2 lg:order-1 lg:col-span-4">
+              <ServiceProtocolSidebar
+                id={service.id}
+                category={service.category}
+                timeline={service.timeline}
+                feeEstimate={service.feeEstimate}
+                icon={IconComponent}
+              />
+            </aside>
+
+            {/* 📝 MAIN CONTENT: MDX or Standard Protocol List */}
+            <div className="order-1 lg:order-2 lg:col-span-8">
+              {mdxData ? (
+                <div className="prose prose-invert prose-slate prose-headings:text-white prose-a:text-accent hover:prose-a:text-accent-light prose-strong:text-accent max-w-none">
+                  <MDXRemote source={mdxData.content} components={components} />
+                </div>
+              ) : (
+                <ol className="flex list-none flex-col gap-8">
+                  {service.protocol?.map((step, index) => (
+                    <li
+                      key={index}
+                      className="group hover:border-accent/50 relative border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-8 transition-colors duration-500"
+                    >
+                      <article className="flex flex-col items-start gap-6 sm:flex-row sm:gap-8">
+                        <span
+                          className="group-hover:text-accent/20 shrink-0 text-5xl font-black text-slate-800 transition-colors"
+                          aria-hidden="true"
+                        >
+                          0{index + 1}
+                        </span>
+                        <div className="flex-1">
+                          <h3 className="group-hover:text-accent-light mb-3 text-xl font-bold tracking-tight text-white uppercase transition-colors">
+                            {step.title}
+                          </h3>
+                          <p className="text-base leading-relaxed font-light text-slate-400">
+                            {step.description}
+                          </p>
+                        </div>
+                      </article>
+                    </li>
+                  ))}
+                </ol>
+              )}
+
+              {/* 🎯 CONVERSION - CTA Embedded in Content Area */}
+              <div className="mt-24 border-t border-slate-900 pt-24">
+                <ContactCTA
+                  title="Ready to Secure Your Credibility?"
+                  description="ติดต่อที่ปรึกษาเพื่อรับการประเมินเบื้องต้นได้ทันที พร้อมรหัสอ้างอิงบริการนี้เพื่อความรวดเร็วในการประสานงาน"
+                  serviceId={service.id}
+                />
+              </div>
             </div>
           </div>
-        </Section>
-      ) : (
-        <>
-          {/* 🛠️ PROTOCOL STEPS (H2 for SEO - Structured Knowledge) */}
-          <Section className="py-32" aria-labelledby="protocols-heading">
-            <div className="grid grid-cols-1 gap-20 lg:grid-cols-12">
-              <div className="lg:col-span-4">
-                <div className="sticky top-32 space-y-12">
-                  <div>
-                    <h2
-                      id="protocols-heading"
-                      className="mb-6 flex items-center gap-4 text-2xl font-bold tracking-wider text-white uppercase"
-                    >
-                      <Shield className="h-8 w-8 text-amber-500" aria-hidden="true" />
-                      Intelligence <br /> Protocols
-                    </h2>
-                    <div className="mb-8 h-1 w-20 bg-amber-500" aria-hidden="true" />
-                    <p className="mb-8 leading-relaxed text-slate-400">
-                      เราใช้มาตรฐานการวิเคราะห์ระดับสากล
-                      เพื่อตรวจสอบความสมบูรณ์ของเอกสารและระบบข้อมูลก่อนดำเนินการจริง (Pre-audit
-                      Logic)
-                    </p>
-                  </div>
-
-                  {/* Technical Metadata Badge */}
-                  <div className="space-y-6 border-l border-slate-800 pl-8">
-                    <div className="flex flex-col gap-1">
-                      <span className="label-mono text-[10px] text-slate-500">System ID</span>
-                      <span className="text-xs font-bold text-white">{service.id}</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="label-mono text-[10px] text-slate-500">
-                        Authority Oversight
-                      </span>
-                      <span className="text-xs font-bold text-amber-500/80">
-                        เจ้าป่า / Secure-Tier 1
-                      </span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="label-mono text-[10px] text-slate-500">Security Level</span>
-                      <span className="text-xs font-bold text-emerald-500">VERIFIED ARCHIVE</span>
-                    </div>
-                  </div>
-
-                  {/* Semantic Data List for Key-Value Pairs */}
-                  <dl className="flex flex-col gap-4">
-                    <div className="flex flex-col border border-slate-800 bg-slate-900/30 p-6 backdrop-blur-sm">
-                      <dt className="mb-1 text-[9px] font-black tracking-widest text-amber-500 uppercase">
-                        Execution Timeline
-                      </dt>
-                      <dd className="text-base font-bold text-white">{service.timeline}</dd>
-                    </div>
-                    <div className="flex flex-col border border-slate-800 bg-slate-900/30 p-6 backdrop-blur-sm">
-                      <dt className="mb-1 text-[9px] font-black tracking-widest text-amber-500 uppercase">
-                        Protocol Fee
-                      </dt>
-                      <dd className="text-base font-bold text-white">{service.feeEstimate}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-
-              {/* Semantic Ordered List for Process Steps */}
-              <ol className="flex list-none flex-col gap-8 lg:col-span-8">
-                {service.protocol?.map((step, index) => (
-                  <li
-                    key={index}
-                    className="group relative border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-8 transition-colors duration-500 outline-none focus-within:border-transparent focus-within:ring-2 focus-within:ring-amber-500 hover:border-amber-500/50"
-                    tabIndex={0}
-                  >
-                    <article className="flex flex-col items-start gap-6 sm:flex-row sm:gap-8">
-                      <span
-                        className="shrink-0 text-5xl font-black text-slate-800 transition-colors group-hover:text-amber-500/20"
-                        aria-hidden="true"
-                      >
-                        0{index + 1}
-                      </span>
-                      <div className="flex-1">
-                        {/* H3 for SEO - Technical Depth */}
-                        <h3 className="mb-3 text-xl font-bold tracking-tight text-white uppercase transition-colors group-hover:text-amber-400">
-                          {step.title}
-                        </h3>
-                        <p className="text-base leading-relaxed text-slate-400">
-                          {step.description}
-                        </p>
-                      </div>
-                    </article>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </Section>
-
-          {/* 🎯 CONVERSION - CTA Linked to ContactForm with Service ID */}
-          <Section className="pb-32" aria-label="Call to Action">
-            <ContactCTA
-              title="Ready to Secure Your Credibility?"
-              description="ติดต่อที่ปรึกษาเพื่อรับการประเมินเบื้องต้นได้ทันที พร้อมรหัสอ้างอิงบริการนี้เพื่อความรวดเร็วในการประสานงาน"
-              serviceId={service.id}
-            />
-          </Section>
-        </>
-      )}
+        </div>
+      </Section>
     </main>
   );
 }

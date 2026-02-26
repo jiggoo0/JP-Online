@@ -6,23 +6,24 @@ import VisualSection from "@/components/sections/VisualSection";
 import CaseStudyPreview from "@/components/sections/CaseStudyPreview";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactCTA from "@/components/shared/ContactCTA";
-import { getAllPosts, CaseStudy } from "@/lib/mdx";
+import BlogList from "@/components/sections/BlogList";
+import { getAllPosts, CaseStudyFrontmatter } from "@/lib/mdx";
 import { Reveal } from "@/components/shared/Reveal";
 
 /**
  * @PAGE: Landing Page (The Conversion Engine)
- * @ORDER: Authority -> Trust -> Logic -> Solutions -> Proof -> FAQ -> Conversion
+ * @ORDER: Authority -> Trust -> Logic -> Solutions -> Proof -> Insights -> FAQ -> Conversion
  */
 export default async function LandingPage() {
-  const caseStudies = await getAllPosts<CaseStudy>("case-studies");
+  const caseStudies = await getAllPosts<CaseStudyFrontmatter>("case-studies");
   const latestCases = caseStudies.slice(0, 2);
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Immigration & Financial Strategy Protocol",
+    name: "ที่ปรึกษาด้านเอกสารและการเงินเพื่อการยื่นวีซ่าและธุรกรรม",
     description:
-      "บริการวางระบบโปรไฟล์เชิงลึก แก้ไขปัญหาเอกสารและวีซ่าเคสยากด้วยระบบ Internal Audit Logic",
+      "บริการให้คำปรึกษาและจัดเตรียมเอกสารสำหรับยื่นวีซ่าและธุรกรรมทางการเงิน โดยทีมงานมืออาชีพที่มีประสบการณ์แก้ไขเคสยาก",
     provider: {
       "@type": "Organization",
       name: "JP-Visual&Docs",
@@ -35,28 +36,33 @@ export default async function LandingPage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "ทำไมต้องจ้างเรา ในเมื่อจ้างเอเจนซี่ทั่วไปราคาถูกกว่า?",
+        name: "อาชีพอิสระ แม่ค้าออนไลน์ หรือคนทำงานอิสระ สามารถทำเรื่องยื่นวีซ่าหรือธุรกรรมทางการเงินได้จริงไหม?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "เอเจนซี่ทั่วไปทำได้แค่กรอกข้อมูล แต่เราใช้ 'ตรรกะธนาคาร' และระบบสากลในการสร้างโปรไฟล์ใหม่ที่มีความน่าเชื่อถือสูง เพื่อแก้ปัญหาที่ซับซ้อนที่สุดครับ",
+          text: "ทำได้จริงครับ เรามีความเชี่ยวชาญในการช่วยจัดระเบียบข้อมูลและเอกสารให้คนทำงานอิสระโดยเฉพาะ เพื่อให้ข้อมูลของคุณมีความสอดคล้องและน่าเชื่อถือตามเกณฑ์ที่หน่วยงานกำหนดครับ",
         },
       },
       {
         "@type": "Question",
-        name: "อาชีพอิสระหรือพ่อค้าแม่ค้าที่รายได้ไม่แน่นอน สามารถขอวีซ่าได้หรือไม่?",
+        name: "หากเดินบัญชีไม่สวย หรือมีเงินเก็บไม่มาก สามารถปรึกษาได้หรือไม่?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "สามารถทำได้ครับ ด้วยระบบ Income Documentation Protocol ของเราที่จะสร้างความชัดเจนของที่มาเงินและตรรกะรายได้ให้เป็นไปตามเกณฑ์การตรวจสอบสากลครับ",
+          text: "ปรึกษาได้ครับ เราไม่ได้ดูเพียงแค่ยอดเงินสุดท้าย แต่เราจะช่วยแนะนำการวางแผนการเดินบัญชีใหม่ให้ดูเป็นระบบมากขึ้น เพื่ออุดรอยโหว่ที่อาจทำให้คุณถูกปฏิเสธ และสร้างความมั่นใจก่อนเริ่มยื่นเรื่องจริงครับ",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "ทำไมถึงควรมีที่ปรึกษาช่วยในการยื่นวีซ่าเคสยาก?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "เพราะการยื่นวีซ่าไม่ได้ดูแค่เอกสารครบ แต่ดูความสมเหตุสมผลของข้อมูลทั้งหมดครับ เราจะช่วยตรวจสอบ (Pre-Audit) และจำลองการตรวจเพื่อหาจุดอ่อนของข้อมูลก่อนยื่นจริง เพื่อให้คุณมั่นใจในทุกขั้นตอนครับ",
         },
       },
     ],
   };
 
   return (
-    <main
-      className="flex flex-col gap-y-12 overflow-x-hidden antialiased"
-      id="main-content"
-    >
+    <main className="flex flex-col gap-y-24 overflow-x-hidden antialiased" id="main-content">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -65,35 +71,40 @@ export default async function LandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* 🚀 Authority & Strategic Hero */}
+      {/* 🏆 ที่ปรึกษาผู้เชี่ยวชาญ (Hero) */}
       <Hero />
 
-      {/* 🛡️ Compliance & Verification Markers */}
+      {/* ✅ ความน่าเชื่อถือและการตรวจสอบ (Trust Signals) */}
       <Reveal delay={0.1}>
         <TrustSignals />
       </Reveal>
 
-      {/* 🧠 Systemic Intelligence (The "How It Works" Logic) */}
+      {/* 💡 แนวคิดการดูแล (Our Approach) */}
       <Reveal>
         <VisualSection className="bg-slate-900/40" />
       </Reveal>
 
-      {/* 🛠️ Strategic Protocols (Services) */}
+      {/* 🛠️ บริการที่แนะนำ (Services) */}
       <Reveal>
         <ServiceGrid limit={4} />
       </Reveal>
 
-      {/* 💼 Case Evidence (Portfolio) */}
+      {/* 💼 ประสบการณ์ที่ผ่านมา (Success Stories) */}
       <Reveal>
         <CaseStudyPreview cases={latestCases} />
       </Reveal>
 
-      {/* ❓ Intellectual Support (FAQ) */}
+      {/* 📝 บทความและคำแนะนำ (Knowledge Base) */}
+      <Reveal>
+        <BlogList />
+      </Reveal>
+
+      {/* ❓ คำถามที่พบบ่อย (FAQ) */}
       <Reveal>
         <FAQSection />
       </Reveal>
 
-      {/* 🎯 High-Intent Conversion Protocol */}
+      {/* 🎯 ติดต่อขอรับคำปรึกษา (Consultation CTA) */}
       <Reveal>
         <ContactCTA />
       </Reveal>
