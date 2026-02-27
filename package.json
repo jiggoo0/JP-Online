@@ -5,14 +5,15 @@
   "scripts": {
     "dev:css": "tailwindcss -i ./app/globals.css -o ./public/styles/global.css --watch",
     "build:css": "tailwindcss -i ./app/globals.css -o ./public/styles/global.css --minify",
-    "dev": "pnpm build:css && next dev --webpack",
+    "dev": "pnpm build:css && next dev",
     "build": "pnpm build:css && next build --webpack",
     "start": "next start",
-    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "fix": "pnpm format && pnpm lint --fix",
-    "knip": "knip --cache --no-exit-code"
+    "type-check": "tsc --noEmit",
+    "check": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run build",
+    "unused": "knip",
+    "aipc": "pnpm run check && pnpm run unused"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
