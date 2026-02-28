@@ -15,7 +15,7 @@ export default function Preloader() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 500); // Optimized for PageSpeed (reduced from 2000ms)
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,14 +24,14 @@ export default function Preloader() {
       {isLoading && (
         <motion.div
           exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[10000] flex flex-col items-center justify-center overflow-hidden bg-slate-950"
         >
           {/* Scanning Line */}
           <motion.div
             initial={{ top: "-10%" }}
             animate={{ top: "110%" }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             className="bg-accent/20 absolute left-0 z-10 h-px w-full"
           />
 
@@ -48,7 +48,7 @@ export default function Preloader() {
             <motion.div
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
-              transition={{ duration: 1.8, ease: "easeInOut" }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
               className="bg-accent absolute top-0 left-0 h-full shadow-[0_0_15px_rgba(180,140,40,0.5)]"
             />
           </div>

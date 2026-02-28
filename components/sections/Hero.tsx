@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../shared/Button";
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * @COMPONENT: Hero
@@ -17,11 +18,15 @@ export const Hero = () => {
       aria-label="Welcome Introduction"
       className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-[#FAF9F6] pt-32 pb-32 md:pt-48"
     >
-      {/* 🏛️ Visual Layer: Executive Background */}
+      {/* 🏛️ Visual Layer: Executive Background (Optimized LCP) */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] grayscale transition-all duration-1000"
-          style={{ backgroundImage: 'url("/assets/hero/hero-monolith.webp")' }}
+        <Image
+          src="/assets/hero/hero-monolith.webp"
+          alt="Executive Architecture"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-[0.08] grayscale transition-all duration-1000"
         />
         {/* Subtle Ivory to Light Gold Gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.03)_0%,transparent_70%)]" />

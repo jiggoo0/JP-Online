@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { StrategicIcon, IconType } from "../shared/StrategicIcon";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ServiceCardProps {
   service: Service;
@@ -42,11 +43,14 @@ export const ServiceCard = ({ service, index }: ServiceCardProps) => {
         aria-label={`ดูรายละเอียดบริการ ${service.name}`}
       />
 
-      {/* 🖼️ High-Visibility Background Image */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
-          style={{ backgroundImage: `url("${service.imageUrl}")` }}
+      {/* 🖼️ High-Visibility Background Image (Optimized) */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Image
+          src={service.imageUrl}
+          alt={service.name}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          className="object-cover object-center transition-transform duration-1000 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-slate-950/80 transition-colors duration-500 group-hover:bg-slate-950/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />

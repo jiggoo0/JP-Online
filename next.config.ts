@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  
+
   // 🎯 Modern Routing & Identity
   typedRoutes: true,
 
@@ -65,14 +65,14 @@ const nextConfig: NextConfig = {
       "framer-motion",
       "clsx",
       "tailwind-merge",
-      "@radix-ui/react-slot"
+      "@radix-ui/react-slot",
     ],
     staleTimes: {
       dynamic: 30,
       static: 180,
     },
     // PPR and DynamicIO are managed via Vercel Dashboard or enabled when types are ready
-    // ppr: true, 
+    // ppr: true,
   },
 
   // 🖼️ Image Intelligence
@@ -87,7 +87,7 @@ const nextConfig: NextConfig = {
   },
 
   // 🚀 [HYBRID_ENGINE]: Webpack & Infrastructure Mapping
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     // 1. Termux File System Optimization
     if (dev && !isVercel) {
       config.watchOptions = {
