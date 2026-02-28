@@ -31,4 +31,6 @@ coverage/
 .nyc_output/
 .gemini/
 .geminiignore
+commands/
+skills/
 MISSION.md
