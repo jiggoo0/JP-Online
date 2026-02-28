@@ -3,15 +3,9 @@
 import React from "react";
 import { Service } from "@/config/services";
 import { motion } from "framer-motion";
-import { ArrowRight, Shield, FileText, Briefcase, Globe, LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { StrategicIcon, IconType } from "../shared/StrategicIcon";
 import Link from "next/link";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Shield,
-  FileText,
-  Briefcase,
-  Globe,
-};
 
 interface ServiceCardProps {
   service: Service;
@@ -26,7 +20,7 @@ interface ServiceCardProps {
  * - Optimized image/icon contrast.
  */
 export const ServiceCard = ({ service, index }: ServiceCardProps) => {
-  const IconComponent = ICON_MAP[service.icon] || Shield;
+  const iconType = (service.category as IconType) || "DEFAULT";
 
   return (
     <motion.article
@@ -61,8 +55,8 @@ export const ServiceCard = ({ service, index }: ServiceCardProps) => {
       {/* Header Info: Friendly Icon & Category */}
       <header className="relative z-10 mb-8 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="border-accent/20 bg-accent/10 text-accent group-hover:bg-accent border p-3 backdrop-blur-sm transition-all duration-500 group-hover:text-slate-950">
-            <IconComponent className="h-5 w-5 stroke-[1.5]" aria-hidden="true" />
+          <div className="border-accent/20 bg-accent/10 text-accent group-hover:bg-accent flex h-11 w-11 items-center justify-center border p-2.5 backdrop-blur-sm transition-all duration-500 group-hover:text-slate-950">
+            <StrategicIcon type={iconType} className="h-full w-full" aria-hidden="true" />
           </div>
           <span className="text-accent/60 group-hover:text-accent-light text-[9px] font-black tracking-[0.2em] uppercase">
             {service.category}

@@ -28,11 +28,14 @@ export default function BlogCard({ post, index }: BlogCardProps) {
     >
       <Link
         href={`/blog/${post.slug}`}
+        aria-label={`อ่านบทความ: ${post.title}`}
         className="hover:border-accent/40 hover:shadow-premium flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-500"
       >
         {/* 🖼️ Image Section - Clear and Large */}
         <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100">
           <div
+            role="img"
+            aria-label={post.title}
             className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 group-hover:scale-110"
             style={{ backgroundImage: `url("${imageUrl}")` }}
           />

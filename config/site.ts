@@ -1,38 +1,31 @@
 import { SiteConfig } from "@/types/site";
 
 export const siteConfig: SiteConfig = {
-  name: "JP-Visual&Docs | Strategic Solutions Provider",
+  name: "JP-Visual&Docs | ที่ปรึกษาวางระบบเอกสารและโปรไฟล์การเงิน",
   description:
-    "ผู้เชี่ยวชาญการวางระบบเอกสารเชิงลึก (Deep Insights) และการแก้ปัญหาโปรไฟล์ขั้นสูง สำหรับการเงินและการย้ายถิ่นฐาน (Immigration & Financial Strategy)",
+    "ที่ปรึกษาการวางระบบเอกสารและโปรไฟล์การเงินเชิงลึก แก้ไขเคสยาก วีซ่าไม่ผ่าน กู้ธนาคารไม่ได้ สำหรับอาชีพอิสระและแม่ค้าออนไลน์ ด้วยระบบ Internal Audit Simulation",
   url: "https://www.jpvisouldocs.online",
-  ogImage: "https://www.jpvisouldocs.online/og.jpg",
+  ogImage: "/og/og-main.webp",
   keywords: [
-    "เจ้าป่า",
-    "JP-Visual&Docs",
-    "Aemza",
-    // 🏛️ Authority & Strategy Tier (Google AI/High-End)
-    "วางแผนโปรไฟล์ระดับสูง",
-    "Internal Audit Simulation Logic",
-    "Financial Profile Optimization",
-    "Executive Documentation Strategy",
-    "GDS System Status Injection",
-    "Immigration Architecture Protocol",
-
-    // 🛠️ Solutions Tier (Main Target: Lower/Middle Class)
-    "ขอวีซ่าไม่ผ่านทำยังไง",
-    "รับทำใบรับรองเงินเดือน พ่อค้าแม่ค้า",
-    "สเตทเม้นท์ไม่สวย กู้ไม่ผ่าน",
-    "แก้ปัญหาวีซ่าอาชีพอิสระ",
-    "จองตั๋วเครื่องบินยื่นวีซ่า รหัส PNR",
-    "ทำสเตทเม้นท์ขอวีซ่าเชงเก้น",
-    "เดินบัญชีธนาคารให้กู้ผ่าน",
-    "เอกสารยื่นวีซ่าสำหรับสาวทำงานอิสระ",
-    "ที่ปรึกษาวีซ่าเคสยาก",
+    "เดินสเตทเม้นท์ขอวีซ่า",
+    "รับทำใบรับรองเงินเดือน แม่ค้าออนไลน์",
+    "กู้บ้านอาชีพอิสระ ไม่มีสลิปเงินเดือน",
+    "วีซ่าเชงเก้นไม่ผ่าน แก้เคสยาก",
+    "รับเดินบัญชีธนาคารให้กู้ผ่าน",
+    "จองตั๋วเครื่องบินยื่นวีซ่า รหัส PNR จริง",
+    "ปรึกษาทำสเตทเม้นท์ย้อนหลัง",
+    "แก้ปัญหากู้ซื้อรถไม่ผ่าน",
+    "วางแผนโปรไฟล์การเงินยื่นวีซ่า",
+    "เอกสารยืนยันรายได้ พ่อค้าแม่ค้า",
   ],
   author: {
     name: "เจ้าป่า",
-    title: "Senior Strategic Architect",
     role: "CEO & Founder",
+    social: {
+      twitter: "https://twitter.com/jpvisdocs",
+      facebook: "https://www.facebook.com/share/1CKsbaAQy2/",
+      line: "https://lin.ee/1d0Juko",
+    },
   },
   links: {
     twitter: "https://twitter.com/jpvisdocs",

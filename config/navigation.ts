@@ -62,4 +62,8 @@ export const navigationConfig: NavigationConfig = {
       ],
     },
   ],
+  contactLinks: [
+    { title: "LINE Official", href: "https://lin.ee/1d0Juko" },
+    { title: "Facebook Page", href: "https://www.facebook.com/share/1CKsbaAQy2/" },
+  ],
 };

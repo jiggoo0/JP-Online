@@ -3,20 +3,13 @@ import { Metadata } from "next";
 import { SERVICES, Service } from "@/config/services";
 import { generateServiceMetadata, generateServiceJsonLd } from "@/lib/seo";
 import Section from "@/components/shared/Section";
-import { Shield, ArrowLeft, FileText, Briefcase, Globe, LucideIcon } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import ContactCTA from "@/components/shared/ContactCTA";
 import { ServiceProtocolSidebar } from "@/components/sections/ServiceProtocolSidebar";
 import { getPostBySlug, getAllPosts, ServiceFrontmatter } from "@/lib/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { MDXComponents } from "@/components/blog/MDXComponents";
 import Link from "next/link";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Shield,
-  FileText,
-  Briefcase,
-  Globe,
-};
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -92,7 +85,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
   };
 
   const jsonLd = generateServiceJsonLd(service);
-  const IconComponent = ICON_MAP[service.icon] || Shield;
 
   const components = {
     ...MDXComponents,
@@ -164,7 +156,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 category={service.category}
                 timeline={service.timeline}
                 feeEstimate={service.feeEstimate}
-                icon={IconComponent}
               />
             </aside>
 

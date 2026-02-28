@@ -1,12 +1,11 @@
 import React from "react";
-import { LucideIcon, Shield } from "lucide-react";
+import { StrategicIcon, IconType } from "../shared/StrategicIcon";
 
 interface ServiceProtocolSidebarProps {
   id: string;
   category?: string;
   timeline: string;
   feeEstimate: string;
-  icon?: LucideIcon;
   authority?: string;
   securityLevel?: string;
 }
@@ -17,17 +16,25 @@ interface ServiceProtocolSidebarProps {
  */
 export const ServiceProtocolSidebar = ({
   id,
+  category,
   timeline,
   feeEstimate,
-  icon: Icon = Shield,
   authority = "เจ้าป่า / Secure-Tier 1",
   securityLevel = "VERIFIED ARCHIVE",
 }: ServiceProtocolSidebarProps) => {
+  const iconType = (category as IconType) || "DEFAULT";
+
   return (
     <div className="sticky top-32 space-y-12">
       <div>
         <h2 className="mb-6 flex items-center gap-4 text-2xl font-bold tracking-wider text-white uppercase">
-          <Icon className="text-accent h-8 w-8" aria-hidden="true" />
+          <div className="border-accent/20 bg-accent/5 h-10 w-10 shrink-0 border p-2 transition-all duration-700">
+            <StrategicIcon
+              type={iconType}
+              className="text-accent h-full w-full"
+              aria-hidden="true"
+            />
+          </div>
           Intelligence <br /> Protocols
         </h2>
         <div className="bg-accent mb-8 h-1 w-20" aria-hidden="true" />

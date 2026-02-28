@@ -19,14 +19,15 @@ export function generateOrganizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    logo: `${siteConfig.url}/assets/logo-strategic.svg`,
     description: siteConfig.description,
     founder: {
       "@type": "Person",
       name: "เจ้าป่า",
       jobTitle: "Senior Strategic Architect",
       description: "ผู้เชี่ยวชาญด้านการวางโครงสร้างโปรไฟล์และระบบเอกสารเชิงลึกระดับสากล",
-      image: `${siteConfig.url}/assets/ceo-avatar.webp`,
+      image: `${siteConfig.url}/assets/services/srv-identity-map.webp`,
+      sameAs: siteConfig.author.social,
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -93,7 +94,7 @@ export function generateServiceJsonLd(service: Service) {
           url: siteConfig.url,
           logo: {
             "@type": "ImageObject",
-            url: `${siteConfig.url}/logo.png`,
+            url: `${siteConfig.url}/assets/logo-strategic.svg`,
           },
         },
         areaServed: "Global",
@@ -171,7 +172,7 @@ export function generateArticleJsonLd(article: {
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/logo.png`,
+        url: `${siteConfig.url}/assets/logo-strategic.svg`,
       },
     },
     mainEntityOfPage: {

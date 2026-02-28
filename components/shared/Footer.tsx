@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import Logo from "@/components/shared/Logo";
 import { ArrowUpRight, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 import { navigationConfig } from "@/config/navigation";
@@ -16,13 +17,13 @@ export const Footer = () => {
   return (
     <footer
       id="footer-protocol"
-      className="relative overflow-hidden border-t border-slate-200 bg-[#0F172A] pt-32 pb-16"
+      className="bg-background relative overflow-hidden border-t border-slate-200 pt-32 pb-16"
     >
       <div className="relative z-10 container mx-auto px-6">
         <div className="mb-24 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
           <section className="lg:col-span-1">
-            <Logo className="mb-10" light={true} />
-            <p className="mb-10 max-w-sm text-sm leading-relaxed font-medium tracking-wide text-slate-400">
+            <Logo className="mb-10 scale-110" light={false} />
+            <p className="mb-10 max-w-sm text-sm leading-relaxed font-light tracking-widest text-slate-500 uppercase">
               เรามอบโซลูชันเชิงกลยุทธ์ (Strategic Solutions) ผ่านการให้คำปรึกษา
               และการจัดเตรียมเอกสารระดับสากล เพื่อความสำเร็จในเคสที่สำคัญที่สุดของคุณ
             </p>
@@ -40,7 +41,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="hover:border-accent hover:text-accent rounded-full border border-slate-800 p-3 text-slate-500 transition-all"
+                  className="hover:border-accent hover:text-accent rounded-sm border border-slate-200 p-3 text-slate-400 transition-all hover:scale-110"
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -56,21 +57,21 @@ export const Footer = () => {
             >
               <h4
                 id={`footer-${navGroup.title.toLowerCase().replace(/\s/g, "-")}`}
-                className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-white uppercase"
+                className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.5em] text-slate-950 uppercase"
               >
                 <div className="bg-accent h-px w-6" aria-hidden="true" />
                 {navGroup.title}
               </h4>
-              <ul className="flex list-none flex-col gap-5 text-[10px] font-bold tracking-[0.15em] text-slate-400 uppercase">
+              <ul className="flex list-none flex-col gap-6 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
                 {navGroup.items.map((item) => (
                   <li key={item.title}>
                     <Link
-                      href={item.href}
-                      className="group flex items-center transition-all hover:text-white"
+                      href={item.href as Route}
+                      className="group hover:text-accent flex items-center transition-all"
                     >
                       {item.title}
                       <ArrowUpRight
-                        className="text-accent ml-2 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100"
+                        className="text-accent ml-2 h-3 w-3 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
                         aria-hidden="true"
                       />
                     </Link>
@@ -83,21 +84,21 @@ export const Footer = () => {
           <section aria-labelledby="footer-concierge">
             <h4
               id="footer-concierge"
-              className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-white uppercase"
+              className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.5em] text-slate-950 uppercase"
             >
               <div className="bg-accent h-px w-6" aria-hidden="true" />
-              Strategic Concierge
+              Strategic Center
             </h4>
-            <ul className="flex list-none flex-col gap-8">
+            <ul className="flex list-none flex-col gap-10">
               <li className="flex flex-col gap-2">
                 <a
                   href={`mailto:${siteConfig.links.email}`}
                   className="group flex flex-col gap-1 outline-none"
                 >
-                  <div className="text-accent text-[9px] font-black tracking-widest uppercase opacity-60">
-                    Official Email
+                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80 transition-opacity group-hover:opacity-100">
+                    Official Support
                   </div>
-                  <span className="text-sm font-bold text-slate-300 transition-colors group-hover:text-white">
+                  <span className="text-sm font-light tracking-widest text-slate-500 transition-colors group-hover:text-slate-950">
                     {siteConfig.links.email}
                   </span>
                 </a>
@@ -109,46 +110,41 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   className="group flex flex-col gap-1 outline-none"
                 >
-                  <div className="text-accent text-[9px] font-black tracking-widest uppercase opacity-60">
-                    LINE Official
+                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80 transition-opacity group-hover:opacity-100">
+                    LINE Official Hub
                   </div>
-                  <span className="text-sm font-bold text-[#06C755] transition-colors group-hover:text-white">
+                  <span className="text-sm font-black tracking-widest text-[#06C755] transition-colors group-hover:text-slate-950">
                     {siteConfig.links.lineId}
                   </span>
                 </a>
               </li>
               <li className="flex flex-col gap-2">
-                <a
-                  href={`tel:${siteConfig.links.phone.replace(/-/g, "")}`}
-                  className="group flex flex-col gap-1 outline-none"
-                >
-                  <div className="text-accent text-[9px] font-black tracking-widest uppercase opacity-60">
-                    Phone Consultation
-                  </div>
-                  <span className="text-sm font-bold text-slate-300 transition-colors group-hover:text-white">
-                    {siteConfig.links.phone}
-                  </span>
-                </a>
+                <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80">
+                  Global Contact
+                </div>
+                <span className="text-sm font-light tracking-widest text-slate-500">
+                  {siteConfig.links.phone}
+                </span>
               </li>
             </ul>
           </section>
         </div>
 
-        <div className="flex flex-col items-center justify-between border-t border-slate-800 pt-16 text-[9px] font-bold tracking-widest text-slate-500 uppercase md:flex-row">
-          <div className="flex flex-col gap-2">
-            <p>© 2026 JP-VISUAL&DOCS. PROFESSIONAL ADVISORY SECURED.</p>
+        <div className="mt-20 flex flex-col items-center justify-between border-t border-slate-200 pt-12 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase md:flex-row">
+          <div className="flex flex-col gap-4 text-center md:text-left">
+            <p>© 2026 JP-VISUAL & DOCS. ELITE PROTOCOL SECURED.</p>
             <a
               href="https://www.aemdevweb.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-accent transition-colors"
             >
-              System Developed by www.aemdevweb.com
+              Architecture by www.aemdevweb.com
             </a>
           </div>
-          <div className="mt-8 flex items-center gap-12 md:mt-0">
-            <button className="transition-colors hover:text-white">Terms of Service</button>
-            <button className="transition-colors hover:text-white">Privacy Policy</button>
+          <div className="mt-12 flex items-center gap-12 md:mt-0">
+            <button className="transition-colors hover:text-slate-950">LEGAL</button>
+            <button className="transition-colors hover:text-slate-950">PRIVACY</button>
           </div>
         </div>
       </div>

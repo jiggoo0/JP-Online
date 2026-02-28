@@ -1,11 +1,9 @@
 /**
- * @DESCRIPTION: PostCSS Config - Industrial Precision
- * We use Tailwind 4 CLI for pre-compilation to public/styles/global.css
- * to bypass Webpack's CSS parser limitations.
+ * @DESCRIPTION: PostCSS Config - AEMZA Native Strategy
+ * Using Tailwind 4 Native PostCSS Plugin for seamless integration with Next.js 16.
  */
 module.exports = {
   plugins: {
-    // Tailwind is handled via CLI as per GEMINI.md Public Static Strategy
-    autoprefixer: {},
+    "@tailwindcss/postcss": {},
   },
 };

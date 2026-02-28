@@ -11,7 +11,7 @@ import CustomCursor from "@/components/shared/CustomCursor";
 import Preloader from "@/components/shared/Preloader";
 import { siteConfig, generateOrganizationJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-// import "./globals.css"; // ❌ Bypassing Webpack CSS Parser as per Strategic Skill
+import "./globals.css";
 
 /* Font Architecture */
 const fontSans = Inter({
@@ -51,6 +51,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
+  alternates: {
+    canonical: siteConfig.url,
+  },
   robots: {
     index: true,
     follow: true,
@@ -79,8 +82,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel="stylesheet" href="/styles/global.css" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

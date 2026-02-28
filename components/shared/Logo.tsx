@@ -27,7 +27,7 @@ export default function Logo({ className, iconOnly = false, light = false }: Log
 
   return (
     <div className={cn("group flex items-center gap-4 select-none", className)}>
-      {/* 🏛️ Elite Symbol: The Balanced "JP" Monogram */}
+      {/* 🏛️ Elite Symbol: The Architectural "JP" Monogram */}
       <div className="relative h-10 w-10 flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105">
         <svg
           viewBox="0 0 100 100"
@@ -35,34 +35,53 @@ export default function Logo({ className, iconOnly = false, light = false }: Log
           xmlns="http://www.w3.org/2000/svg"
           className="h-full w-full"
         >
-          {/* Circular Frame - Subtle authority boundary */}
-          <circle
-            cx="50"
-            cy="50"
-            r="48"
+          {/* Square Frame - Structural integrity boundary */}
+          <rect
+            x="5"
+            y="5"
+            width="90"
+            height="90"
             stroke={primaryColor}
             strokeWidth="1"
             strokeOpacity="0.1"
+            className="group-hover:stroke-opacity-30 transition-all duration-700"
           />
 
-          {/* The "J" Component (Foundation) */}
+          {/* The "Spine" (Authority) */}
           <path
-            d="M35 30V60C35 71.0457 43.9543 80 55 80H60"
-            stroke={accentColor}
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="transition-all duration-500"
-          />
-
-          {/* The "P" Component (Vision) */}
-          <path
-            d="M45 20V70M45 20H65C73.2843 20 80 26.7157 80 35C80 43.2843 73.2843 50 65 50H45"
+            d="M35 25V75"
             stroke={primaryColor}
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeWidth="6"
+            strokeLinecap="square"
             className="transition-all duration-500"
+          />
+
+          {/* The "Bridge" (Vision/P Logic) */}
+          <path
+            d="M35 25H70V48H35"
+            stroke={primaryColor}
+            strokeWidth="6"
+            strokeLinejoin="miter"
+            className="transition-all duration-500"
+          />
+
+          {/* The "Anchor" (Support/J Logic - Gold) */}
+          <path
+            d="M35 75H20"
+            stroke={accentColor}
+            strokeWidth="6"
+            strokeLinecap="square"
+            className="transition-all duration-500 group-hover:translate-x-1"
+          />
+
+          {/* The Precision Point (The "Bit" of Data) */}
+          <rect
+            x="70"
+            y="25"
+            width="6"
+            height="6"
+            fill={accentColor}
+            className="transition-all duration-700 group-hover:scale-110"
           />
         </svg>
       </div>
@@ -80,10 +99,10 @@ export default function Logo({ className, iconOnly = false, light = false }: Log
           <span
             className={cn(
               "text-[9px] font-bold tracking-[0.5em] uppercase opacity-60",
-              light ? "text-slate-300" : "text-slate-500",
+              light ? "text-slate-300" : "text-slate-400",
             )}
           >
-            & Strategic Docs
+            & STRATEGIC DOCS
           </span>
         </div>
       )}

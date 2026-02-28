@@ -3,19 +3,20 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { UserCheck, Globe, ShieldAlert, Cpu } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
+import { StrategicIcon, IconType } from "../shared/StrategicIcon";
 
 const IDENTITY_NODES = [
   {
     id: "financial",
-    icon: Cpu,
+    icon: "FINANCIAL" as IconType,
     label: "จัดโครงสร้างเดินบัญชี",
     status: "AUDIT-READY",
     details: "ออกแบบแผนการเงินและยอดหมุนเวียนให้สอดคล้องกับตรรกะการตรวจของ AI ธนาคารและสถานทูต",
   },
   {
     id: "immigration",
-    icon: Globe,
+    icon: "IMMIGRATION" as IconType,
     label: "ลงระบบเดินทางจริง",
     status: "VERIFIED",
     details:
@@ -23,7 +24,7 @@ const IDENTITY_NODES = [
   },
   {
     id: "legal",
-    icon: UserCheck,
+    icon: "DOCUMENTATION" as IconType,
     label: "จัดเตรียมโปรไฟล์เชิงกลยุทธ์",
     status: "ALIGNED",
     details:
@@ -31,7 +32,7 @@ const IDENTITY_NODES = [
   },
   {
     id: "recovery",
-    icon: ShieldAlert,
+    icon: "SYSTEMS" as IconType,
     label: "กู้คืนเคสถูกปฏิเสธ",
     status: "RE-SYNCED",
     details:
@@ -73,7 +74,6 @@ export const IdentityMap: React.FC<{ className?: string }> = ({ className }) => 
       {/* Nodes Grid: Business Integrity Blocks */}
       <div className="relative z-20 grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {IDENTITY_NODES.map((node, index) => {
-          const Icon = node.icon;
           const isActive = activeNode === index;
 
           return (
@@ -96,7 +96,7 @@ export const IdentityMap: React.FC<{ className?: string }> = ({ className }) => 
                       : "border-slate-800 text-slate-700 group-hover:border-slate-600 group-hover:text-slate-500",
                   )}
                 >
-                  <Icon size={28} strokeWidth={1.5} />
+                  <StrategicIcon type={node.icon} className="h-full w-full p-2.5" />
                 </div>
 
                 <div className="space-y-2">

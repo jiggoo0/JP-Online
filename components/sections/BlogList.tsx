@@ -18,31 +18,35 @@ export default async function BlogList() {
   const posts = await getAllPosts<BlogFrontmatter>("blog");
 
   return (
-    <Section id="insights" className="border-t border-slate-900 bg-slate-950 py-32">
+    <Section id="insights" className="bg-background border-t border-slate-200 py-32 md:py-48">
       <div className="container mx-auto px-6">
         {/* Header Segment */}
-        <div className="mb-24 max-w-2xl">
-          <div className="mb-8 flex items-center gap-4">
-            <div className="bg-accent/50 h-px w-12" />
-            <span className="text-accent text-[10px] font-black tracking-[0.5em] uppercase">
-              Helpful Resources
-            </span>
+        <div className="mb-32">
+          <div className="flex flex-col justify-between gap-12 md:flex-row md:items-end">
+            <div className="max-w-2xl">
+              <div className="mb-10 flex items-center gap-4">
+                <div className="bg-accent h-px w-16" />
+                <span className="label-mono text-[11px] tracking-[0.4em] text-slate-500 uppercase">
+                  Strategic Insights Hub
+                </span>
+              </div>
+              <h2 className="text-5xl font-black tracking-tighter text-slate-950 uppercase md:text-8xl">
+                Intelligence <br />
+                <span className="text-accent text-6xl font-light tracking-normal lowercase italic md:text-8xl">
+                  Resources
+                </span>
+              </h2>
+            </div>
+
+            <p className="max-w-xs text-sm leading-relaxed tracking-wide text-slate-500">
+              รวมบทความและคำแนะนำเชิงลึก
+              เพื่อช่วยให้คุณเข้าใจการจัดโครงสร้างเอกสารและโปรไฟล์รายได้อย่างมืออาชีพ
+            </p>
           </div>
-          <h2 className="text-4xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-7xl">
-            ความรู้{" "}
-            <span className="from-accent-light to-accent bg-gradient-to-r bg-clip-text font-light text-transparent italic">
-              &
-            </span>{" "}
-            เทคนิคดีๆ
-          </h2>
-          <p className="mt-8 max-w-md text-sm leading-loose font-medium tracking-wide text-slate-400">
-            รวมบทความและคำแนะนำที่เป็นประโยชน์
-            เพื่อช่วยให้คุณเข้าใจการเตรียมตัวและแก้ปัญหาเอกสารได้อย่างถูกต้อง
-          </p>
         </div>
 
         {/* Execution Layer: Grid Assembly */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
           {posts.map((post, index) => (
             <BlogCard key={post.slug} index={index} post={post} />
           ))}
@@ -52,12 +56,12 @@ export default async function BlogList() {
         <div className="mt-32 flex justify-center">
           <Link
             href="/blog"
-            className="group hover:border-accent/50 flex items-center gap-10 border-b border-slate-900 px-4 py-5 transition-all duration-700 active:scale-95"
+            className="group hover:border-accent/50 flex items-center gap-10 border-b border-slate-200 px-4 py-5 transition-all duration-700 active:scale-95"
           >
             <span className="group-hover:text-accent text-[10px] font-black tracking-[0.6em] text-slate-500 uppercase">
               Explore All Insights
             </span>
-            <div className="group-hover:bg-accent h-px w-16 bg-slate-800 transition-all duration-700 group-hover:w-32" />
+            <div className="group-hover:bg-accent h-px w-16 bg-slate-200 transition-all duration-700 group-hover:w-32" />
           </Link>
         </div>
       </div>

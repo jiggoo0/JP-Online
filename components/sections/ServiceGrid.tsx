@@ -18,7 +18,7 @@ export const ServiceGrid = ({ limit }: ServiceGridProps) => {
   const servicesToShow = limit ? filteredServices.slice(0, limit) : filteredServices;
 
   return (
-    <Section id="services" className="relative overflow-hidden">
+    <Section id="services" className="bg-background relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(180,140,40,0.03)_0%,transparent_50%)]" />
 
@@ -36,14 +36,14 @@ export const ServiceGrid = ({ limit }: ServiceGridProps) => {
               Visual & Documentation expertise
             </span>
           </div>
-          <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-white uppercase md:text-7xl">
+          <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-slate-950 uppercase md:text-7xl">
             CORE{" "}
             <span className="from-accent-light to-accent bg-gradient-to-r bg-clip-text font-light text-transparent italic">
               &
             </span>
             SOLUTIONS
           </h2>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed font-medium text-slate-300">
+          <p className="mt-8 max-w-2xl text-base leading-relaxed font-medium text-slate-600">
             เราไม่ได้มีแค่บริการ... แต่เรามี "ระบบ"
             ที่ถูกออกแบบมาเพื่อแก้ปัญหาที่ซับซ้อนที่สุดโดยเฉพาะ
           </p>

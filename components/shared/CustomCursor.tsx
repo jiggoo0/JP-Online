@@ -34,8 +34,8 @@ export default function CustomCursor() {
       setIsHovered(!!isInteractive);
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleHover);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mouseover", handleHover, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
@@ -45,14 +45,14 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="pointer-events-none fixed top-0 left-0 z-[9999] hidden h-8 w-8 rounded-full border border-amber-500 mix-blend-difference md:block"
+      className="border-accent pointer-events-none fixed top-0 left-0 z-[9999] hidden h-8 w-8 rounded-full border mix-blend-difference md:block"
       style={{
         translateX: cursorXSpring,
         translateY: cursorYSpring,
       }}
       animate={{
         scale: isHovered ? 2.5 : 1,
-        backgroundColor: isHovered ? "rgba(245, 158, 11, 0.1)" : "transparent",
+        backgroundColor: isHovered ? "rgba(180, 140, 40, 0.15)" : "transparent",
       }}
     />
   );

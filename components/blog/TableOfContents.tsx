@@ -62,7 +62,7 @@ export default function TableOfContents() {
   return (
     <nav className="sticky top-40 -ml-72 hidden h-fit w-64 border-r border-slate-900 pr-8 xl:block">
       <div className="mb-8 flex items-center gap-3">
-        <div className="h-4 w-1 bg-amber-500" />
+        <div className="bg-accent h-4 w-1" />
         <span className="text-[10px] font-black tracking-[0.4em] text-white uppercase">
           Report Structure
         </span>
@@ -74,8 +74,8 @@ export default function TableOfContents() {
             <a
               href={`#${heading.id}`}
               className={cn(
-                "block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:text-amber-500",
-                activeId === heading.id ? "translate-x-2 text-amber-500" : "text-slate-600",
+                "hover:text-accent block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300",
+                activeId === heading.id ? "text-accent translate-x-2" : "text-slate-600",
               )}
             >
               {heading.text}

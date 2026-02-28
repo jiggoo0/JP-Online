@@ -21,51 +21,66 @@ interface ContactCTAProps {
  * @STYLE: High-Tier Engagement / Strategic Protocol Activation
  */
 export default function ContactCTA({
-  title = "ทักมาคุยกับเราได้เลยครับ",
-  description = "ไม่ว่าคุณจะมีปัญหาเรื่องการเดินบัญชี เอกสารยื่นกู้ หรือวีซ่าไม่ผ่าน เรายินดีให้คำปรึกษาเบื้องต้นฟรี เพื่อหาทางออกที่ดีที่สุดสำหรับเคสของคุณโดยเฉพาะ",
+  description = "ไม่ว่าคุณจะมีปัญหาเรื่องการเดินบัญชี เอกสารยื่นกู้ หรือวีซ่าไม่ผ่าน เรายินดีให้คำปรึกษาเบื้องต้นเพื่อหาทางออกที่ดีที่สุดสำหรับเคสของคุณโดยเฉพาะ",
   serviceId,
 }: ContactCTAProps) {
   return (
-    <Section id="contact" className="border-t border-white/5 bg-slate-950/40 py-24 md:py-32">
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+    <Section
+      id="contact"
+      className="bg-background relative overflow-hidden border-t border-slate-200 py-32 md:py-48"
+    >
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 z-0 opacity-[0.05]" aria-hidden="true">
+        <div className="h-full w-full bg-[linear-gradient(to_right,#020617_1px,transparent_1px),linear-gradient(to_bottom,#020617_1px,transparent_1px)] bg-[size:40px_40px]" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+          transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
           viewport={{ once: true }}
         >
-          <div className="border-accent/20 bg-accent/5 mb-10 inline-flex items-center gap-3 border px-6 py-2">
-            <MessageCircle className="text-accent h-4 w-4" />
-            <span className="text-accent text-[10px] font-bold tracking-[0.2em] uppercase">
-              {serviceId ? `สนใจบริการ: ${serviceId}` : "ยินดีให้คำปรึกษาฟรี"}
+          <div className="border-accent/20 bg-accent/5 mb-14 inline-flex items-center gap-4 border px-8 py-3 backdrop-blur-sm">
+            <div className="bg-accent h-2 w-2 animate-pulse" />
+            <span className="label-mono text-accent text-[10px] font-bold tracking-[0.4em] uppercase">
+              {serviceId ? `PROTOCOL: ${serviceId}` : "Protocol: Strategic Intake"}
             </span>
           </div>
 
-          <h2 className="mb-10 text-4xl font-black tracking-tight text-white uppercase md:text-7xl">
-            {title}
+          <h2 className="mb-12 text-5xl font-black tracking-tight text-slate-950 uppercase md:text-8xl">
+            Secure Your <br />
+            <span className="text-accent font-light tracking-normal lowercase italic">
+              Future
+            </span>{" "}
+            Now
           </h2>
 
-          <p className="mx-auto mb-16 max-w-2xl text-base leading-loose text-slate-400 md:text-lg">
+          <p className="mx-auto mb-20 max-w-2xl text-base leading-loose tracking-wide text-slate-600 md:text-xl">
             {description}
           </p>
 
-          <div className="mx-auto max-w-md">
+          <div className="mx-auto flex max-w-lg flex-col items-center gap-8">
             <a
               href={siteConfig.links.line}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex items-center justify-between overflow-hidden bg-[#06C755] px-10 py-6 text-sm font-black tracking-[0.2em] text-white uppercase transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(6,199,85,0.4)]"
+              className="group hover:bg-accent hover:border-accent relative flex w-full items-center justify-between border border-slate-950 bg-slate-950 px-10 py-8 text-sm font-black tracking-[0.3em] text-white uppercase transition-all"
             >
-              <div className="relative z-10 flex items-center gap-4">
+              <div className="relative z-10 flex items-center gap-5">
                 <MessageCircle className="h-6 w-6" />
-                <span>ปรึกษาผ่าน LINE คลิกเลย</span>
+                <span>Activate Priority Channel</span>
               </div>
-              <ArrowRight className="relative z-10 h-5 w-5 transition-transform duration-500 group-hover:translate-x-2" />
-              <div className="absolute inset-0 z-0 translate-x-[-100%] bg-white/10 transition-transform duration-500 group-hover:translate-x-0" />
+              <ArrowRight className="relative z-10 h-6 w-6 transition-transform duration-500 group-hover:translate-x-3" />
             </a>
-            <span className="mt-8 block text-[9px] font-bold tracking-[0.3em] text-slate-600 uppercase">
-              ดูแลเคสโดยทีมงานมืออาชีพ // ตอบไว ใส่ใจทุกรายละเอียด
-            </span>
+
+            <div className="flex items-center gap-6 opacity-40">
+              <div className="h-px w-12 bg-slate-400" />
+              <span className="text-[9px] font-bold tracking-[0.4em] text-slate-500 uppercase">
+                End-to-End Encryption Secured
+              </span>
+              <div className="h-px w-12 bg-slate-400" />
+            </div>
           </div>
         </motion.div>
       </div>

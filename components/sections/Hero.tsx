@@ -39,28 +39,29 @@ export const Hero = () => {
           <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-2 shadow-sm">
             <div className="bg-accent h-2 w-2 rounded-full" />
             <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
-              ยินดีให้คำปรึกษาปัญหาเรื่องเอกสารและการเงิน
+              STRATEGIC PROFILE ARCHITECTURE // ELITE IVORY
             </span>
           </div>
 
           {/* H1: Authority in Midnight Navy */}
           <h1 className="mb-10 max-w-5xl text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.95] font-black tracking-tighter text-slate-950 uppercase">
-            JP-VISUAL
+            ARCHITECTING
             <br />
             <span className="via-accent bg-gradient-to-r from-slate-900 to-slate-900 bg-clip-text text-transparent italic">
-              &DOCS
+              SUCCESS
             </span>
           </h1>
 
           <p className="mx-auto mb-16 max-w-2xl text-base leading-[1.8] font-medium tracking-wide text-slate-600 md:text-xl">
-            ช่วยวางแผนจัดระเบียบ{" "}
-            <span className="border-accent/30 border-b-2 font-bold text-slate-950">สเตทเม้นท์</span>{" "}
+            เรายกระดับความเชื่อมั่นทางการเงินผ่านการวางโครงสร้าง{" "}
+            <span className="border-accent/30 border-b-2 font-bold text-slate-950">
+              โปรไฟล์เชิงกลยุทธ์
+            </span>{" "}
             และ{" "}
             <span className="border-accent/30 border-b-2 font-bold text-slate-950">
-              โปรไฟล์รายได้
+              ระบบเอกสารมาตรฐานสากล
             </span>{" "}
-            ให้มีความน่าเชื่อถือ แก้ปัญหาเอกสารไม่พร้อม เคสกู้ยาก หรือยื่นวีซ่าไม่ผ่าน
-            ด้วยประสบการณ์ตรงจากทีมที่ปรึกษามืออาชีพ
+            เปลี่ยนข้อจำกัดด้านอาชีพให้กลายเป็นตรรกะที่ทรงพลัง พร้อมสำหรับการตรวจสอบระดับ Elite
           </p>
 
           <nav
@@ -72,7 +73,7 @@ export const Hero = () => {
                 variant="primary"
                 className="shadow-premium hover:bg-accent bg-slate-950 px-10 py-4 text-xs font-black tracking-widest text-white transition-colors duration-500"
               >
-                เริ่มปรึกษาฟรีตอนนี้
+                เริ่มวางแผนโปรไฟล์วันนี้
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -81,7 +82,7 @@ export const Hero = () => {
                 variant="secondary"
                 className="border-slate-200 bg-white px-10 py-4 text-xs font-black tracking-widest text-slate-950 transition-colors duration-500 hover:bg-slate-50"
               >
-                ดูบริการทั้งหมด
+                ดูพอร์ตโฟลิโอตรรกะ
               </Button>
             </Link>
           </nav>
@@ -90,25 +91,25 @@ export const Hero = () => {
           <div className="mt-24 flex items-center gap-12 border-t border-slate-200 pt-16 opacity-70">
             <div className="flex flex-col items-center">
               <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Fast
+                Elite
               </span>
               <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
-                Execution
+                Integrity
               </span>
             </div>
             <div className="h-8 w-px bg-slate-200" />
             <div className="flex flex-col items-center">
               <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Ready
+                Global
               </span>
               <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
-                For Audit
+                Compliance
               </span>
             </div>
             <div className="h-8 w-px bg-slate-200" />
             <div className="flex flex-col items-center">
               <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Clear
+                Structural
               </span>
               <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
                 Logic

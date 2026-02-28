@@ -8,4 +8,5 @@ export interface FooterNavGroup {
 export interface NavigationConfig {
   mainNav: NavItem[];
   footerNav: FooterNavGroup[];
+  contactLinks: NavItem[];
 }

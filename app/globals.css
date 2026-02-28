@@ -38,14 +38,17 @@
   --radius-card: 1.25rem;
   --radius-pill: 9999px;
 
-  /* --- Effects & Shadows --- */
-  --shadow-premium: 0 10px 40px -10px rgba(15, 23, 42, 0.1);
-  --shadow-gold: 0 4px 20px rgba(180, 140, 40, 0.15);
+  /* --- Effects & Shadows (Advanced Depth) --- */
+  --shadow-premium: 0 10px 40px -10px rgba(15, 23, 42, 0.1), 0 0 1px rgba(15, 23, 42, 0.05);
+  --shadow-gold: 0 4px 20px rgba(180, 140, 40, 0.15), 0 0 30px rgba(180, 140, 40, 0.05);
+  --shadow-inner-vault: inset 0 2px 4px 0 rgba(15, 23, 42, 0.05);
 
-  /* --- Animation Orchestration --- */
+  /* --- Animation Orchestration (Executive Precision) --- */
   --ease-executive: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-vault: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-base: 300ms;
-  --duration-slow: 500ms;
+  --duration-slow: 600ms;
+  --duration-fast: 150ms;
 }
 
 /**
@@ -61,32 +64,37 @@
   body {
     @apply bg-background min-h-screen overflow-x-hidden font-sans text-slate-900;
     margin: 0;
-    line-height: 1.8;
-    letter-spacing: -0.01em;
+    line-height: 1.6;
+    letter-spacing: -0.015em;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
   }
 
-  /* Typography - Precise Authority */
+  /* Typography - Precise Authority & Executive Weight */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-bold tracking-tight text-slate-950;
+    @apply font-black tracking-tight text-slate-950 uppercase;
   }
 
   h1 {
-    @apply text-[clamp(2.5rem,8vw,5rem)] leading-[1.1];
+    @apply text-[clamp(2.5rem,10vw,6rem)] leading-[0.9] tracking-tighter;
   }
   h2 {
-    @apply text-[clamp(2rem,6vw,3.5rem)] leading-tight;
+    @apply text-[clamp(2rem,6vw,4rem)] leading-[1.1] tracking-tight;
   }
   h3 {
-    @apply text-[clamp(1.5rem,4vw,2.25rem)] leading-snug;
+    @apply text-[clamp(1.5rem,4vw,2.5rem)] leading-snug tracking-normal;
+  }
+
+  p {
+    @apply leading-relaxed font-light tracking-wide text-slate-600;
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    background-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
     color: var(--color-slate-950);
   }
 }
@@ -150,13 +158,30 @@
   }
 
   .executive-gradient {
-    @apply bg-gradient-to-br from-slate-950 to-slate-800 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 bg-clip-text text-transparent;
   }
 
   .glass-ivory {
-    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
-    @apply border-b backdrop-blur-md;
+    background-color: color-mix(in srgb, var(--color-surface) 90%, transparent);
+    @apply border-b backdrop-blur-xl transition-all;
+    border-color: var(--color-slate-100);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  }
+
+  .vault-card {
+    @apply bg-surface relative overflow-hidden rounded-sm border transition-all;
     border-color: var(--color-slate-200);
+    box-shadow: var(--shadow-inner-vault);
+  }
+
+  .vault-card:hover {
+    @apply -translate-y-1 shadow-2xl;
+    border-color: var(--color-accent-dim);
+  }
+
+  .executive-border {
+    @apply hover:border-accent/40 border border-slate-200/50 p-6 transition-all;
+    box-shadow: var(--shadow-premium);
   }
 }
 

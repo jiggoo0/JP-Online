@@ -13,28 +13,37 @@ import { CaseStudyFrontmatter } from "@/lib/mdx";
  */
 export default function CaseStudyPreview({ cases }: { cases: CaseStudyFrontmatter[] }) {
   return (
-    <Section id="portfolio" className="border-b border-slate-900 bg-slate-950/20">
-      <div className="mb-24 flex flex-col items-end justify-between gap-12 md:flex-row">
-        <div className="max-w-2xl">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="accent-line" />
-            <span className="label-mono text-slate-500">Operational Case Archives</span>
+    <Section id="portfolio" className="bg-background border-b border-slate-200 py-32 md:py-48">
+      <div className="mb-32">
+        <div className="flex flex-col justify-between gap-12 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <div className="mb-10 flex items-center gap-4">
+              <div className="bg-accent h-px w-16" />
+              <span className="label-mono text-[11px] tracking-[0.4em] text-slate-400 uppercase">
+                Operational Case Archives
+              </span>
+            </div>
+            <h2 className="text-5xl font-black tracking-tighter text-slate-950 uppercase md:text-8xl">
+              Success <br />
+              <span className="text-accent font-light tracking-normal lowercase italic">
+                Protocols
+              </span>
+            </h2>
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-white uppercase md:text-6xl">
-            Success <br />
-            <span className="text-accent">Protocols</span>
-          </h2>
+
+          <Link
+            href="/case-studies"
+            className="group hover:border-accent inline-flex items-center gap-10 border-b border-slate-200 pb-4 transition-all"
+          >
+            <span className="label-mono text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase transition-colors group-hover:text-slate-950">
+              Access Full Archives
+            </span>
+            <ArrowUpRight className="text-accent h-5 w-5 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2" />
+          </Link>
         </div>
-        <Link
-          href="/case-studies"
-          className="group label-mono flex items-center gap-2 text-slate-500 transition-all hover:text-white"
-        >
-          VIEW FULL ARCHIVES
-          <ArrowUpRight className="text-accent h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-20">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-24">
         {cases.map((item, index) => (
           <motion.div
             key={item.slug}
@@ -46,32 +55,32 @@ export default function CaseStudyPreview({ cases }: { cases: CaseStudyFrontmatte
           >
             <Link href={`/case-studies/${item.slug}`} className="absolute inset-0 z-20" />
 
-            <div className="hover:border-accent/50 relative mb-10 aspect-[16/9] overflow-hidden border border-slate-800 bg-slate-950/60 transition-all duration-700 group-hover:bg-slate-900">
+            <div className="hover:border-accent/50 relative mb-10 aspect-[16/9] overflow-hidden border border-slate-200 bg-white shadow-sm transition-all duration-700 group-hover:shadow-xl">
               <div
-                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                 style={{
                   backgroundImage: `url("${item.image || "/assets/case-studies/case-preview-vault.webp"}")`,
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(30,41,59,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,41,59,0.3)_1px,transparent_1px)] bg-[size:30px_30px] opacity-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.05)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
 
               <div className="absolute top-8 left-8 z-10 flex flex-col gap-2">
-                <span className="label-mono group-hover:text-accent bg-slate-950/60 px-2 py-1 text-[9px] text-slate-300 backdrop-blur-sm transition-colors">
+                <span className="label-mono group-hover:text-accent bg-white/90 px-2 py-1 text-[9px] text-slate-600 backdrop-blur-sm transition-colors">
                   System ID: {item.slug.slice(0, 8).toUpperCase()}
                 </span>
-                <span className="label-mono text-accent bg-slate-950/60 px-2 py-1 text-[9px] font-bold backdrop-blur-sm">
+                <span className="label-mono text-accent bg-white/90 px-2 py-1 text-[9px] font-bold backdrop-blur-sm">
                   STATUS: {item.outcome || "VERIFIED"}
                 </span>
               </div>
             </div>
 
             <div className="flex flex-col gap-4 px-2">
-              <span className="label-mono text-slate-500">Category // {item.category}</span>
-              <h3 className="group-hover:text-accent text-2xl font-bold tracking-tight text-white uppercase transition-colors md:text-3xl">
+              <span className="label-mono text-slate-400">Category // {item.category}</span>
+              <h3 className="group-hover:text-accent text-2xl font-bold tracking-tight text-slate-950 uppercase transition-colors md:text-3xl">
                 {item.title}
               </h3>
-              <p className="max-w-md text-sm leading-relaxed tracking-wide text-slate-500">
+              <p className="max-w-md text-sm leading-relaxed tracking-wide text-slate-600">
                 {item.description}
               </p>
             </div>

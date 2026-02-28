@@ -1,7 +1,10 @@
+import type { Route } from "next";
+
 export interface NavItem {
   title: string;
-  href: string;
+  href: Route | string; // Allows both Typed Routes and external/anchor strings
   description?: string;
+  disabled?: boolean;
 }
 
 export interface SiteConfig {
@@ -12,8 +15,12 @@ export interface SiteConfig {
   keywords: string[];
   author: {
     name: string;
-    title: string;
     role: string;
+    social?: {
+      twitter?: string;
+      facebook?: string;
+      line?: string;
+    };
   };
   links: {
     twitter: string;
