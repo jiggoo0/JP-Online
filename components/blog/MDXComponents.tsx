@@ -136,23 +136,27 @@ export const MDXComponents = {
   ),
 
   /* Brand Signature CTA */
-  ProtocolCTA: () => (
-    <div className="border-accent/20 my-20 rounded-sm border bg-gradient-to-br from-slate-900 to-slate-950 p-12 text-center">
-      <Shield className="text-accent mx-auto mb-6 h-10 w-10" />
-      <h4 className="mb-4 text-xl font-black tracking-widest text-white uppercase">
-        ต้องการเริ่มต้นวางระบบทันที?
-      </h4>
-      <p className="mb-8 text-sm font-light tracking-widest text-slate-400 uppercase">
-        ติดต่อฝ่ายวิเคราะห์เชิงกลยุทธ์เพื่อขอรับการประเมินเบื้องต้นได้ทันที
-      </p>
-      <a
-        href="https://lin.ee/1d0Juko"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-accent hover:bg-accent-light inline-block rounded-sm px-10 py-4 text-[10px] font-black tracking-[0.3em] text-slate-950 uppercase transition-all hover:scale-105"
-      >
-        CONTACT VIA LINE OFFICIAL
-      </a>
-    </div>
-  ),
+  ProtocolCTA: () => {
+    // Dynamically import siteConfig to avoid top-level issues in MDX scope
+    const { siteConfig } = require("@/config/site");
+    return (
+      <div className="border-accent/20 my-20 rounded-sm border bg-gradient-to-br from-slate-900 to-slate-950 p-12 text-center">
+        <Shield className="text-accent mx-auto mb-6 h-10 w-10" />
+        <h4 className="mb-4 text-xl font-black tracking-widest text-white uppercase">
+          ต้องการเริ่มต้นวางระบบทันที?
+        </h4>
+        <p className="mb-8 text-sm font-light tracking-widest text-slate-400 uppercase">
+          ติดต่อฝ่ายวิเคราะห์เชิงกลยุทธ์เพื่อขอรับการประเมินเบื้องต้นได้ทันที
+        </p>
+        <a
+          href={siteConfig.links.line}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-accent hover:bg-accent-light inline-block rounded-sm px-10 py-4 text-[10px] font-black tracking-[0.3em] text-slate-950 uppercase transition-all hover:scale-105"
+        >
+          CONTACT VIA LINE OFFICIAL
+        </a>
+      </div>
+    );
+  },
 };
