@@ -49,6 +49,7 @@ export default function CustomCursor() {
       style={{
         translateX: cursorXSpring,
         translateY: cursorYSpring,
+        willChange: "transform",
       }}
       animate={{
         scale: isHovered ? 2.5 : 1,

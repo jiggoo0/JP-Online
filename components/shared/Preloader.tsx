@@ -13,10 +13,22 @@ export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const handleLoad = () => {
       setIsLoading(false);
-    }, 500); // Optimized for PageSpeed (reduced from 2000ms)
-    return () => clearTimeout(timer);
+    };
+
+    // If the page is already loaded, remove the loader immediately
+    if (document.readyState === "complete") {
+      setIsLoading(false);
+    } else {
+      window.addEventListener("load", handleLoad);
+      // Safety fallback: Never block the user for more than 800ms
+      const fallback = setTimeout(handleLoad, 800);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        clearTimeout(fallback);
+      };
+    }
   }, []);
 
   return (

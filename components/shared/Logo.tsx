@@ -34,6 +34,10 @@ export default function Logo({ className, iconOnly = false, light = false }: Log
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="h-full w-full"
+          role="img"
+          aria-label="JP.VISUAL & STRATEGIC DOCS Logo"
+          width="40"
+          height="40"
         >
           {/* Square Frame - Structural integrity boundary */}
           <rect

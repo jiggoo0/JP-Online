@@ -21,12 +21,11 @@ export default function Section({ children, className, id }: SectionProps) {
   const sectionClass = cn(
     "relative overflow-hidden py-20 md:py-32",
     !className?.includes("bg-") && "bg-[#020617]",
-    className
+    className,
   );
 
   return (
     <section id={id} className={sectionClass}>
-
       {/* Structural Decor (Subtle Horizontal Lines) */}
       <div className="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-slate-900 to-transparent" />
       <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-slate-900 to-transparent" />

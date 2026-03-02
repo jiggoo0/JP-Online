@@ -23,7 +23,7 @@ export const Footer = () => {
         <div className="mb-24 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
           <section className="lg:col-span-1">
             <Logo className="mb-10 scale-110" light={false} />
-            <p className="mb-10 max-w-sm text-sm leading-relaxed font-light tracking-widest text-slate-500 uppercase">
+            <p className="mb-10 max-w-sm text-sm leading-relaxed font-light tracking-widest text-slate-600 uppercase">
               เรามอบโซลูชันเชิงกลยุทธ์ (Strategic Solutions) ผ่านการให้คำปรึกษา
               และการจัดเตรียมเอกสารระดับสากล เพื่อความสำเร็จในเคสที่สำคัญที่สุดของคุณ
             </p>
@@ -41,7 +41,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="hover:border-accent hover:text-accent rounded-sm border border-slate-200 p-3 text-slate-400 transition-all hover:scale-110"
+                  className="hover:border-accent hover:text-accent rounded-sm border border-slate-200 p-3 text-slate-500 transition-all hover:scale-110"
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -55,14 +55,14 @@ export const Footer = () => {
               key={navGroup.title}
               aria-labelledby={`footer-${navGroup.title.toLowerCase().replace(/\s/g, "-")}`}
             >
-              <h4
+              <h3
                 id={`footer-${navGroup.title.toLowerCase().replace(/\s/g, "-")}`}
                 className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.5em] text-slate-950 uppercase"
               >
                 <div className="bg-accent h-px w-6" aria-hidden="true" />
                 {navGroup.title}
-              </h4>
-              <ul className="flex list-none flex-col gap-6 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
+              </h3>
+              <ul className="flex list-none flex-col gap-6 text-[10px] font-black tracking-[0.2em] text-slate-600 uppercase">
                 {navGroup.items.map((item) => (
                   <li key={item.title}>
                     <Link
@@ -82,23 +82,23 @@ export const Footer = () => {
           ))}
 
           <section aria-labelledby="footer-concierge">
-            <h4
+            <h3
               id="footer-concierge"
               className="mb-10 flex items-center gap-3 text-[10px] font-black tracking-[0.5em] text-slate-950 uppercase"
             >
               <div className="bg-accent h-px w-6" aria-hidden="true" />
               Strategic Center
-            </h4>
+            </h3>
             <ul className="flex list-none flex-col gap-10">
               <li className="flex flex-col gap-2">
                 <a
                   href={`mailto:${siteConfig.links.email}`}
                   className="group flex flex-col gap-1 outline-none"
                 >
-                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80 transition-opacity group-hover:opacity-100">
+                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-90 transition-opacity group-hover:opacity-100">
                     Official Support
                   </div>
-                  <span className="text-sm font-light tracking-widest text-slate-500 transition-colors group-hover:text-slate-950">
+                  <span className="text-sm font-medium tracking-widest text-slate-600 transition-colors group-hover:text-slate-950">
                     {siteConfig.links.email}
                   </span>
                 </a>
@@ -110,19 +110,19 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   className="group flex flex-col gap-1 outline-none"
                 >
-                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80 transition-opacity group-hover:opacity-100">
+                  <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-90 transition-opacity group-hover:opacity-100">
                     LINE Official Hub
                   </div>
-                  <span className="text-sm font-black tracking-widest text-[#06C755] transition-colors group-hover:text-slate-950">
+                  <span className="text-sm font-black tracking-widest text-[#059645] transition-colors group-hover:text-slate-950">
                     {siteConfig.links.lineId}
                   </span>
                 </a>
               </li>
               <li className="flex flex-col gap-2">
-                <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-80">
+                <div className="text-accent text-[10px] font-black tracking-[0.3em] uppercase opacity-90">
                   Global Contact
                 </div>
-                <span className="text-sm font-light tracking-widest text-slate-500">
+                <span className="text-sm font-medium tracking-widest text-slate-600">
                   {siteConfig.links.phone}
                 </span>
               </li>
@@ -130,7 +130,7 @@ export const Footer = () => {
           </section>
         </div>
 
-        <div className="mt-20 flex flex-col items-center justify-between border-t border-slate-200 pt-12 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase md:flex-row">
+        <div className="mt-20 flex flex-col items-center justify-between border-t border-slate-200 pt-12 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase md:flex-row">
           <div className="flex flex-col gap-4 text-center md:text-left">
             <p>© 2026 JP-VISUAL & DOCS. ELITE PROTOCOL SECURED.</p>
             <a
