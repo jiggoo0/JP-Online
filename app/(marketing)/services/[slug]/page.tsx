@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { SERVICES, Service } from "@/config/services";
-import { generateServiceMetadata, generateServiceJsonLd } from "@/lib/seo";
+import { generateServiceMetadata, generateIndividualServiceJsonLd } from "@/lib/seo";
 import Section from "@/components/shared/Section";
 import { ArrowLeft } from "lucide-react";
 import ContactCTA from "@/components/shared/ContactCTA";
@@ -84,7 +84,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     icon: (serviceFromConfig?.icon as string) || "Shield",
   };
 
-  const jsonLd = generateServiceJsonLd(service);
+  const jsonLd = generateIndividualServiceJsonLd(service);
 
   const components = {
     ...MDXComponents,

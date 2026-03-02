@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import Section from "../shared/Section";
 import { cn } from "@/lib/utils";
+import { generateFaqJsonLd } from "@/lib/seo";
 
 const FAQS = [
   {
@@ -32,9 +33,15 @@ const FAQS = [
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqJsonLd = generateFaqJsonLd(FAQS);
 
   return (
     <Section className="bg-background border-t border-slate-200 py-32 md:py-48">
+      {/* 🚀 Dynamic FAQ Schema for Search Engine Intelligence */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="container mx-auto max-w-5xl px-6">
         <div className="mb-32">
           <motion.div
@@ -72,6 +79,9 @@ export default function FAQSection() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
                 className="flex w-full flex-col items-start justify-between p-10 text-left outline-none md:flex-row md:p-14"
               >
                 <div className="mb-6 flex shrink-0 items-center gap-8 md:mb-0 md:w-1/3">
@@ -111,6 +121,9 @@ export default function FAQSection() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
                     className="overflow-hidden"
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${index}`}
                   >
                     <div className="flex flex-col p-10 pt-0 md:flex-row md:p-14 md:pt-0">
                       <div className="hidden shrink-0 md:block md:w-1/3" />

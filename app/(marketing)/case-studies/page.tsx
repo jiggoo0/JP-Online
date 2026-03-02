@@ -2,6 +2,7 @@ import React from "react";
 import Section from "@/components/shared/Section";
 import { getAllPosts, CaseStudyFrontmatter } from "@/lib/mdx";
 import Link from "next/link";
+import { generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata = {
   title: "Case Evidence & Success Protocols | JP-Visual&Docs",
@@ -12,8 +13,17 @@ export const metadata = {
 export default async function CaseStudiesPage() {
   const caseStudies = await getAllPosts<CaseStudyFrontmatter>("case-studies");
 
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: "Home", item: "/" },
+    { name: "Case Studies", item: "/case-studies" },
+  ]);
+
   return (
     <main className="min-h-screen bg-[#020617] pt-40 pb-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Section>
         <div className="mb-24">
           <div className="mb-6 flex items-center gap-3">

@@ -3,17 +3,34 @@ import Section from "@/components/shared/Section";
 import { SERVICES } from "@/config/services";
 import { ServiceCard } from "@/components/sections/ServiceCard";
 import { Shield, Zap, Target } from "lucide-react";
+import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo";
 
 export const metadata = {
   title: "Strategic Service Protocols | JP-Visual&Docs",
   description:
-    "Comprehensive solutions for financial profiling, immigration architecture, and high-authority documentation.",
+    "Explore our high-end advisory services for international documentation, financial structuring, and lifestyle mobility.",
 };
 
 export default function ServicesPage() {
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: "Home", item: "/" },
+    { name: "Services", item: "/services" },
+  ]);
+
+  const serviceJsonLd = generateServiceJsonLd();
+
   return (
     <main className="min-h-screen bg-[#020617] pt-40 pb-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       {/* Header Tier */}
+
       <Section>
         <div className="mb-24">
           <div className="mb-6 flex items-center gap-3">

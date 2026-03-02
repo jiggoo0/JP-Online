@@ -17,9 +17,19 @@ export function generateOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/assets/logo-strategic.svg`,
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${siteConfig.url}/#logo`,
+      url: `${siteConfig.url}/assets/logo-strategic.svg`,
+      contentUrl: `${siteConfig.url}/assets/logo-strategic.svg`,
+      width: "512",
+      height: "512",
+      caption: siteConfig.name,
+    },
+    image: { "@id": `${siteConfig.url}/#logo` },
     description: siteConfig.description,
     founder: {
       "@type": "Person",
@@ -27,18 +37,94 @@ export function generateOrganizationJsonLd() {
       jobTitle: "Senior Strategic Architect",
       description: "ผู้เชี่ยวชาญด้านการวางโครงสร้างโปรไฟล์และระบบเอกสารเชิงลึกระดับสากล",
       image: `${siteConfig.url}/assets/services/srv-identity-map.webp`,
-      sameAs: siteConfig.author.social,
+      sameAs: [siteConfig.author.social],
     },
     contactPoint: {
       "@type": "ContactPoint",
+      telephone: "+66-XX-XXX-XXXX", // สามารถใส่เบอร์จริงได้ถ้ามี
       contactType: "customer support",
       availableLanguage: ["Thai", "English"],
+      areaServed: "Global",
     },
     address: {
       "@type": "PostalAddress",
       addressCountry: "TH",
     },
+    sameAs: [siteConfig.author.social],
     keywords: siteConfig.keywords.join(", "),
+  };
+}
+
+/**
+ * generateServiceJsonLd - สร้าง Service Schema สำหรับหน้าบริการหลัก
+ */
+export function generateServiceJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteConfig.url}/services/#service`,
+    name: "บริการที่ปรึกษาด้านเอกสารและการเงินเชิงลึก (Strategic Document & Financial Advisory)",
+    description:
+      "บริการวางแผนโครงสร้างข้อมูล จัดเตรียมเอกสาร และจำลองการตรวจสอบเพื่อเพิ่มความเชื่อถือในเคสยากสำหรับการยื่นวีซ่าและธุรกรรมทางการเงินระดับพรีเมียม",
+    provider: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+    },
+    areaServed: "Global",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Service Portfolio",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Documentation Strategy",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Financial Account Structuring",
+          },
+        },
+      ],
+    },
+  };
+}
+
+/**
+ * generateBreadcrumbJsonLd - สร้าง Breadcrumb Schema สำหรับทิศทางการนำทางของ Search Engine
+ */
+export function generateBreadcrumbJsonLd(items: { name: string; item: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.item.startsWith("http") ? item.item : `${siteConfig.url}${item.item}`,
+    })),
+  };
+}
+
+/**
+ * generateFaqJsonLd - สร้าง FAQ Schema เพื่อให้แสดงผลใน Google Rich Results
+ */
+export function generateFaqJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 
@@ -78,9 +164,9 @@ export function generateServiceMetadata(service: Service): Metadata {
 }
 
 /**
- * generateServiceJsonLd - Schema.org สำหรับหน้า Service
+ * generateIndividualServiceJsonLd - Schema.org สำหรับหน้า Service รายย่อย
  */
-export function generateServiceJsonLd(service: Service) {
+export function generateIndividualServiceJsonLd(service: Service) {
   return {
     "@context": "https://schema.org",
     "@graph": [

@@ -13,65 +13,13 @@ import { TacticalDivider } from "@/components/shared/TacticalDivider";
 
 /**
  * @PAGE: Landing Page (The Conversion Engine)
- * @ORDER: Authority -> Trust -> Logic -> Solutions -> Proof -> Insights -> FAQ -> Conversion
  */
 export default async function LandingPage() {
   const caseStudies = await getAllPosts<CaseStudyFrontmatter>("case-studies");
   const latestCases = caseStudies.slice(0, 2);
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: "ที่ปรึกษาด้านเอกสารและการเงินเพื่อการยื่นวีซ่าและธุรกรรม",
-    description:
-      "บริการให้คำปรึกษาและจัดเตรียมเอกสารสำหรับยื่นวีซ่าและธุรกรรมทางการเงิน โดยทีมงานมืออาชีพที่มีประสบการณ์แก้ไขเคสยาก",
-    provider: {
-      "@type": "Organization",
-      name: "JP-Visual&Docs",
-    },
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "อาชีพอิสระ แม่ค้าออนไลน์ หรือคนทำงานอิสระ สามารถทำเรื่องยื่นวีซ่าหรือธุรกรรมทางการเงินได้จริงไหม?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "ทำได้จริงครับ เรามีความเชี่ยวชาญในการช่วยจัดระเบียบข้อมูลและเอกสารให้คนทำงานอิสระโดยเฉพาะ เพื่อให้ข้อมูลของคุณมีความสอดคล้องและน่าเชื่อถือตามเกณฑ์ที่หน่วยงานกำหนดครับ",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "หากเดินบัญชีไม่สวย หรือมีเงินเก็บไม่มาก สามารถปรึกษาได้หรือไม่?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "ปรึกษาได้ครับ เราไม่ได้ดูเพียงแค่ยอดเงินสุดท้าย แต่เราจะช่วยแนะนำการวางแผนการเดินบัญชีใหม่ให้ดูเป็นระบบมากขึ้น เพื่ออุดรอยโหว่ที่อาจทำให้คุณถูกปฏิเสธ และสร้างความมั่นใจก่อนเริ่มยื่นเรื่องจริงครับ",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "ทำไมถึงควรมีที่ปรึกษาช่วยในการยื่นวีซ่าเคสยาก?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "เพราะการยื่นวีซ่าไม่ได้ดูแค่เอกสารครบ แต่ดูความสมเหตุสมผลของข้อมูลทั้งหมดครับ เราจะช่วยตรวจสอบ (Pre-Audit) และจำลองการตรวจเพื่อหาจุดอ่อนของข้อมูลก่อนยื่นจริง เพื่อให้คุณมั่นใจในทุกขั้นตอนครับ",
-        },
-      },
-    ],
-  };
-
   return (
     <main className="bg-background flex flex-col overflow-x-hidden antialiased" id="main-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       {/* 🏆 ที่ปรึกษาผู้เชี่ยวชาญ (Hero) */}
       <Hero />
 

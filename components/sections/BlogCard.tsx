@@ -19,7 +19,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   const imageUrl = post.image || "/assets/blog/blog-exec-docs.webp";
 
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.19, 1, 0.22, 1] }}
@@ -74,6 +74,6 @@ export default function BlogCard({ post, index }: BlogCardProps) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 }
