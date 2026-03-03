@@ -14,10 +14,6 @@ interface TocItem {
   level: number;
 }
 
-/**
- * @COMPONENT: TableOfContents
- * @STYLE: Minimalist Sticky TOC / Obsidian Accent
- */
 export default function TableOfContents() {
   const [headings, setHeadings] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
@@ -29,7 +25,6 @@ export default function TableOfContents() {
       level: Number(elem.tagName.substring(1)),
     }));
 
-    // Assign IDs to elements if they don't have one
     elements.forEach((item) => {
       const el = document.getElementById(item.id);
       if (!el) {
@@ -45,9 +40,7 @@ export default function TableOfContents() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
       { rootMargin: "-100px 0px -66%" },
@@ -67,7 +60,6 @@ export default function TableOfContents() {
           Report Structure
         </span>
       </div>
-
       <ul className="space-y-5">
         {headings.map((heading) => (
           <li key={heading.id} style={{ paddingLeft: `${(heading.level - 2) * 1.5}rem` }}>

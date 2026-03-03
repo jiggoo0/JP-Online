@@ -16,7 +16,7 @@ interface ServicePageProps {
 }
 
 /**
- * ✅ Generate Dynamic Metadata & OG Image
+ * Dynamic Metadata & OG Generation
  */
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -41,14 +41,13 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 }
 
 /**
- * ✅ Generate Static Paths for Webpack/Next.js Build
+ * Static Path Orchestration
  */
 export async function generateStaticParams() {
   const posts = await getAllPosts<ServiceFrontmatter>("services");
   const mdxSlugs = posts.filter((post) => post.slug).map((post) => ({ slug: post.slug }));
   const configSlugs = SERVICES.map((service) => ({ slug: service.slug }));
 
-  // Combine and de-duplicate slugs
   const allSlugs = [...mdxSlugs, ...configSlugs];
   const uniqueSlugs = Array.from(new Set(allSlugs.map((s) => s.slug))).map((slug) => ({ slug }));
 
@@ -63,7 +62,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   if (!mdxData && !serviceFromConfig) notFound();
 
   /**
-   * 🏗️ Merged Data Intelligence Strategy
+   * Data Merging Strategy
    * Priority: MDX Frontmatter > Config Dataset
    */
   const service: Service = {
@@ -93,13 +92,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <main className="selection:bg-accent/30 selection:text-accent-light min-h-screen bg-slate-950">
-      {/* 🚀 Schema.org JSON-LD Integration */}
+      {/* Schema.org JSON-LD Integration */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 🏆 HERO SECTION (Executive Title & Strategic Visual) */}
+      {/* HERO SECTION: Executive Summary & Strategic Visual */}
       <section
         aria-label="Service Introduction"
         className="relative flex min-h-[60vh] flex-col justify-center overflow-hidden border-b border-slate-900 pt-44 pb-24"
@@ -115,20 +114,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
               className="group hover:text-accent mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase transition-all"
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              Service Protocol Archive
+              Access Service Archive
             </Link>
             <br />
             <span className="border-accent/20 bg-accent/10 text-accent mb-8 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
-              Protocol: {service.category}
+              PROTOCOL: ${service.category}
             </span>
             <h1 className="mb-8 text-4xl leading-tight font-black text-white uppercase md:text-6xl">
-              {service.name.split("(")[0].trim()} <br />
+              ${service.name.split("(")[0].trim()} <br />
               <span className="from-accent-light via-accent to-accent-dim bg-gradient-to-r bg-clip-text text-transparent italic">
-                {service.tagline}
+                ${service.tagline}
               </span>
             </h1>
             <p className="mb-12 max-w-2xl text-xl leading-relaxed font-light text-slate-400">
-              {service.description}
+              ${service.description}
             </p>
 
             {/* Strategic Service Asset */}
@@ -145,11 +144,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* 🛠️ INDUSTRIAL LAYOUT (12-Column Grid) */}
+      {/* INDUSTRIAL GRID LAYOUT */}
       <Section className="py-24">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 gap-20 lg:grid-cols-12">
-            {/* 🛡️ LEFT SIDEBAR: Technical Protocol Sidebar (Always Visible) */}
+            {/* SIDEBAR: Technical Metadata & Protocols */}
             <aside className="order-2 lg:order-1 lg:col-span-4">
               <ServiceProtocolSidebar
                 id={service.id}
@@ -159,7 +158,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               />
             </aside>
 
-            {/* 📝 MAIN CONTENT: MDX or Standard Protocol List */}
+            {/* CONTENT AREA: Intelligence Deployment */}
             <div className="order-1 lg:order-2 lg:col-span-8">
               {mdxData ? (
                 <div className="prose prose-invert prose-slate prose-headings:text-white prose-a:text-accent hover:prose-a:text-accent-light prose-strong:text-accent max-w-none">
@@ -177,14 +176,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
                           className="group-hover:text-accent/20 shrink-0 text-5xl font-black text-slate-800 transition-colors"
                           aria-hidden="true"
                         >
-                          0{index + 1}
+                          0${index + 1}
                         </span>
                         <div className="flex-1">
                           <h3 className="group-hover:text-accent-light mb-3 text-xl font-bold tracking-tight text-white uppercase transition-colors">
-                            {step.title}
+                            ${step.title}
                           </h3>
                           <p className="text-base leading-relaxed font-light text-slate-400">
-                            {step.description}
+                            ${step.description}
                           </p>
                         </div>
                       </article>
@@ -193,11 +192,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </ol>
               )}
 
-              {/* 🎯 CONVERSION - CTA Embedded in Content Area */}
+              {/* CONVERSION: Strategic Intake Activation */}
               <div className="mt-24 border-t border-slate-900 pt-24">
                 <ContactCTA
-                  title="Ready to Secure Your Credibility?"
-                  description="ติดต่อที่ปรึกษาเพื่อรับการประเมินเบื้องต้นได้ทันที พร้อมรหัสอ้างอิงบริการนี้เพื่อความรวดเร็วในการประสานงาน"
+                  title="Secure Your Tactical Advantage"
+                  description="ติดต่อที่ปรึกษาเชิงกลยุทธ์เพื่อขอรับการประเมินเบื้องต้น และเริ่มกระบวนการจัดวางระบบข้อมูลของคุณทันที"
                   serviceId={service.id}
                 />
               </div>

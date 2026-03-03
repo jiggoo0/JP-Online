@@ -3,99 +3,106 @@ import { Service } from "@/types/services";
 export * from "@/types/services";
 
 /**
- * =========================================
- * ✅ Services Dataset - Simplified for Mass Market
- * =========================================
+ * SERVICE INFRASTRUCTURE DATASET
+ * Standard: The Pathfinder Strategic Protocol v1.0
  */
 export const SERVICES: Service[] = [
   {
-    id: "Financial-01",
-    slug: "financial-account-structuring",
+    id: "SRV-FIN-01",
+    slug: "capital-leverage-infrastructure",
     category: "FINANCIAL",
-    name: "รับวางสเตทเม้นท์ธนาคาร (Statement Structuring)",
-    title: "Financial Account Structuring - ปรับสมดุลบัญชีเพื่อกู้บ้าน/รถ/วีซ่า",
-    tagline: "เปลี่ยนบัญชีรกรุงรัง ให้เป็น 'โปรไฟล์การเงิน' ที่ธนาคารเชื่อถือ",
+    name: "Financial & Credit Advisory",
+    title: "ที่ปรึกษาวางแผนสเตทเม้นท์และสินเชื่อ - อาชีพอิสระกู้บ้านผ่าน 100%",
+    tagline: "เปลี่ยนบัญชีที่ธนาคารส่ายหน้า ให้เป็นโปรไฟล์ลูกค้าระดับพรีเมียม",
     description:
-      "สำหรับอาชีพอิสระที่เงินเข้าไม่นิ่ง หรือใช้จ่ายผ่านบัญชีจนดูเหมือนไม่มีเหลือ เราช่วยวางโครงสร้างการเดินบัญชีใหม่ให้มีความสมเหตุสมผลตามเกณฑ์ของธนาคารและสถานทูต เพื่อเพิ่มโอกาสการกู้ผ่าน 100%",
-    timeline: "ปรับจูนรอบบัญชี 3 - 6 เดือน",
-    feeEstimate: "เริ่มต้น 5,xxx.- (ขึ้นอยู่กับเคส)",
+      "รับวางแผนสเตทเม้นท์ธนาคารและจัดทำโครงสร้างรายได้เชิงตรรกะ เพื่อแก้ปัญหากู้บ้านไม่ผ่าน กู้รถไม่ผ่าน สำหรับแม่ค้าออนไลน์และฟรีแลนซ์ที่ไม่มีสลิปเงินเดือน",
+    timeline: "Execution: 3 - 6 Months Strategy",
+    feeEstimate: "Consultancy Fee: Contact for Assessment",
     imageUrl: "/assets/services/srv-financial-struct.webp",
     contactMethod: "LINE",
     icon: "Shield",
     protocol: [
       {
-        title: "Case Diagnosis",
-        description: "วิเคราะห์บัญชีย้อนหลังและระบุจุดที่ทำให้กู้ไม่ผ่าน",
+        title: "Risk Diagnosis",
+        description: "วิเคราะห์รอยโหว่ของประวัติทางการเงินและระบุจุดวิกฤตที่ต้องได้รับการแก้ไข",
       },
       {
-        title: "Transaction Mapping",
-        description: "ออกแบบตรรกะรายได้-รายจ่าย (Cash Flow) ให้สอดคล้องกับอาชีพ",
+        title: "Algorithm Alignment",
+        description: "ปรับจูนยอดหมุนเวียนให้สอดคล้องกับตรรกะการตรวจจับของ AI ธนาคารสากล",
       },
       {
-        title: "Payment Engagement",
-        description: "ยืนยันยอดและเริ่มดำเนินการวางแผนทันทีหลังชำระค่าที่ปรึกษา",
+        title: "Integrity Deployment",
+        description: "เริ่มกระบวนการจัดวางข้อมูลตามแผนยุทธศาสตร์เพื่อผลลัพธ์ที่ยั่งยืน",
       },
     ],
-    features: ["Statement Logic Optimization", "High-Success Rate", "Confidential Care"],
-  },
-  {
-    id: "Doc-01",
-    slug: "customized-income-documentation",
-    category: "DOCUMENTATION",
-    name: "รับทำใบรับรองเงินเดือน (Income Documentation)",
-    title: "Income Documentation Strategy - ออกแบบเอกสารรับรองรายได้ แม่ค้าออนไลน์",
-    tagline: "เอกสารที่สถานทูตและธนาคารยอมรับ แม้ไม่มีบริษัทหรือไม่ได้จดทะเบียน",
-    description:
-      "บริการจัดร่างเอกสารรับรองการทำงานและที่มาของรายได้ (High-Fidelity) สำหรับแม่ค้าออนไลน์ ฟรีแลนซ์ หรือคนทำงานอิสระที่ต้องการหลักฐานยืนยันตัวตนทางการเงินที่จับต้องได้และตรวจสอบได้จริง",
-    timeline: "1 - 2 วันทำการ",
-    feeEstimate: "เริ่มต้น 3,xxx.-",
-    imageUrl: "/assets/services/srv-income-grid.webp",
-    contactMethod: "LINE",
-    icon: "FileText",
-    protocol: [
-      {
-        title: "Occupational Alignment",
-        description: "เลือกตำแหน่งงานและอาชีพให้แมตช์กับรายการเดินบัญชีจริง",
-      },
-      {
-        title: "Drafting & Execution",
-        description: "เริ่มกระบวนการจัดเตรียมเอกสารทันทีหลังจากได้รับการยืนยันการชำระเงิน",
-      },
-      {
-        title: "Final Verification",
-        description: "ตรวจสอบความสอดคล้อง (Logic Check) รอบสุดท้ายก่อนส่งมอบงาน",
-      },
+    features: [
+      "Financial Logic Engineering",
+      "Algorithm-Based Profiling",
+      "Zero-Knowledge Asset Care",
     ],
-    features: ["Pixel-Perfect Drafts", "Fast Delivery", "Audit-Compliant"],
   },
   {
     id: "SRV-IMM-01",
-    slug: "flight-hotel-confirmed-status",
+    slug: "lifestyle-mobility-independent-visa",
     category: "IMMIGRATION",
-    name: "จองตั๋วเครื่องบินยื่นวีซ่า (GDS Active Status)",
-    title: "GDS Reservation Protocol - ใบจองสถานะจริง ตรวจสอบรหัส PNR ได้",
-    tagline: "แก้ปัญหา 'ใบจองปลอม' จนโดนแบน... เราจองผ่านระบบสากลที่มีชื่อคุณจริง",
+    name: "Visa & Mobility Strategy",
+    title: "รับวางแผนเอกสารยื่นวีซ่าเคสยาก - แก้เคสวีซ่าไม่ผ่าน & จองตั๋วจริง PNR",
+    tagline: "สร้างความน่าเชื่อถือให้โปรไฟล์การเดินทางของคุณ ผ่านระบบตรวจสอบสากล",
     description:
-      "บริการใบจองตั๋วเครื่องบินและโรงแรมผ่านระบบ GDS (Global Distribution System) สถานทูตตรวจสอบได้จริง มีรหัส PNR ยืนยัน เหมาะสำหรับเคสวีซ่าเชงเก้น วีซ่าอเมริกา ที่ต้องการความชัวร์ 100%",
-    timeline: "ด่วนพิเศษ 3-6 ชั่วโมง",
-    feeEstimate: "เริ่มต้น 1,xxx.-",
+      "บริการแก้เคสวีซ่าเชงเก้น/อเมริกาไม่ผ่าน จัดเตรียมเอกสารรายได้ และจองตั๋วเครื่องบิน/โรงแรมรหัส PNR จริงที่ตรวจสอบได้ในฐานข้อมูลสายการบิน (GDS) 100%",
+    timeline: "Processing: 24h - 10 Days",
+    feeEstimate: "Strategic Rate: Applied by Case",
     imageUrl: "/assets/services/srv-gds-status.webp",
     contactMethod: "LINE",
     icon: "Globe",
     protocol: [
       {
         title: "System Injection",
-        description: "จองผ่านระบบสากลเพื่อให้ชื่อของคุณขึ้นในฐานข้อมูลสายการบิน",
+        description: "จองผ่านระบบสากลเพื่อให้ชื่อของคุณขึ้นในฐานข้อมูลสายการบินและโรงแรมจริง",
       },
       {
-        title: "Status Monitoring",
-        description: "เริ่มกระบวนการออกใบจองและเช็คสถานะทันทีหลังแจ้งโอน",
+        title: "Verification Audit",
+        description: "ตรวจสอบความสมบูรณ์ของรหัส PNR และสถานะที่พักก่อนการเดินทางจริง",
       },
       {
-        title: "Code Issuance",
-        description: "ส่งมอบรหัส PNR และใบจองที่สามารถนำไปเช็คบนเว็บสายการบินได้เลย",
+        title: "Secure Issuance",
+        description: "ส่งมอบแผนการเดินทางและเอกสารยืนยันสถานะที่ตรวจสอบได้จากทั่วโลก",
       },
     ],
-    features: ["Verified PNR Code", "Fast Turnaround", "Worldwide Access"],
+    features: [
+      "GDS Institutional Verification",
+      "Real-time PNR Status",
+      "Anti-Rejection Infrastructure",
+    ],
+  },
+  {
+    id: "SRV-DOC-01",
+    slug: "physical-credential-logistics",
+    category: "DOCUMENTATION",
+    name: "Executive Document Assets",
+    title: "รับทำใบรับรองเงินเดือนและเอกสารรายได้ - มาตรฐานตรวจสอบภายใน",
+    tagline: "เอกสารรายได้ที่ทรงพลังและน่าเชื่อถือที่สุด ภายใต้ระบบความลับระดับสูงสุด",
+    description:
+      "รับร่างหนังสือรับรองเงินเดือน ใบสำคัญรับเงิน และ Identity Assets ระดับพรีเมียมที่สอดคล้องกับรายการเดินบัญชีจริง เพื่อใช้ประกอบการทำธุรกรรมทางการเงินทุกประเภท",
+    timeline: "Production: 1 - 3 Days",
+    feeEstimate: "Asset Value: Based on Specs",
+    imageUrl: "/assets/services/srv-income-grid.webp",
+    contactMethod: "LINE",
+    icon: "FileText",
+    protocol: [
+      {
+        title: "Asset Specifications",
+        description: "กำหนดรายละเอียดความต้องการและระดับความสมจริงที่จำเป็นสำหรับเคสของคุณ",
+      },
+      {
+        title: "Precision Execution",
+        description: "เริ่มกระบวนการผลิตและตรวจสอบคุณภาพตามมาตรฐานสูงสุดของระบบ",
+      },
+      {
+        title: "Secure Delivery",
+        description: "ส่งมอบทรัพย์สินผ่านช่องทางที่มีความปลอดภัยและเป็นส่วนตัวสูงสุด",
+      },
+    ],
+    features: ["High-Fidelity Assets", "Encrypted Logistics", "Zero-Trace Protocol"],
   },
 ];

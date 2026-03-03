@@ -7,10 +7,6 @@
 import { cn } from "@/lib/utils";
 import { Info, AlertTriangle, CheckCircle2, Shield, Lock } from "lucide-react";
 
-/**
- * @COMPONENT: MDXComponents
- * @STYLE: Executive Documentation / Precision Typography
- */
 export const MDXComponents = {
   h1: ({ className, ...props }: React.ComponentPropsWithoutRef<"h1">) => (
     <h1
@@ -81,8 +77,6 @@ export const MDXComponents = {
   hr: ({ className, ...props }: React.ComponentPropsWithoutRef<"hr">) => (
     <hr className={cn("my-16 border-slate-900", className)} {...props} />
   ),
-
-  /* Executive Callout Components */
   Callout: ({
     children,
     type = "info",
@@ -96,7 +90,6 @@ export const MDXComponents = {
       success: <CheckCircle2 className="h-5 w-5 text-emerald-400" />,
       secure: <Lock className="text-accent h-5 w-5" />,
     };
-
     return (
       <div
         className={cn(
@@ -115,12 +108,9 @@ export const MDXComponents = {
       </div>
     );
   },
-
-  /* Executive Image Wrapper */
   Image: ({ alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <figure className="my-16">
       <div className="group overflow-hidden rounded-sm border border-slate-900 bg-[#0c1122] p-3 shadow-2xl">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="h-auto w-full scale-[1.01] opacity-80 transition-all duration-1000 group-hover:scale-100 group-hover:opacity-100"
           alt={alt}
@@ -134,16 +124,13 @@ export const MDXComponents = {
       )}
     </figure>
   ),
-
-  /* Brand Signature CTA */
   ProtocolCTA: () => {
-    // Dynamically import siteConfig to avoid top-level issues in MDX scope
     const { siteConfig } = require("@/config/site");
     return (
       <div className="border-accent/20 my-20 rounded-sm border bg-gradient-to-br from-slate-900 to-slate-950 p-12 text-center">
         <Shield className="text-accent mx-auto mb-6 h-10 w-10" />
         <h4 className="mb-4 text-xl font-black tracking-widest text-white uppercase">
-          ต้องการเริ่มต้นวางระบบทันที?
+          ต้องการเริ่มต้นวางยุทธศาสตร์ทันที?
         </h4>
         <p className="mb-8 text-sm font-light tracking-widest text-slate-400 uppercase">
           ติดต่อฝ่ายวิเคราะห์เชิงกลยุทธ์เพื่อขอรับการประเมินเบื้องต้นได้ทันที

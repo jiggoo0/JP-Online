@@ -3,19 +3,19 @@ import { NavigationConfig } from "@/types/navigation";
 export const navigationConfig: NavigationConfig = {
   mainNav: [
     {
-      title: "Services",
+      title: "Solutions",
       href: "/services",
-      description: "Our core executive protocols and business solutions.",
+      description: "Executive-grade financial and mobility infrastructures.",
     },
     {
       title: "Case Studies",
       href: "/case-studies",
-      description: "Case studies of visual strategy and documentation excellence.",
+      description: "Proven outcomes in visual strategy and documentation architecture.",
     },
     {
-      title: "Blog",
+      title: "Intelligence",
       href: "/blog",
-      description: "Strategic knowledge and industry intelligence.",
+      description: "Market insights and strategic documentation protocols.",
     },
     {
       title: "Contact",

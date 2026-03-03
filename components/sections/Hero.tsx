@@ -10,7 +10,6 @@ import Image from "next/image";
 /**
  * @COMPONENT: Hero
  * @STYLE: High-End Ivory & Midnight Navy Transformation
- * - Professional, Clean, and Trustworthy.
  */
 export const Hero = () => {
   return (
@@ -18,7 +17,7 @@ export const Hero = () => {
       aria-label="Welcome Introduction"
       className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-[#FAF9F6] pt-32 pb-32 md:pt-48"
     >
-      {/* 🏛️ Visual Layer: Executive Background (Optimized LCP) */}
+      {/* Visual Layer: Executive Background */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <Image
           src="/assets/hero/hero-monolith.webp"
@@ -28,7 +27,6 @@ export const Hero = () => {
           sizes="100vw"
           className="object-cover object-center opacity-[0.08] grayscale transition-all duration-1000"
         />
-        {/* Subtle Ivory to Light Gold Gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,140,40,0.03)_0%,transparent_70%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F6] via-transparent to-[#FAF9F6]" />
       </div>
@@ -40,15 +38,13 @@ export const Hero = () => {
           transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
           className="flex flex-col items-center text-center"
         >
-          {/* Badge: Professional Advisor Tag */}
           <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-2 shadow-sm">
             <div className="bg-accent h-2 w-2 rounded-full" />
             <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
-              STRATEGIC PROFILE ARCHITECTURE // ELITE IVORY
+              STRATEGIC PROFILE ARCHITECTURE // THE PATHFINDER
             </span>
           </div>
 
-          {/* H1: Authority in Midnight Navy */}
           <h1 className="mb-10 max-w-5xl text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.95] font-black tracking-tighter text-slate-950 uppercase">
             ARCHITECTING
             <br />
@@ -58,15 +54,15 @@ export const Hero = () => {
           </h1>
 
           <p className="mx-auto mb-16 max-w-2xl text-base leading-[1.8] font-medium tracking-wide text-slate-600 md:text-xl">
-            เรายกระดับความเชื่อมั่นทางการเงินผ่านการวางโครงสร้าง{" "}
+            เรายกระดับความเชื่อมั่นผ่านการวางโครงสร้าง{" "}
             <span className="border-accent/30 border-b-2 font-bold text-slate-950">
               โปรไฟล์เชิงกลยุทธ์
             </span>{" "}
             และ{" "}
             <span className="border-accent/30 border-b-2 font-bold text-slate-950">
-              ระบบเอกสารมาตรฐานสากล
+              ระบบเอกสารสากล
             </span>{" "}
-            เปลี่ยนข้อจำกัดด้านอาชีพให้กลายเป็นตรรกะที่ทรงพลัง พร้อมสำหรับการตรวจสอบระดับ Elite
+            เปลี่ยนข้อจำกัดทางอาชีพให้กลายเป็นตรรกะที่ทรงพลัง พร้อมสำหรับการตรวจสอบระดับ Elite
           </p>
 
           <nav
@@ -78,7 +74,7 @@ export const Hero = () => {
                 variant="primary"
                 className="shadow-premium hover:bg-accent bg-slate-950 px-10 py-4 text-xs font-black tracking-widest text-white transition-colors duration-500"
               >
-                เริ่มวางแผนโปรไฟล์วันนี้
+                เริ่มวางแผนยุทธศาสตร์วันนี้
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -91,36 +87,6 @@ export const Hero = () => {
               </Button>
             </Link>
           </nav>
-
-          {/* Success Marker: Grounded & Formal */}
-          <div className="mt-24 flex items-center gap-12 border-t border-slate-200 pt-16 opacity-70">
-            <div className="flex flex-col items-center">
-              <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Elite
-              </span>
-              <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
-                Integrity
-              </span>
-            </div>
-            <div className="h-8 w-px bg-slate-200" />
-            <div className="flex flex-col items-center">
-              <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Global
-              </span>
-              <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
-                Compliance
-              </span>
-            </div>
-            <div className="h-8 w-px bg-slate-200" />
-            <div className="flex flex-col items-center">
-              <span className="text-xl font-black tracking-tighter text-slate-950 uppercase">
-                Structural
-              </span>
-              <span className="text-accent text-[8px] font-bold tracking-[0.3em] uppercase">
-                Logic
-              </span>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

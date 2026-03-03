@@ -3,7 +3,8 @@ import { Service } from "@/config/services";
 import { siteConfig as globalConfig } from "@/config/site";
 
 /**
- * ✅ Global Site Configuration (Synced from config/site.ts)
+ * GLOBAL SITE CONFIGURATION
+ * Aligned with config/site.ts
  */
 export const siteConfig = {
   ...globalConfig,
@@ -11,7 +12,7 @@ export const siteConfig = {
 };
 
 /**
- * generateOrganizationJsonLd - สร้างฐานข้อมูล Entity ขององค์กรและ CEO สำหรับ Google AI
+ * generateOrganizationJsonLd - Creates Entity Database for Google AI
  */
 export function generateOrganizationJsonLd() {
   return {
@@ -41,7 +42,7 @@ export function generateOrganizationJsonLd() {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+66-XX-XXX-XXXX", // สามารถใส่เบอร์จริงได้ถ้ามี
+      telephone: "+66-XX-XXX-XXXX",
       contactType: "customer support",
       availableLanguage: ["Thai", "English"],
       areaServed: "Global",
@@ -56,16 +57,16 @@ export function generateOrganizationJsonLd() {
 }
 
 /**
- * generateServiceJsonLd - สร้าง Service Schema สำหรับหน้าบริการหลัก
+ * generateServiceJsonLd - Creates Service Schema for SEO Authority
  */
 export function generateServiceJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${siteConfig.url}/services/#service`,
-    name: "บริการที่ปรึกษาด้านเอกสารและการเงินเชิงลึก (Strategic Document & Financial Advisory)",
+    name: "Chief Strategic Architect for Global Mobility & Financial Compliance",
     description:
-      "บริการวางแผนโครงสร้างข้อมูล จัดเตรียมเอกสาร และจำลองการตรวจสอบเพื่อเพิ่มความเชื่อถือในเคสยากสำหรับการยื่นวีซ่าและธุรกรรมทางการเงินระดับพรีเมียม",
+      "ผู้เชี่ยวชาญด้านการวางโครงสร้างโปรไฟล์ระดับสูง การจัดการเอกสารยืนยันตัวตน และการจำลองระบบตรวจสอบภายในเพื่อการข้ามพรมแดนและการเงินโลก",
     provider: {
       "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
@@ -95,7 +96,7 @@ export function generateServiceJsonLd() {
 }
 
 /**
- * generateBreadcrumbJsonLd - สร้าง Breadcrumb Schema สำหรับทิศทางการนำทางของ Search Engine
+ * generateBreadcrumbJsonLd - Navigation Intelligence
  */
 export function generateBreadcrumbJsonLd(items: { name: string; item: string }[]) {
   return {
@@ -111,7 +112,7 @@ export function generateBreadcrumbJsonLd(items: { name: string; item: string }[]
 }
 
 /**
- * generateFaqJsonLd - สร้าง FAQ Schema เพื่อให้แสดงผลใน Google Rich Results
+ * generateFaqJsonLd - Rich Results Optimization
  */
 export function generateFaqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
@@ -129,7 +130,7 @@ export function generateFaqJsonLd(faqs: { question: string; answer: string }[]) 
 }
 
 /**
- * generateServiceMetadata - สร้าง Metadata สำหรับหน้าบริการแต่ละหน้า
+ * generateServiceMetadata - Metadata Engineering
  */
 export function generateServiceMetadata(service: Service): Metadata {
   return {
@@ -164,7 +165,7 @@ export function generateServiceMetadata(service: Service): Metadata {
 }
 
 /**
- * generateIndividualServiceJsonLd - Schema.org สำหรับหน้า Service รายย่อย
+ * generateIndividualServiceJsonLd - Individual Service Schema
  */
 export function generateIndividualServiceJsonLd(service: Service) {
   return {
@@ -224,7 +225,7 @@ export function generateIndividualServiceJsonLd(service: Service) {
 }
 
 /**
- * generateArticleJsonLd - Schema.org สำหรับหน้า Blog หรือ Case Study
+ * generateArticleJsonLd - Article Intelligence (Blog/Case Study)
  */
 export function generateArticleJsonLd(article: {
   title: string;
